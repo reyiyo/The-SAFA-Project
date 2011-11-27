@@ -1,4 +1,4 @@
-package org.safaproject.safa.entities;
+package org.safaproject.safa.model;
 
 import java.util.List;
 import java.util.Set;
@@ -30,7 +30,6 @@ public class Usuario {
 	private String password;
 	
 	@Email
-	//La expresion regular del mail es mas zarpada que la de una url...
 	private String email;
 	
 	@ManyToOne
@@ -48,7 +47,6 @@ public class Usuario {
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<Rol> roles;
 	
-	//Es un list porque nos interesa el orden
 	@OneToMany
 	@JoinColumn(name="idUsuario")
 	private List<Apunte> historial;

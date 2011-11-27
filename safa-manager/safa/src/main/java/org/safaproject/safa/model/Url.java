@@ -1,4 +1,4 @@
-package org.safaproject.safa.entities;
+package org.safaproject.safa.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

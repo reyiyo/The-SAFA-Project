@@ -1,6 +1,5 @@
-package org.safaproject.safa.entities;
+package org.safaproject.safa.model;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,9 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-@SuppressWarnings("serial")
 @Entity
-public class MoldeTag implements Serializable{
+public class MoldeTag {
 	
 	@Id	
 	private String nombreTag;

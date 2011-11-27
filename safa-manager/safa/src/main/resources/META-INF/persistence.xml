@@ -1,0 +1,19 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+	<persistence-unit name="safa-entities"
+		transaction-type="RESOURCE_LOCAL">
+		<class>org.safaproject.safa.model.Apunte</class>
+		<class>org.safaproject.safa.model.Indicador</class>
+		<class>org.safaproject.safa.model.MoldeTag</class>
+		<class>org.safaproject.safa.model.NodoArbolTag</class>
+		<class>org.safaproject.safa.model.PedidoTag</class>
+		<class>org.safaproject.safa.model.Rol</class>
+		<class>org.safaproject.safa.model.Tag</class>
+		<class>org.safaproject.safa.model.TipoIndicador</class>
+		<class>org.safaproject.safa.model.TipoRecurso</class>
+		<class>org.safaproject.safa.model.Url</class>
+		<class>org.safaproject.safa.model.Usuario</class>
+	</persistence-unit>
+</persistence>

@@ -1,4 +1,4 @@
-package org.safaproject.safa.entities;
+package org.safaproject.safa.model;
 
 import java.util.Set;
 
@@ -14,7 +14,7 @@ public class TipoRecurso {
 	private String nombre;
 	
 	@OneToMany
-	@JoinColumn(name="idApunte")
+	@JoinColumn(name="idUrl")
 	private Set<Url> recursos;
 	
 	public String getNombre() {
