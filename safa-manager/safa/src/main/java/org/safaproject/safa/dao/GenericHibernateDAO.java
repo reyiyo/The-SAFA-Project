@@ -3,96 +3,216 @@ package org.safaproject.safa.dao;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Map;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.hibernate.Criteria;
-import org.hibernate.LockOptions;
-import org.hibernate.SessionFactory;
+import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Projections;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 
-public class GenericHibernateDAO<T, ID extends Serializable>
-		implements GenericDAO<T, ID> {
+/**
+ * JPA implementation of the GenericDAO. Note that this implementation also
+ * expects Hibernate as JPA implementation. That's because we like the Criteria
+ * API :P.
+ * 
+ * @param <T>
+ *            The persistent type
+ * @param <ID>
+ *            The primary key type
+ */
+public class GenericHibernateDAO<T, ID extends Serializable> implements
+		GenericDAO<T, ID> {
 
-	private Class<T> persistentClass;
-	@Autowired
-	private SessionFactory sessionFactory;
+	private final Class<T> persistentClass;
+	
+	private EntityManager entityManager;
 
+	
 	@SuppressWarnings("unchecked")
 	public GenericHibernateDAO() {
 		this.persistentClass = (Class<T>) ((ParameterizedType) getClass()
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 	}
-	
-	public GenericHibernateDAO(Class<T> type) {
-		this.persistentClass = type;
+
+	public GenericHibernateDAO(final Class<T> persistentClass) {
+		super();
+		this.persistentClass = persistentClass;
 	}
 
-	public Class<T> getPersistentClass() {
-		return persistentClass;
+	/**
+	 * @see org.safaproject.safa.dao.GenericDAO#countAll
+	 */
+	@Override
+	public Long countAll() {
+		return countByCriteria();
 	}
 
-	@SuppressWarnings("unchecked")
-	public T findById(ID id, boolean lock) {
-		T entity;
-		if (lock)
-			entity = (T) sessionFactory.getCurrentSession().load(getPersistentClass(), id,
-					LockOptions.UPGRADE);
-		else
-			entity = (T) sessionFactory.getCurrentSession().load(getPersistentClass(), id);
+	/**
+	 * @see org.safaproject.safa.dao.GenericDAO#countByExample(java.lang.Object)
+	 */
+	@Override
+	public Long countByExample(final T exampleInstance) {
+		Session session = (Session) getEntityManager().getDelegate();
+		Criteria crit = session.createCriteria(getEntityClass());
+		crit.setProjection(Projections.rowCount());
+		crit.add(Example.create(exampleInstance));
 
-		return entity;
+		return (Long) crit.list().get(0);
 	}
 
+	/**
+	 * @see org.safaproject.safa.dao.GenericDAO#findAll()
+	 */
+	@Override
 	public List<T> findAll() {
 		return findByCriteria();
 	}
 
+	/**
+	 * @see org.safaproject.safa.dao.GenericDAO#findByExample(java.lang.Object)
+	 */
 	@SuppressWarnings("unchecked")
-	public List<T> findByExample(T exampleInstance) {
-		Criteria crit = sessionFactory.getCurrentSession().createCriteria(getPersistentClass());
-		Example example = Example.create(exampleInstance).excludeZeroes()
-				.enableLike()
-				.ignoreCase();
-		crit.add(example);
-		return crit.list();
-	}
-	
-	public T makePersistent(T entity) {
-		sessionFactory.getCurrentSession().saveOrUpdate(entity);
-		return entity;
+	@Override
+	public List<T> findByExample(final T exampleInstance) {
+		Session session = (Session) getEntityManager().getDelegate();
+		Criteria crit = session.createCriteria(getEntityClass());
+		final List<T> result = crit.list();
+		return result;
 	}
 
-	public void makeTransient(T entity) {
-		sessionFactory.getCurrentSession().delete(entity);
+	/**
+	 * @see org.safaproject.safa.dao.GenericDAO#findById(java.io.Serializable)
+	 */
+	@Override
+	public T findById(final ID id) {
+		final T result = getEntityManager().find(persistentClass, id);
+		return result;
 	}
 
-	public void flush() {
-		sessionFactory.getCurrentSession().flush();
-	}
-
-	public void clear() {
-		sessionFactory.getCurrentSession().clear();
-	}
-	
+	/**
+	 * @see org.safaproject.safa.dao.GenericDAO#findByNamedQuery(java.lang.String,
+	 *      java.lang.Object[])
+	 */
 	@SuppressWarnings("unchecked")
-	protected List<T> findByCriteria(Criterion... criterion) {
-		Criteria crit = sessionFactory.getCurrentSession().createCriteria(getPersistentClass());
-		for (Criterion c : criterion) {
+	@Override
+	public List<T> findByNamedQuery(final String name, Object... params) {
+		javax.persistence.Query query = getEntityManager().createNamedQuery(
+				name);
+
+		for (int i = 0; i < params.length; i++) {
+			query.setParameter(i + 1, params[i]);
+		}
+
+		final List<T> result = (List<T>) query.getResultList();
+		return result;
+	}
+
+	/**
+	 * @see org.safaproject.safa.dao.GenericDAO#findByNamedQueryAndNamedParams(java.lang.String,
+	 *      java.util.Map)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<T> findByNamedQueryAndNamedParams(final String name,
+			final Map<String, ? extends Object> params) {
+		javax.persistence.Query query = getEntityManager().createNamedQuery(
+				name);
+
+		for (final Map.Entry<String, ? extends Object> param : params
+				.entrySet()) {
+			query.setParameter(param.getKey(), param.getValue());
+		}
+
+		final List<T> result = (List<T>) query.getResultList();
+		return result;
+	}
+
+	/**
+	 * @see org.safaproject.safa.dao.GenericDAO#getEntityClass()
+	 */
+	@Override
+	public Class<T> getEntityClass() {
+		return persistentClass;
+	}
+
+	/**
+	 * set the JPA entity manager to use.
+	 * 
+	 * @param entityManager
+	 */
+	@Required
+	@PersistenceContext
+	public void setEntityManager(final EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	/**
+	 * Use this inside subclasses as a convenience method.
+	 */
+	protected List<T> findByCriteria(final Criterion... criterion) {
+		return findByCriteria(-1, -1, criterion);
+	}
+
+	/**
+	 * Use this inside subclasses as a convenience method.
+	 */
+	@SuppressWarnings("unchecked")
+	protected List<T> findByCriteria(final int firstResult,
+			final int maxResults, final Criterion... criterion) {
+		Session session = (Session) getEntityManager().getDelegate();
+		Criteria crit = session.createCriteria(getEntityClass());
+
+		for (final Criterion c : criterion) {
 			crit.add(c);
 		}
-		return crit.list();
-	}
-	
-	public Long count(){
-		Criteria crit = sessionFactory.getCurrentSession().createCriteria(getPersistentClass());
-		crit.setProjection(Projections.rowCount());
-		return (Long) crit.uniqueResult();
-	}
-	
-	public void setSessionFactory(SessionFactory sessionFactory){
-		this.sessionFactory = sessionFactory;
+
+		if (firstResult > 0) {
+			crit.setFirstResult(firstResult);
+		}
+
+		if (maxResults > 0) {
+			crit.setMaxResults(maxResults);
+		}
+
+		final List<T> result = crit.list();
+		return result;
 	}
 
+	protected Long countByCriteria(Criterion... criterion) {
+		Session session = (Session) getEntityManager().getDelegate();
+		Criteria crit = session.createCriteria(getEntityClass());
+		crit.setProjection(Projections.rowCount());
+
+		for (final Criterion c : criterion) {
+			crit.add(c);
+		}
+
+		return (Long) crit.list().get(0);
+	}
+
+	/**
+	 * @see org.safaproject.safa.dao.GenericDAO#delete(java.lang.Object)
+	 */
+	@Override
+	public void delete(T entity) {
+		getEntityManager().remove(entity);
+	}
+
+	/**
+	 * @see org.safaproject.safa.dao.GenericDAO#save(java.lang.Object)
+	 */
+	@Override
+	public T save(T entity) {
+		final T savedEntity = getEntityManager().merge(entity);
+		return savedEntity;
+	}
 }

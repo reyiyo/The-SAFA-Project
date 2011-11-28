@@ -15,7 +15,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	<context:property-placeholder
 		location="classpath:hsql.properties" />
 	
-	<import resource="hsqlDatasource.xml" />
-	<import resource="safa-jdbc-context.xml" />
+	<import resource="classpath:hsqlDatasource.xml" />
+	<import resource="classpath:safa-jdbc-context.xml" />
 	
 </beans>
