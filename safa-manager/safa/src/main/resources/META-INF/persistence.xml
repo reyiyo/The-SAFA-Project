@@ -17,5 +17,6 @@
 		<class>org.safaproject.safa.model.User</class>
 		<class>org.safaproject.safa.model.UserProfile</class>
 		<class>org.safaproject.safa.model.Vote</class>
+		<class>org.safaproject.safa.model.TagDataTypeEnum</class>
 	</persistence-unit>
 </persistence>

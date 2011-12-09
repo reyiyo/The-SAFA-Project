@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -101,7 +102,7 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findByNamedQuery(final String name, Object... params) {
-		javax.persistence.Query query = getEntityManager().createNamedQuery(
+		Query query = getEntityManager().createNamedQuery(
 				name);
 
 		for (int i = 0; i < params.length; i++) {
@@ -120,7 +121,7 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	@Override
 	public List<T> findByNamedQueryAndNamedParams(final String name,
 			final Map<String, ? extends Object> params) {
-		javax.persistence.Query query = getEntityManager().createNamedQuery(
+		Query query = getEntityManager().createNamedQuery(
 				name);
 
 		for (final Map.Entry<String, ? extends Object> param : params

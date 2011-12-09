@@ -19,12 +19,12 @@ public class Tag {
 	@Id
 	@GeneratedValue
 	private Long tagId;
-
-	private String value;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "tagName")
 	private TagType tagType;
+
+	private String value;
 
 	@ManyToMany(mappedBy = "tags")
 	private Set<Content> contents;
