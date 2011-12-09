@@ -4,16 +4,18 @@
 	version="2.0">
 	<persistence-unit name="safa-entities"
 		transaction-type="RESOURCE_LOCAL">
-		<class>org.safaproject.safa.model.Apunte</class>
-		<class>org.safaproject.safa.model.Indicador</class>
-		<class>org.safaproject.safa.model.MoldeTag</class>
-		<class>org.safaproject.safa.model.NodoArbolTag</class>
-		<class>org.safaproject.safa.model.PedidoTag</class>
+		<class>org.safaproject.safa.model.Content</class>
+		<class>org.safaproject.safa.model.Indicator</class>
+		<class>org.safaproject.safa.model.TagType</class>
+		<class>org.safaproject.safa.model.TagTreeNode</class>
+		<class>org.safaproject.safa.model.TagRequest</class>
 		<class>org.safaproject.safa.model.Rol</class>
 		<class>org.safaproject.safa.model.Tag</class>
-		<class>org.safaproject.safa.model.TipoIndicador</class>
-		<class>org.safaproject.safa.model.TipoRecurso</class>
-		<class>org.safaproject.safa.model.Url</class>
-		<class>org.safaproject.safa.model.Usuario</class>
+		<class>org.safaproject.safa.model.IndicatorType</class>
+		<class>org.safaproject.safa.model.ResourceType</class>
+		<class>org.safaproject.safa.model.Resource</class>
+		<class>org.safaproject.safa.model.User</class>
+		<class>org.safaproject.safa.model.UserProfile</class>
+		<class>org.safaproject.safa.model.Vote</class>
 	</persistence-unit>
 </persistence>

@@ -1,6 +1,5 @@
 package org.safaproject.safa.model;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -10,54 +9,84 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-@SuppressWarnings("serial")
+/**
+ * @author reyiyo
+ *
+ */
 @Entity
-public class Tag implements Serializable {
-	
+public class Tag {
+
 	@Id
 	@GeneratedValue
-	private Long idTag;
-	
-	private String valor;
-	
+	private Long tagId;
+
+	private String value;
+
 	@ManyToOne
-	@JoinColumn(name="nombreTag")
-	private MoldeTag moldeTag;
-	
-	@ManyToMany(mappedBy="tags")
-	private Set<Apunte> apuntes;
-	
-	public void setIdTag(Long idTag) {
-		this.idTag = idTag;
-	}
-	
-	public Long getIdTag() {
-		return idTag;
-	}
-	
-	public void setValor(String valor) {
-		this.valor = valor;
-	}
-	
-	public String getValor() {
-		return valor;
-	}
-	
-	public void setMoldeTag(MoldeTag moldeTag) {
-		this.moldeTag = moldeTag;
-		//moldeTag.addTag(this);
-	}
-	
-	public MoldeTag getMoldeTag() {
-		return moldeTag;
+	@JoinColumn(name = "tagName")
+	private TagType tagType;
+
+	@ManyToMany(mappedBy = "tags")
+	private Set<Content> contents;
+
+	/**
+	 * @return the tagId
+	 */
+	public Long getTagId() {
+		return tagId;
 	}
 
-	public void setApuntes(Set<Apunte> apuntes) {
-		this.apuntes = apuntes;
+	/**
+	 * @param tagId
+	 *            the tagId to set
+	 */
+	public void setTagId(Long tagId) {
+		this.tagId = tagId;
 	}
-	
-	public Set<Apunte> getApuntes() {
-		return apuntes;
+
+	/**
+	 * @return the value
+	 */
+	public String getValue() {
+		return value;
+	}
+
+	/**
+	 * @param value
+	 *            the value to set
+	 */
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	/**
+	 * @return the tagType
+	 */
+	public TagType getTagType() {
+		return tagType;
+	}
+
+	/**
+	 * @param tagType
+	 *            the tagType to set
+	 */
+	public void setTagType(TagType tagType) {
+		this.tagType = tagType;
+	}
+
+	/**
+	 * @return the contents
+	 */
+	public Set<Content> getContents() {
+		return contents;
+	}
+
+	/**
+	 * @param contents
+	 *            the contents to set
+	 */
+	public void setContents(Set<Content> contents) {
+		this.contents = contents;
 	}
 
 }

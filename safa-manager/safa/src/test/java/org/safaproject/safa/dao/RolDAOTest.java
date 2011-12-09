@@ -23,10 +23,10 @@ public class RolDAOTest {
 	@Test
 	public void shallCreateRol() {
 		Rol rol = new Rol();
-		rol.setNombre("ADMIN");
+		rol.setName("ADMIN");
 		rol = rolDAO.save(rol);
 
-		Rol rolFromDB = rolDAO.findById(rol.getIdRol());
+		Rol rolFromDB = rolDAO.findById(rol.getRolId());
 
 		assertEquals(rol, rolFromDB);
 	}
@@ -34,11 +34,11 @@ public class RolDAOTest {
 	@Test
 	public void shallFindAll() {
 		Rol rol = new Rol();
-		rol.setNombre("ADMIN");
+		rol.setName("ADMIN");
 		rol = rolDAO.save(rol);
 
 		Rol rol2 = new Rol();
-		rol2.setNombre("USER");
+		rol2.setName("USER");
 		rol2 = rolDAO.save(rol2);
 
 		assertEquals(rolDAO.findAll().size(), 2);
@@ -47,11 +47,11 @@ public class RolDAOTest {
 	@Test
 	public void shallFindByExample() {
 		Rol rol = new Rol();
-		rol.setNombre("ADMIN");
+		rol.setName("ADMIN");
 		rol = rolDAO.save(rol);
 		
 		Rol example = new Rol();
-		example.setNombre("ADMIN");
+		example.setName("ADMIN");
 
 		Rol rolFromDB = rolDAO.findByExample(example).get(0);
 
@@ -61,11 +61,11 @@ public class RolDAOTest {
 	@Test
 	public void shallGetRolCount() {
 		Rol rol = new Rol();
-		rol.setNombre("ADMIN");
+		rol.setName("ADMIN");
 		rol = rolDAO.save(rol);
 
 		Rol rol2 = new Rol();
-		rol2.setNombre("USER");
+		rol2.setName("USER");
 		rol2 = rolDAO.save(rol2);
 
 		assertEquals(rolDAO.countAll(), new Long(2));
@@ -74,15 +74,15 @@ public class RolDAOTest {
 	@Test
 	public void shallCountByExample() {
 		Rol rol = new Rol();
-		rol.setNombre("ADMIN");
+		rol.setName("ADMIN");
 		rol = rolDAO.save(rol);
 
 		Rol rol2 = new Rol();
-		rol2.setNombre("USER");
+		rol2.setName("USER");
 		rol2 = rolDAO.save(rol2);
 		
 		Rol example = new Rol();
-		example.setNombre("ADMIN");
+		example.setName("ADMIN");
 
 		assertEquals(rolDAO.countByExample(example), new Long(1));
 	}
@@ -90,11 +90,11 @@ public class RolDAOTest {
 	@Test
 	public void shallDeleteRol() {
 		Rol rol = new Rol();
-		rol.setNombre("ADMIN");
+		rol.setName("ADMIN");
 		rol = rolDAO.save(rol);
 
 		Rol rol2 = new Rol();
-		rol2.setNombre("USER");
+		rol2.setName("USER");
 		rol2 = rolDAO.save(rol2);
 		
 		rolDAO.delete(rol);
@@ -111,11 +111,11 @@ public class RolDAOTest {
 	@Test(expected=PersistenceException.class)
 	public void shallGetNotUniqueNameConstraintViolationException() {
 		Rol rol = new Rol();
-		rol.setNombre("ADMIN");
+		rol.setName("ADMIN");
 		rol = rolDAO.save(rol);
 
 		Rol rol2 = new Rol();
-		rol2.setNombre("ADMIN");
+		rol2.setName("ADMIN");
 		rol2 = rolDAO.save(rol2);
 	}
 	

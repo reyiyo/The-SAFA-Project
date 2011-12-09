@@ -5,30 +5,36 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * This class defines a Rol for a User.
+ * 
+ * @author reyiyo
+ * 
+ */
 @Entity
 public class Rol {
-	
+
 	@Id
 	@GeneratedValue
-	private Long idRol;
-	
-	@Column(unique=true, nullable=false)
-	private String nombre;
-	
-	public Long getIdRol() {
-		return idRol;
+	private Long rolId;
+
+	@Column(unique = true, nullable = false)
+	private String name;
+
+	public Long getRolId() {
+		return rolId;
 	}
-	
-	public void setIdRol(Long idRol) {
-		this.idRol = idRol;
+
+	public void setRolId(Long rolId) {
+		this.rolId = rolId;
 	}
-	
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	
-	public String getNombre() {
-		return nombre;
+
+	public String getName() {
+		return name;
 	}
 
 }
