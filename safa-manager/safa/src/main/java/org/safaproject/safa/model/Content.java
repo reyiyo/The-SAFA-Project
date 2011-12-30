@@ -51,6 +51,10 @@ public class Content {
 
 	private boolean reviewed = false;
 
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "contentId")
+	private Set<Comment> comments;
+
 	/**
 	 * @return the contentId
 	 */
@@ -214,6 +218,20 @@ public class Content {
 	 */
 	public void setReviewed(boolean reviewed) {
 		this.reviewed = reviewed;
+	}
+
+	/**
+	 * @return the comments
+	 */
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
 	}
 
 }

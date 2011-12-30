@@ -4,6 +4,7 @@
 	version="2.0">
 	<persistence-unit name="safa-entities"
 		transaction-type="RESOURCE_LOCAL">
+		<class>org.safaproject.safa.model.Comment</class>
 		<class>org.safaproject.safa.model.Content</class>
 		<class>org.safaproject.safa.model.Indicator</class>
 		<class>org.safaproject.safa.model.TagType</class>
