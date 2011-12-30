@@ -9,7 +9,7 @@
 	<name>Safa Manager</name>
 
 	<modules>
-		<module>safa</module>
+		<module>safa-api</module>
 		<module>safa-war</module>
 	</modules>
 

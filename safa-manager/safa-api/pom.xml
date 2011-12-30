@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.safaproject</groupId>
-	<artifactId>safa</artifactId>
+	<artifactId>safa-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Safa Server</name>
+	<name>Safa Api</name>
 	<description>The safa project api module</description>
 
 	<parent>
