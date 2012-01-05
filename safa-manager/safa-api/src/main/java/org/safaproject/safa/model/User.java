@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.Email;
  * 
  */
 @Entity
-@Table(name = "USER")
+@Table(name = "SAFA_USER")
 public class User {
 
 	// It will be provided by OpenID
@@ -44,7 +44,7 @@ public class User {
 	private String email;
 
 	@ManyToMany
-	@JoinTable(name = "USER_ROL")
+	@JoinTable(name = "SAFA_USER_ROL")
 	private Set<Rol> rols;
 
 	@ManyToOne
