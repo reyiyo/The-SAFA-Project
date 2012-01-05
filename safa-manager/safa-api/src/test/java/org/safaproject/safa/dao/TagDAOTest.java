@@ -42,19 +42,28 @@ public class TagDAOTest {
 
 	@Test
 	public void shallFindAll() {
-		
+
 		tagDAO.save(createTag("Lidia Capurro", "Teacher"));
-
-		TagType tagType1 = createTagType("Teacher", TagDataTypeEnum.STRING);
-		tagType1 = tagTypeDAO.save(tagType1);
-
-		TagType tagType2 = createTagType("Exam Date", TagDataTypeEnum.DATE);
-		tagType2 = tagTypeDAO.save(tagType2);
+		tagDAO.save(createTag("2010/01/01", "Exam Date"));
 
 		assertEquals(tagTypeDAO.findAll().size(), 2);
 	}
 
-	//TODO: complete the tests
+	@Test
+	public void shallFindByExample() {
+		tagDAO.save(createTag("Lidia Capurro", "Teacher"));
+		tagDAO.save(createTag("2010/01/01", "Exam Date"));
+
+		Tag example = new Tag();
+		example.setTagType(tagTypeDAO.findById("Teacher"));
+		example.setValue("Lidia Capurro");
+		// FIXME: Fix find by example search (@see
+		// org.safaproject.safa.dao.GenericHibernateDAO)
+
+		assertEquals(1, tagDAO.findByExample(example).size());
+	}
+
+	// TODO: complete the tests
 
 	private TagType createTagType(final String tagName,
 			final TagDataTypeEnum tagDataType) {

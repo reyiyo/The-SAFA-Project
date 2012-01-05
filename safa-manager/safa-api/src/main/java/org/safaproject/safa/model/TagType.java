@@ -1,14 +1,11 @@
 package org.safaproject.safa.model;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -18,6 +15,7 @@ import javax.validation.constraints.NotNull;
  * 
  */
 @Entity
+@Table(name = "TAG_TYPE")
 public class TagType {
 
 	/**
@@ -26,16 +24,14 @@ public class TagType {
 	 * one
 	 */
 	@Id
+	@Column(name = "tagName")
 	private String tagName;
 
+	@Column(name = "tagDataType")
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	// TODO: Investigate why this constraint is not being evaluated
 	private TagDataTypeEnum tagDataType;
-
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "tagName")
-	private Set<Tag> tags;
 
 	/**
 	 * @return the tagName
@@ -65,25 +61,6 @@ public class TagType {
 	 */
 	public void setTagDataType(TagDataTypeEnum tagDataType) {
 		this.tagDataType = tagDataType;
-	}
-
-	/**
-	 * The TagType Name cannot be changed/updated because it is the ID of the
-	 * entity
-	 */
-	/**
-	 * @return the tags
-	 */
-	public Set<Tag> getTags() {
-		return tags;
-	}
-
-	/**
-	 * @param tags
-	 *            the tags to set
-	 */
-	public void setTags(Set<Tag> tags) {
-		this.tags = tags;
 	}
 
 }

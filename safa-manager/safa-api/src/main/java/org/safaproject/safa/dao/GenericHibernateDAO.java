@@ -30,10 +30,9 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 		GenericDAO<T, ID> {
 
 	private final Class<T> persistentClass;
-	
+
 	private EntityManager entityManager;
 
-	
 	@SuppressWarnings("unchecked")
 	public GenericHibernateDAO() {
 		this.persistentClass = (Class<T>) ((ParameterizedType) getClass()
@@ -82,6 +81,8 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	public List<T> findByExample(final T exampleInstance) {
 		Session session = (Session) getEntityManager().getDelegate();
 		Criteria crit = session.createCriteria(getEntityClass());
+		crit.add(Example.create(exampleInstance).excludeZeroes()
+				.ignoreCase());
 		final List<T> result = crit.list();
 		return result;
 	}
@@ -102,8 +103,7 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findByNamedQuery(final String name, Object... params) {
-		Query query = getEntityManager().createNamedQuery(
-				name);
+		Query query = getEntityManager().createNamedQuery(name);
 
 		for (int i = 0; i < params.length; i++) {
 			query.setParameter(i + 1, params[i]);
@@ -121,8 +121,7 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	@Override
 	public List<T> findByNamedQueryAndNamedParams(final String name,
 			final Map<String, ? extends Object> params) {
-		Query query = getEntityManager().createNamedQuery(
-				name);
+		Query query = getEntityManager().createNamedQuery(name);
 
 		for (final Map.Entry<String, ? extends Object> param : params
 				.entrySet()) {

@@ -3,7 +3,9 @@ package org.safaproject.safa.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * This class defines a Rol for a User.
@@ -12,10 +14,12 @@ import javax.persistence.Id;
  * 
  */
 @Entity
+@Table(name = "ROL")
 public class Rol {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "rolId")
 	private Long rolId;
 
 	@Column(unique = true, nullable = false)

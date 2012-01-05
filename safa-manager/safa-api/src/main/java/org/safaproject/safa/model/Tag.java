@@ -1,33 +1,33 @@
 package org.safaproject.safa.model;
 
-import java.util.Set;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * @author reyiyo
- *
+ * 
  */
 @Entity
+@Table(name = "TAG")
 public class Tag {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "tagId")
 	private Long tagId;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "tagName")
 	private TagType tagType;
 
+	@Column(name = "value")
 	private String value;
-
-	@ManyToMany(mappedBy = "tags")
-	private Set<Content> contents;
 
 	/**
 	 * @return the tagId
@@ -72,21 +72,6 @@ public class Tag {
 	 */
 	public void setTagType(TagType tagType) {
 		this.tagType = tagType;
-	}
-
-	/**
-	 * @return the contents
-	 */
-	public Set<Content> getContents() {
-		return contents;
-	}
-
-	/**
-	 * @param contents
-	 *            the contents to set
-	 */
-	public void setContents(Set<Content> contents) {
-		this.contents = contents;
 	}
 
 }

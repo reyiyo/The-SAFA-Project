@@ -4,29 +4,38 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * @author reyiyo
  * 
  */
 @Entity
+@Table(name = "CONTENT")
 public class Content {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "contentId")
 	private String contentId;
 
+	@Column(name = "title")
 	private String title;
 
+	@Column(name = "description")
 	private String description;
 
+	@Column(name = "uploadDate")
 	private Date uploadDate;
 
 	@ManyToOne
@@ -34,11 +43,14 @@ public class Content {
 	private User user;
 
 	@ManyToMany
+	@JoinTable(name = "TAG_CONTENT")
 	private Set<Tag> tags;
 
 	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "INDICATOR_CONTENT")
 	private Set<Indicator> indicators;
 
+	@Column(name = "available")
 	private boolean available = true;
 
 	@OneToMany(cascade = CascadeType.ALL)
@@ -49,6 +61,7 @@ public class Content {
 	@JoinColumn(name = "idThumbnailResource")
 	private Resource thumbnail;
 
+	@Column(name = "reviewed")
 	private boolean reviewed = false;
 
 	@OneToMany(cascade = CascadeType.ALL)
@@ -228,7 +241,8 @@ public class Content {
 	}
 
 	/**
-	 * @param comments the comments to set
+	 * @param comments
+	 *            the comments to set
 	 */
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;

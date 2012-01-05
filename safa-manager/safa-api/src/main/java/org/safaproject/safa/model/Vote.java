@@ -1,10 +1,13 @@
 package org.safaproject.safa.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * This class defines each vote of an user.
@@ -13,10 +16,12 @@ import javax.persistence.ManyToOne;
  * 
  */
 @Entity
+@Table(name = "VOTE")
 public class Vote {
-	
+
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "voteId")
 	private Long voteId;
 
 	@ManyToOne
@@ -31,10 +36,12 @@ public class Vote {
 	@JoinColumn(name = "contentId")
 	private Content content;
 
+	@Column(name = "value")
 	private Integer value;
-	
+
 	/**
-	 * @param voteId the voteId to set
+	 * @param voteId
+	 *            the voteId to set
 	 */
 	public void setVoteId(Long voteId) {
 		this.voteId = voteId;

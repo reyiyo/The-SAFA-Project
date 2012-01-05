@@ -1,12 +1,9 @@
 package org.safaproject.safa.model;
 
-import java.util.Set;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Table;
 
 /**
  * This class defines the type of an indicator.
@@ -15,19 +12,17 @@ import javax.validation.constraints.NotNull;
  * 
  */
 @Entity
+@Table(name = "INDICATOR_TYPE")
 public class IndicatorType {
 
 	@Id
+	@Column(name = "indicatorName", nullable = false)
 	private String indicatorName;
 
-	@OneToMany
-	@JoinColumn(name = "indicatorName")
-	private Set<Indicator> indicators;
-
-	@NotNull
+	@Column(name = "minValue", nullable = false)
 	private Integer minValue;
 
-	@NotNull
+	@Column(name = "maxValue", nullable = false)
 	private Integer maxValue;
 
 	/**
@@ -43,21 +38,6 @@ public class IndicatorType {
 	 */
 	public void setIndicatorName(String indicatorName) {
 		this.indicatorName = indicatorName;
-	}
-
-	/**
-	 * @return the indicators
-	 */
-	public Set<Indicator> getIndicators() {
-		return indicators;
-	}
-
-	/**
-	 * @param indicators
-	 *            the indicators to set
-	 */
-	public void setIndicators(Set<Indicator> indicators) {
-		this.indicators = indicators;
 	}
 
 	/**

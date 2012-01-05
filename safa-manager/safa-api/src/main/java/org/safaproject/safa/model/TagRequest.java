@@ -1,11 +1,13 @@
 package org.safaproject.safa.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Table;
 
 /**
  * This class describes a user request for a new tag that doesn't exist in the
@@ -15,24 +17,29 @@ import javax.validation.constraints.NotNull;
  * 
  */
 @Entity
+@Table(name = "TAG_REQUEST")
 public class TagRequest {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "tagRequestId")
 	private Long tagRequestId;
 
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;
 
+	@Column(name = "tagName")
 	private String tagName;
 
+	@Column(name = "tagValue")
 	private String tagValue;
 
+	@Column(name = "reason")
 	private String reason;
 
 	@ManyToOne
-	@NotNull
+	@JoinColumn(name = "contentId")
 	private Content content;
 
 	/**

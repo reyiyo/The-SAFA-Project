@@ -1,9 +1,13 @@
 package org.safaproject.safa.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.URL;
@@ -16,11 +20,15 @@ import org.hibernate.validator.constraints.URL;
  * 
  */
 @Entity
+@Table(name = "RESOURCE")
 public class Resource {
 
 	@Id
-	private String resourceId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "resourceId")
+	private Long resourceId;
 
+	@Column(name = "url")
 	@URL
 	private String url;
 
@@ -29,14 +37,16 @@ public class Resource {
 	private ResourceType resourceType;
 
 	@Min(0)
+	@Column(name = "size")
 	private Long size;
 
+	@Column(name = "description")
 	private String description;
 
 	/**
 	 * @return the resourceId
 	 */
-	public String getResourceId() {
+	public Long getResourceId() {
 		return resourceId;
 	}
 
@@ -44,7 +54,7 @@ public class Resource {
 	 * @param resourceId
 	 *            the resourceId to set
 	 */
-	public void setResourceId(String resourceId) {
+	public void setResourceId(Long resourceId) {
 		this.resourceId = resourceId;
 	}
 

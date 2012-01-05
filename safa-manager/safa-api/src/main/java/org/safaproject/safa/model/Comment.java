@@ -2,25 +2,32 @@ package org.safaproject.safa.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "COMMENT")
 public class Comment {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "commentId")
 	private Long commentId;
 
+	@Column(name = "commentDate")
 	private Date commentDate;
 
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;
 
+	@Column(name = "commentText")
 	private String commentText;
 
 	public Long getCommentId() {

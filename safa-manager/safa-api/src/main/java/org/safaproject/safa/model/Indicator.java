@@ -1,10 +1,13 @@
 package org.safaproject.safa.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * This class is used as a calculated value for all votes in a content. It does
@@ -16,16 +19,19 @@ import javax.persistence.ManyToOne;
  * 
  */
 @Entity
+@Table(name = "INDICATOR")
 public class Indicator {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "indicatorId")
 	private Long indicatorId;
 
 	@ManyToOne
 	@JoinColumn(name = "indicatorName")
 	private IndicatorType indicatorType;
 
+	@Column(name = "value")
 	private Integer value;
 
 	/**
