@@ -23,10 +23,10 @@ public class Tag {
 	private Long tagId;
 
 	@ManyToOne
-	@JoinColumn(name = "tagName")
+	@JoinColumn(name = "tagName", nullable = false)
 	private TagType tagType;
 
-	@Column(name = "value")
+	@Column(name = "value", nullable = false)
 	private String value;
 
 	/**

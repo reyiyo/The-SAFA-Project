@@ -80,10 +80,11 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	@Override
 	public List<T> findByExample(final T exampleInstance) {
 		Session session = (Session) getEntityManager().getDelegate();
-		Criteria crit = session.createCriteria(getEntityClass());
-		crit.add(Example.create(exampleInstance).excludeZeroes()
-				.ignoreCase());
-		final List<T> result = crit.list();
+		Example example = Example.create(exampleInstance).excludeZeroes()
+				.ignoreCase();
+		Criteria criteria = session.createCriteria(getEntityClass()).add(
+				example);
+		final List<T> result = criteria.list();
 		return result;
 	}
 

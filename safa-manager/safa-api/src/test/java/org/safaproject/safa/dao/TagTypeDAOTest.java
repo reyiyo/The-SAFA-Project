@@ -77,8 +77,7 @@ public class TagTypeDAOTest {
 
 		TagType example = new TagType();
 
-		// TODO: Investigate why this works wrong...
-		// example.setTagName("Exam Date");
+		example.setTagName("Exam Date");
 		example.setTagDataType(TagDataTypeEnum.STRING);
 
 		assertEquals(tagTypeDAO.countByExample(example), new Long(1));

@@ -18,7 +18,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<org.springframework.version>3.0.6.RELEASE</org.springframework.version>
 		<org.hibernate.version>3.6.8.Final</org.hibernate.version>
-		<hsqldb.version>2.0.0</hsqldb.version>
+		<hsqldb.version>2.2.6</hsqldb.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<org.hibernate.javax.persistence.version>1.0.1.Final</org.hibernate.javax.persistence.version>
 		<org.hibernate.annotations.version>3.5.6-Final</org.hibernate.annotations.version>
