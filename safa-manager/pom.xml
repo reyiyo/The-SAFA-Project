@@ -30,8 +30,9 @@
 		<junit.version>4.8.1</junit.version>
 		<jetty.version>6.1.4</jetty.version>
 		<jetty.plugin.version>6.1.10</jetty.plugin.version>
+		<guava.version>10.0.1</guava.version>
 	</properties>
-	
+
 	<dependencies>
 		<!-- SPRING DEPENDENCIES -->
 		<dependency>
@@ -90,7 +91,7 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<!-- LOGGING DEPENDENCIES -->
 		<dependency>
 			<groupId>log4j</groupId>
@@ -104,6 +105,13 @@
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- GUAVA DEPENDENCIES -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
 		</dependency>
 	</dependencies>
 

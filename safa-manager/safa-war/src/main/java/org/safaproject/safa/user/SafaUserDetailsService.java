@@ -1,11 +1,14 @@
 package org.safaproject.safa.user;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.NoResultException;
 
+import org.safaproject.safa.dao.RolDAO;
 import org.safaproject.safa.dao.UserDAO;
 import org.safaproject.safa.model.Rol;
 import org.safaproject.safa.model.User;
@@ -16,13 +19,21 @@ import org.springframework.security.core.userdetails.AuthenticationUserDetailsSe
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.openid.OpenIDAttribute;
 import org.springframework.security.openid.OpenIDAuthenticationToken;
+
+import com.google.common.collect.Maps;
 
 public class SafaUserDetailsService implements UserDetailsService,
 		AuthenticationUserDetailsService<OpenIDAuthenticationToken> {
 
+	private static final String USERNAME = "lastname";
+
 	@Autowired
 	private UserDAO userDAO;
+
+	@Autowired
+	private RolDAO rolDAO;
 
 	@Override
 	public UserDetails loadUserByUsername(final String username)
@@ -39,16 +50,42 @@ public class SafaUserDetailsService implements UserDetailsService,
 
 	private UserDetails createWebUser(User user) {
 		return new org.springframework.security.core.userdetails.User(
-				user.getUsername(), user.getPassword(), user.getIsLocked(),
+				user.getUsername(), "", user.getIsLocked(),
 				user.getIsLocked(), user.getIsLocked(), user.getIsLocked(),
 				getGrantedAuthorities(user));
 	}
 
 	@Override
-	public UserDetails loadUserDetails(OpenIDAuthenticationToken arg0)
+	public UserDetails loadUserDetails(OpenIDAuthenticationToken token)
 			throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+
+		String openIdUrl = token.getIdentityUrl();
+
+		Map<String, OpenIDAttribute> attributes = Maps.uniqueIndex(
+				token.getAttributes(),
+				new OpenIdAttributesTransformerFunction());
+
+		try {
+			UserDetails user = loadUserByUsername(attributes.get(USERNAME)
+					.getValues().get(0));
+			return user;
+		} catch (UsernameNotFoundException e) {
+			return createNewOpenIdUser(openIdUrl, attributes);
+		}
+
+	}
+
+	private UserDetails createNewOpenIdUser(final String openIdUrl,
+			final Map<String, OpenIDAttribute> attributes) {
+
+		User user = new User(openIdUrl, attributes.get(USERNAME).getValues()
+				.get(0), "null@null.com", new HashSet<Rol>(Arrays.asList(rolDAO
+				.getDefaultRol())));
+
+		userDAO.save(user);
+
+		return createWebUser(user);
+
 	}
 
 	/**

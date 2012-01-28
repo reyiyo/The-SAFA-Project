@@ -22,7 +22,7 @@ public class Rol {
 	@Column(name = "rolId")
 	private Long rolId;
 
-	@Column(unique = true, nullable = false)
+	@Column(name = "name", unique = true, nullable = false)
 	private String name;
 
 	public Long getRolId() {

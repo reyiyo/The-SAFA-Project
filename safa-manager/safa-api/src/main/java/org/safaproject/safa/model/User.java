@@ -17,6 +17,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.URL;
 
 /**
  * This class contains the basic data from an user. Most of the data will be
@@ -35,6 +36,7 @@ public class User {
 	private Long userId;
 
 	@Column(name = "urlToken", unique = true, nullable = false)
+	@URL
 	private String openIDurlToken;
 
 	@Pattern(regexp = "^[a-zA-Z0-9]+[\\.\\-_a-zA-Z0-9]+$")
@@ -42,7 +44,7 @@ public class User {
 	private String username;
 
 	@Size(min = 6, max = 20)
-	@Column(name = "password", nullable = false)
+	@Column(name = "password")
 	private String password;
 
 	@Email
@@ -59,6 +61,19 @@ public class User {
 
 	@Column(name = "locked")
 	private Boolean isLocked = false;
+
+	public User() {
+
+	}
+
+	public User(String openIDurlToken, String username, String email,
+			Set<Rol> rols) {
+		this.openIDurlToken = openIDurlToken;
+		this.username = username;
+		this.email = email;
+		this.rols = rols;
+		this.isLocked = false;
+	}
 
 	/**
 	 * @return the userId
@@ -173,7 +188,8 @@ public class User {
 	}
 
 	/**
-	 * @param isLocked the isLocked to set
+	 * @param isLocked
+	 *            the isLocked to set
 	 */
 	public void setIsLocked(Boolean isLocked) {
 		this.isLocked = isLocked;

@@ -46,7 +46,7 @@
     A custom UserDetailsService which will allow any user to authenticate and "register" their IDs in an internal map
     for use if they return to the site. This is the most common usage pattern for sites which use OpenID.
  -->
-    <b:bean id="registeringUserService" class="org.safaproject.safa.user.CustomUserDetailsService" />
+    <b:bean id="registeringUserService" class="org.safaproject.safa.user.SafaUserDetailsService" />
 
 <!--
     A namespace-based UserDetailsService which will reject users who are not already defined.
