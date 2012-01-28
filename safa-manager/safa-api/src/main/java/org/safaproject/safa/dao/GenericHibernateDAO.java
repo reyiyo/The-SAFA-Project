@@ -31,7 +31,7 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 
 	private final Class<T> persistentClass;
 
-	private EntityManager entityManager;
+	protected EntityManager entityManager;
 
 	@SuppressWarnings("unchecked")
 	public GenericHibernateDAO() {

@@ -2,8 +2,11 @@ package org.safaproject.safa.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -26,30 +29,36 @@ import org.hibernate.validator.constraints.Email;
 @Table(name = "SAFA_USER")
 public class User {
 
-	// It will be provided by OpenID
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "userId")
 	private Long userId;
 
+	@Column(name = "urlToken", unique = true, nullable = false)
+	private String openIDurlToken;
+
 	@Pattern(regexp = "^[a-zA-Z0-9]+[\\.\\-_a-zA-Z0-9]+$")
-	@Column(name = "username")
+	@Column(name = "username", unique = true, nullable = false)
 	private String username;
 
 	@Size(min = 6, max = 20)
-	@Column(name = "password")
+	@Column(name = "password", nullable = false)
 	private String password;
 
 	@Email
-	@Column(name = "email")
+	@Column(name = "email", nullable = false)
 	private String email;
 
 	@ManyToMany
 	@JoinTable(name = "SAFA_USER_ROL")
 	private Set<Rol> rols;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "profileId")
 	private UserProfile profile;
+
+	@Column(name = "locked")
+	private Boolean isLocked = false;
 
 	/**
 	 * @return the userId
@@ -64,6 +73,21 @@ public class User {
 	 */
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	/**
+	 * @return the openIDurlToken
+	 */
+	public String getOpenIDurlToken() {
+		return openIDurlToken;
+	}
+
+	/**
+	 * @param openIDurlToken
+	 *            the openIDurlToken to set
+	 */
+	public void setOpenIDurlToken(String openIDurlToken) {
+		this.openIDurlToken = openIDurlToken;
 	}
 
 	/**
@@ -139,6 +163,20 @@ public class User {
 	 */
 	public void setProfile(UserProfile profile) {
 		this.profile = profile;
+	}
+
+	/**
+	 * @return the isLocked
+	 */
+	public Boolean getIsLocked() {
+		return isLocked;
+	}
+
+	/**
+	 * @param isLocked the isLocked to set
+	 */
+	public void setIsLocked(Boolean isLocked) {
+		this.isLocked = isLocked;
 	}
 
 }

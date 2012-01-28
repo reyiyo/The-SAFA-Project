@@ -10,10 +10,16 @@
 	<parent>
 		<groupId>org.safaproject</groupId>
 		<artifactId>safa-manager</artifactId>
-		<version>0.1-SNAPSHOT</version>
+		<version>${safa.version}</version>
 	</parent>
 
 	<dependencies>
+		<!-- SAFA DEPENDENCIES -->
+		<dependency>
+			<groupId>org.safaproject</groupId>
+			<artifactId>safa-api</artifactId>
+			<version>${safa-api.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>

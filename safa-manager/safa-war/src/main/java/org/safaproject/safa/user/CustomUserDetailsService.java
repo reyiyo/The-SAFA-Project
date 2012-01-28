@@ -29,6 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService, Authenticat
      */
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
         UserDetails user = registeredUsers.get(id);
+        
 
         if (user == null) {
             throw new UsernameNotFoundException(id);
