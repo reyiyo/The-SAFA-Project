@@ -10,7 +10,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-    <http pattern="/openidlogin.jsp*" security="none" />
+    <http pattern="/safa/auth/*" security="none" />
     <http pattern="/images/*" security="none" />
     <http pattern="/css/*" security="none" />
     <http pattern="/js/*" security="none" />
@@ -18,8 +18,8 @@
     <http>
         <intercept-url pattern="/**" access="ROLE_USER"/>
         <logout/>
-        <openid-login login-page="/openidlogin.jsp" user-service-ref="registeringUserService"
-                authentication-failure-url="/openidlogin.jsp?login_error=true">
+        <openid-login login-page="/safa/auth/login" user-service-ref="registeringUserService"
+                authentication-failure-url="/safa/auth/login?login_error=true" default-target-url="/safa/main/index" >
             <attribute-exchange identifier-match="https://www.google.com/.*">
                 <openid-attribute name="email" type="http://axschema.org/contact/email" required="true" count="1"/>
                 <openid-attribute name="firstname" type="http://axschema.org/namePerson/first" required="true" />
@@ -47,17 +47,4 @@
     for use if they return to the site. This is the most common usage pattern for sites which use OpenID.
  -->
     <b:bean id="registeringUserService" class="org.safaproject.safa.user.SafaUserDetailsService" />
-
-<!--
-    A namespace-based UserDetailsService which will reject users who are not already defined.
-    This can be used as an alternative.
- -->
-<!--
-    <user-service id="userService">
-        <user name="http://luke.taylor.myopenid.com/" authorities="ROLE_SUPERVISOR,ROLE_USER" />
-        <user name="http://luke.taylor.openid.cn/" authorities="ROLE_SUPERVISOR,ROLE_USER" />
-        <user name="http://raykrueger.blogspot.com/" authorities="ROLE_SUPERVISOR,ROLE_USER" />
-        <user name="http://spring.security.test.myopenid.com/" authorities="ROLE_SUPERVISOR,ROLE_USER" />
-    </user-service>
- -->
 </b:beans>

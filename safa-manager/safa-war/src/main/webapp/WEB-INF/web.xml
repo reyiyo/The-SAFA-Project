@@ -15,6 +15,12 @@
         </param-value>
 	</context-param>
 
+	<!-- - Loads the root application context of this web app at startup. - 
+		The application context is then available via - WebApplicationContextUtils.getWebApplicationContext(servletContext). -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
 	<context-param>
 		<param-name>webAppRootKey</param-name>
 		<param-value>openid.root</param-value>
@@ -30,10 +36,41 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!-- - Loads the root application context of this web app at startup. - 
-		The application context is then available via - WebApplicationContextUtils.getWebApplicationContext(servletContext). -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+	<!-- Reads request input using UTF-8 encoding -->
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Handles all requests into the application -->
+	<servlet>
+		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				/WEB-INF/safa-war-applicationContext.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+		<url-pattern>/safa/*</url-pattern>
+	</servlet-mapping>
 
 </web-app>

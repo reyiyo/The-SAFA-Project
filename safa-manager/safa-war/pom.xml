@@ -4,7 +4,7 @@
 	<groupId>org.safaproject</groupId>
 	<artifactId>safa-war</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${safa-war.version}</version>
 	<name>Safa Webapp</name>
 
 	<parent>
@@ -12,6 +12,11 @@
 		<artifactId>safa-manager</artifactId>
 		<version>${safa.version}</version>
 	</parent>
+	
+	<properties>
+		<org.springsecurity.version>3.1.0.CI-SNAPSHOT</org.springsecurity.version>
+		
+	</properties>
 
 	<dependencies>
 		<!-- SAFA DEPENDENCIES -->
@@ -20,36 +25,54 @@
 			<artifactId>safa-api</artifactId>
 			<version>${safa-api.version}</version>
 		</dependency>
+		
+		<!-- SPRING-SECURITY DEPENDENCIES -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<version>3.1.0.CI-SNAPSHOT</version>
+			<version>${org.springsecurity.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-openid</artifactId>
-			<version>3.1.0.CI-SNAPSHOT</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>3.0-alpha-1</version>
+			<version>${org.springsecurity.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>3.1.0.CI-SNAPSHOT</version>
+			<version>${org.springsecurity.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
-			<version>3.1.0.CI-SNAPSHOT</version>
+			<version>${org.springsecurity.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!-- SPRING-MVC DEPENDENCIES -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		
+		<!-- Jackson JSON Mapper -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+		
+		<!-- SERVLET -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>3.0-alpha-1</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -145,4 +168,3 @@
 		</plugins>
 	</build>
 </project>
-
