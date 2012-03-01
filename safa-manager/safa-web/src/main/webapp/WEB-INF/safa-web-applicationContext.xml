@@ -21,7 +21,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />
 
-	<import resource="classpath:safa-api-applicationContext.xml" />
+	<import resource="classpath:safa-server-applicationContext.xml" />
 	<import resource="safa-web-security-context.xml" />
 
 	<bean id="viewResolver"
