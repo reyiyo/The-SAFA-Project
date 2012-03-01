@@ -1,4 +1,4 @@
-package org.safaproject.safa.model;
+package org.safaproject.safa.model.indicator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.safaproject.safa.model.content.Content;
+import org.safaproject.safa.model.user.User;
 
 /**
  * This class defines each vote of an user.

@@ -4,20 +4,20 @@
 	version="2.0">
 	<persistence-unit name="safa-entities"
 		transaction-type="RESOURCE_LOCAL">
-		<class>org.safaproject.safa.model.Comment</class>
-		<class>org.safaproject.safa.model.Content</class>
-		<class>org.safaproject.safa.model.Indicator</class>
-		<class>org.safaproject.safa.model.TagType</class>
-		<class>org.safaproject.safa.model.TagTreeNode</class>
-		<class>org.safaproject.safa.model.TagRequest</class>
-		<class>org.safaproject.safa.model.Rol</class>
-		<class>org.safaproject.safa.model.Tag</class>
-		<class>org.safaproject.safa.model.IndicatorType</class>
-		<class>org.safaproject.safa.model.ResourceType</class>
-		<class>org.safaproject.safa.model.Resource</class>
-		<class>org.safaproject.safa.model.User</class>
-		<class>org.safaproject.safa.model.UserProfile</class>
-		<class>org.safaproject.safa.model.Vote</class>
-		<class>org.safaproject.safa.model.TagDataTypeEnum</class>
+		<class>org.safaproject.safa.model.content.Comment</class>
+		<class>org.safaproject.safa.model.content.Content</class>
+		<class>org.safaproject.safa.model.indicator.Indicator</class>
+		<class>org.safaproject.safa.model.tag.TagType</class>
+		<class>org.safaproject.safa.model.tag.TagTreeNode</class>
+		<class>org.safaproject.safa.model.tag.TagRequest</class>
+		<class>org.safaproject.safa.model.user.Rol</class>
+		<class>org.safaproject.safa.model.tag.Tag</class>
+		<class>org.safaproject.safa.model.indicator.IndicatorType</class>
+		<class>org.safaproject.safa.model.content.ResourceType</class>
+		<class>org.safaproject.safa.model.content.Resource</class>
+		<class>org.safaproject.safa.model.user.User</class>
+		<class>org.safaproject.safa.model.user.UserProfile</class>
+		<class>org.safaproject.safa.model.indicator.Vote</class>
+		<class>org.safaproject.safa.model.tag.TagDataTypeEnum</class>
 	</persistence-unit>
 </persistence>

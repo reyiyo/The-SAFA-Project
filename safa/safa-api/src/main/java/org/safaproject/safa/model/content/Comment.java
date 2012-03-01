@@ -1,4 +1,4 @@
-package org.safaproject.safa.model;
+package org.safaproject.safa.model.content;
 
 import java.util.Date;
 
@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.safaproject.safa.model.user.User;
 
 @Entity
 @Table(name = "COMMENT")

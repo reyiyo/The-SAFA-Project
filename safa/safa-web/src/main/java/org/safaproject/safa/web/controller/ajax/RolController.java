@@ -1,7 +1,7 @@
 package org.safaproject.safa.web.controller.ajax;
 
 import org.safaproject.safa.dao.RolDAO;
-import org.safaproject.safa.model.Rol;
+import org.safaproject.safa.model.user.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

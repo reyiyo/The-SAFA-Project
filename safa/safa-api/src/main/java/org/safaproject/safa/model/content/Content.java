@@ -1,4 +1,4 @@
-package org.safaproject.safa.model;
+package org.safaproject.safa.model.content;
 
 import java.util.Date;
 import java.util.Set;
@@ -15,6 +15,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.safaproject.safa.model.indicator.Indicator;
+import org.safaproject.safa.model.tag.Tag;
+import org.safaproject.safa.model.user.User;
 
 /**
  * @author reyiyo

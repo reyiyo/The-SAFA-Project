@@ -1,4 +1,4 @@
-package org.safaproject.safa.model;
+package org.safaproject.safa.model.tag;
 
 import java.util.List;
 

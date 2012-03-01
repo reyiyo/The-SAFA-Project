@@ -1,6 +1,6 @@
 package org.safaproject.safa.dao;
 
-import org.safaproject.safa.model.Tag;
+import org.safaproject.safa.model.tag.Tag;
 import org.springframework.stereotype.Repository;
 
 @Repository

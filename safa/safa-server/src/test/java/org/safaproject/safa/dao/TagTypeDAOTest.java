@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.safaproject.safa.model.TagDataTypeEnum;
-import org.safaproject.safa.model.TagType;
+import org.safaproject.safa.model.tag.TagDataTypeEnum;
+import org.safaproject.safa.model.tag.TagType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;

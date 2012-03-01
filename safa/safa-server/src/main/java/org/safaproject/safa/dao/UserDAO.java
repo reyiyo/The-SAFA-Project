@@ -2,7 +2,7 @@ package org.safaproject.safa.dao;
 
 import javax.persistence.Query;
 
-import org.safaproject.safa.model.User;
+import org.safaproject.safa.model.user.User;
 import org.springframework.stereotype.Repository;
 
 @Repository

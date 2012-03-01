@@ -10,8 +10,8 @@ import javax.persistence.NoResultException;
 
 import org.safaproject.safa.dao.RolDAO;
 import org.safaproject.safa.dao.UserDAO;
-import org.safaproject.safa.model.Rol;
-import org.safaproject.safa.model.User;
+import org.safaproject.safa.model.user.Rol;
+import org.safaproject.safa.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -89,7 +89,7 @@ public class SafaUserDetailsService implements UserDetailsService,
 	}
 
 	/**
-	 * Wraps {@link org.safaproject.safa.model.Rol} roles to
+	 * Wraps {@link org.safaproject.safa.model.user.Rol} roles to
 	 * {@link SimpleGrantedAuthority} objects
 	 * 
 	 * @param roleswith

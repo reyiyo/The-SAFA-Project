@@ -1,4 +1,4 @@
-package org.safaproject.safa.model;
+package org.safaproject.safa.model.content;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
