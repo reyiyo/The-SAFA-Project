@@ -8,7 +8,7 @@
 
 	<parent>
 		<groupId>org.safaproject</groupId>
-		<artifactId>safa-manager</artifactId>
+		<artifactId>safa</artifactId>
 		<version>${safa.version}</version>
 	</parent>
 	

@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.safaproject</groupId>
-	<artifactId>safa-manager</artifactId>
+	<artifactId>safa</artifactId>
 	<packaging>pom</packaging>
 	<version>${safa.version}</version>
-	<name>Safa Manager</name>
+	<name>Safa Project</name>
 
 	<modules>
 		<module>safa-server</module>
