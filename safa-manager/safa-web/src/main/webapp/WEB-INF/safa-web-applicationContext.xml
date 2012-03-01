@@ -22,7 +22,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	<mvc:annotation-driven />
 
 	<import resource="classpath:safa-api-applicationContext.xml" />
-	<import resource="safa-war-security-context.xml" />
+	<import resource="safa-web-security-context.xml" />
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
