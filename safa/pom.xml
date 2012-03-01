@@ -9,6 +9,7 @@
 	<name>Safa Project</name>
 
 	<modules>
+		<module>safa-api</module>
 		<module>safa-server</module>
 		<module>safa-web</module>
 	</modules>
