@@ -9,13 +9,14 @@
 	<name>Safa Manager</name>
 
 	<modules>
-		<module>safa-api</module>
+		<module>safa-server</module>
 		<module>safa-war</module>
 	</modules>
 
 	<properties>
 		<safa.version>0.1-SNAPSHOT</safa.version>
 		<safa-api.version>0.0.1-SNAPSHOT</safa-api.version>
+		<safa-server.version>0.0.1-SNAPSHOT</safa-server.version>
 		<safa-war.version>0.0.1-SNAPSHOT</safa-war.version>
 		<java.version>1.6</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
