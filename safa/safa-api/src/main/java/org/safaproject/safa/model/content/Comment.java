@@ -17,6 +17,17 @@ import org.safaproject.safa.model.user.User;
 @Table(name = "COMMENT")
 public class Comment {
 
+	public Comment() {
+		//Constructor for hibernate
+	}
+	
+	public Comment(Date commentDate, User user, String commentText) {
+		super();
+		this.commentDate = commentDate;
+		this.user = user;
+		this.commentText = commentText;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "commentId")
