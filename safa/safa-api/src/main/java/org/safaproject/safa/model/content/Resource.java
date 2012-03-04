@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.URL;
+import org.safaproject.safa.model.tag.Tag;
 
 /**
  * This class defines a Resource. A Resource describes an url metadata, like its
@@ -34,7 +35,7 @@ public class Resource {
 
 	@ManyToOne
 	@JoinColumn(name = "resourceType", nullable = false)
-	private ResourceType resourceType;
+	private Tag resourceType;
 
 	@Column(name = "size", nullable = false)
 	@Min(value = 0, message = "{Resource.size.Min}")
@@ -47,8 +48,7 @@ public class Resource {
 		// Constructor for hibernate
 	}
 
-	public Resource(String url, ResourceType resourceType, Long size,
-			String description) {
+	public Resource(String url, Tag resourceType, Long size, String description) {
 
 		super();
 		this.url = url;
@@ -91,7 +91,7 @@ public class Resource {
 	/**
 	 * @return the resourceType
 	 */
-	public ResourceType getResourceType() {
+	public Tag getResourceType() {
 		return resourceType;
 	}
 
@@ -99,7 +99,7 @@ public class Resource {
 	 * @param resourceType
 	 *            the resourceType to set
 	 */
-	public void setResourceType(ResourceType resourceType) {
+	public void setResourceType(Tag resourceType) {
 		this.resourceType = resourceType;
 	}
 

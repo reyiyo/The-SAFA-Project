@@ -29,7 +29,7 @@ public interface GenericDAO<T, ID extends Serializable> {
 	 *            the primary key
 	 * @return the entity
 	 */
-	T findById(final ID id);
+	T findById(ID id);
 
 	/**
 	 * Load all entities
@@ -50,7 +50,7 @@ public interface GenericDAO<T, ID extends Serializable> {
 	 *            the example
 	 * @return the list of entities
 	 */
-	List<T> findByExample(final T exampleInstance);
+	List<T> findByExample(T exampleInstance);
 
 	/**
 	 * Find using a named query
@@ -62,7 +62,7 @@ public interface GenericDAO<T, ID extends Serializable> {
 	 * 
 	 * @return the list of entities
 	 */
-	List<T> findByNamedQuery(final String queryName, Object... params);
+	List<T> findByNamedQuery(String queryName, Object... params);
 
 	/**
 	 * Find using a named query
@@ -74,8 +74,8 @@ public interface GenericDAO<T, ID extends Serializable> {
 	 * 
 	 * @return the list of entities
 	 */
-	List<T> findByNamedQueryAndNamedParams(final String queryName,
-			final Map<String, ? extends Object> params);
+	List<T> findByNamedQueryAndNamedParams(String queryName,
+			Map<String, ? extends Object> params);
 
 	/**
 	 * Counts all entities
@@ -95,17 +95,17 @@ public interface GenericDAO<T, ID extends Serializable> {
 	 *            the search criteria
 	 * @return the number of entities
 	 */
-	Long countByExample(final T exampleInstance);
+	Long countByExample(T exampleInstance);
 
 	/**
-	 * Saves an entity. This can be either a INSERT or UPDATE in the database
+	 * Saves a NEW entity.
 	 * 
 	 * @param entity
 	 *            the entity to save
 	 * 
 	 * @return the saved entity
 	 */
-	T save(final T entity);
+	void save(T entity);
 
 	/**
 	 * Deletes an entity from the database
@@ -113,5 +113,14 @@ public interface GenericDAO<T, ID extends Serializable> {
 	 * @param entity
 	 *            the entity to delete
 	 */
-	void delete(final T entity);
+	void delete(T entity);
+
+	/**
+	 * Updates an entity from the database which doesn't need to be attached.
+	 * This can be either a INSERT or UPDATE in the database
+	 * 
+	 * @param entity
+	 *            the entity to delete
+	 */
+	T update(T entity);
 }

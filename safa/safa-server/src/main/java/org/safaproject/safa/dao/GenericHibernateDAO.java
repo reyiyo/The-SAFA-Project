@@ -212,8 +212,15 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	 * @see org.safaproject.safa.dao.GenericDAO#save(java.lang.Object)
 	 */
 	@Override
-	public T save(T entity) {
+	public T update(T entity) {
 		final T savedEntity = getEntityManager().merge(entity);
 		return savedEntity;
+	}
+	
+	/**
+	 * @see org.safaproject.safa.dao.GenericDAO#persist(java.lang.Object)
+	 */
+	public void save(T entity){
+		getEntityManager().persist(entity);
 	}
 }

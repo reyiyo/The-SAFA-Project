@@ -31,7 +31,17 @@ public class TagType {
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	// TODO: Investigate why this constraint is not being evaluated
-	private TagDataTypeEnum tagDataType;
+	private TagDataTypes tagDataType;
+
+	public TagType() {
+		// Constructor for hibernate
+	}
+
+	public TagType(String tagName, TagDataTypes tagDataType) {
+		super();
+		this.tagName = tagName;
+		this.tagDataType = tagDataType;
+	}
 
 	/**
 	 * @return the tagName
@@ -51,7 +61,7 @@ public class TagType {
 	/**
 	 * @return the tagType
 	 */
-	public TagDataTypeEnum getTagDataType() {
+	public TagDataTypes getTagDataType() {
 		return tagDataType;
 	}
 
@@ -59,7 +69,7 @@ public class TagType {
 	 * @param tagType
 	 *            the tagType to set
 	 */
-	public void setTagDataType(TagDataTypeEnum tagDataType) {
+	public void setTagDataType(TagDataTypes tagDataType) {
 		this.tagDataType = tagDataType;
 	}
 

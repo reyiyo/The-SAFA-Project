@@ -11,17 +11,19 @@ import javax.persistence.PersistenceException;
 import junit.framework.Assert;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.safaproject.safa.model.content.Comment;
 import org.safaproject.safa.model.content.Content;
 import org.safaproject.safa.model.content.Resource;
-import org.safaproject.safa.model.content.ResourceType;
 import org.safaproject.safa.model.content.builder.CommentBuilder;
 import org.safaproject.safa.model.content.builder.ContentBuilder;
 import org.safaproject.safa.model.content.builder.ResourceBuilder;
-import org.safaproject.safa.model.content.builder.ResourceTypeBuilder;
+import org.safaproject.safa.model.tag.Tag;
+import org.safaproject.safa.model.tag.TagDataTypes;
+import org.safaproject.safa.model.tag.TagType;
+import org.safaproject.safa.model.tag.builder.TagBuilder;
+import org.safaproject.safa.model.tag.builder.TagTypeBuilder;
 import org.safaproject.safa.model.user.User;
 import org.safaproject.safa.model.user.builder.UserBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +46,10 @@ public class ContentDAOTest {
 	private CommentDAO commentDao;
 
 	@Autowired
-	private ResourceTypeDAO resourceTypeDAO;
+	private TagTypeDAO tagTypeDAO;
+
+	@Autowired
+	private TagDAO tagDAO;
 
 	@Autowired
 	private ResourceDAO resourceDAO;
@@ -53,8 +58,12 @@ public class ContentDAOTest {
 			.withEmail("test@test.com")
 			.withOpenIDurlToken("http://laputamadre.com").build();
 
-	private ResourceType testResourceType = new ResourceTypeBuilder().withName(
-			"PDF").build();
+	private TagType testTagType = new TagTypeBuilder()
+			.withTagName("Resource Type").withTagDataType(TagDataTypes.STRING)
+			.build();
+
+	private Tag testResourceType = new TagBuilder().withTagType(testTagType)
+			.withValue("PDF").build();
 
 	private Resource testResource = new ResourceBuilder().withDescription("")
 			.withSize(10L).withUrl("http://tuvieja.com")
@@ -62,9 +71,10 @@ public class ContentDAOTest {
 
 	@Before
 	public void init() {
-		testingUser = userDao.save(testingUser);
-		testResourceType = resourceTypeDAO.save(testResourceType);
-		testResource = resourceDAO.save(testResource);
+		userDao.save(testingUser);
+		tagTypeDAO.save(testTagType);
+		tagDAO.save(testResourceType);
+		resourceDAO.save(testResource);
 	}
 
 	@Test
@@ -79,7 +89,7 @@ public class ContentDAOTest {
 						new HashSet<Resource>(Arrays.asList(testResource)))
 				.withUploadDate(new Date()).withUser(testingUser).build();
 
-		content = contentDao.save(content);
+		contentDao.save(content);
 
 		Content contentFromDB = contentDao.findById(content.getContentId());
 
@@ -116,7 +126,7 @@ public class ContentDAOTest {
 	public void shallFindByExample() {
 		String title = "Design Patterns";
 		String desc = "Desc";
-		Content content = contentDao.save(new ContentBuilder()
+		Content content = new ContentBuilder()
 				.withAvailable(true)
 				.withDescription(desc)
 				.withReviewed(true)
@@ -124,7 +134,8 @@ public class ContentDAOTest {
 				.withUploadDate(new Date())
 				.withResources(
 						new HashSet<Resource>(Arrays.asList(testResource)))
-				.withThumbnail(testResource).withUser(testingUser).build());
+				.withThumbnail(testResource).withUser(testingUser).build();
+		contentDao.save(content);
 
 		Content contentByExample = contentDao.findByExample(
 				new ContentBuilder().withTitle(title).withDescription(desc)
@@ -157,7 +168,7 @@ public class ContentDAOTest {
 
 	@Test
 	public void shallDeleteContent() {
-		Content content = contentDao.save(new ContentBuilder()
+		Content content = new ContentBuilder()
 				.withAvailable(true)
 				.withDescription("Desc")
 				.withReviewed(true)
@@ -165,8 +176,10 @@ public class ContentDAOTest {
 				.withUploadDate(new Date())
 				.withResources(
 						new HashSet<Resource>(Arrays.asList(testResource)))
-				.withThumbnail(testResource).withUser(testingUser).build());
-		Content content2 = contentDao.save(new ContentBuilder()
+				.withThumbnail(testResource).withUser(testingUser).build();
+		contentDao.save(content);
+
+		Content content2 = new ContentBuilder()
 				.withAvailable(true)
 				.withDescription("Desc")
 				.withReviewed(true)
@@ -174,7 +187,9 @@ public class ContentDAOTest {
 				.withUploadDate(new Date())
 				.withResources(
 						new HashSet<Resource>(Arrays.asList(testResource)))
-				.withThumbnail(testResource).withUser(testingUser).build());
+				.withThumbnail(testResource).withUser(testingUser).build();
+
+		contentDao.save(content2);
 
 		Assert.assertEquals(Long.valueOf(2), contentDao.countAll());
 
@@ -190,7 +205,7 @@ public class ContentDAOTest {
 	@Test
 	public void shallUpdateContent() {
 		String modifiedTitle = "Clean Code";
-		Content content = contentDao.save(new ContentBuilder()
+		Content content = new ContentBuilder()
 				.withAvailable(true)
 				.withDescription("Desc")
 				.withReviewed(true)
@@ -198,7 +213,9 @@ public class ContentDAOTest {
 				.withUploadDate(new Date())
 				.withResources(
 						new HashSet<Resource>(Arrays.asList(testResource)))
-				.withThumbnail(testResource).withUser(testingUser).build());
+				.withThumbnail(testResource).withUser(testingUser).build();
+
+		contentDao.save(content);
 
 		content.setTitle(modifiedTitle);
 		contentDao.save(content);
@@ -233,10 +250,9 @@ public class ContentDAOTest {
 		commentDao.delete(comment);
 	}
 
-	@Ignore
 	@Test(expected = PersistenceException.class)
 	public void shallFailBecauseOfNullTitle() {
-		Content content = contentDao.save(new ContentBuilder()
+		Content content = new ContentBuilder()
 				.withAvailable(true)
 				.withDescription("Desc")
 				.withReviewed(true)
@@ -244,10 +260,10 @@ public class ContentDAOTest {
 				.withUploadDate(new Date())
 				.withResources(
 						new HashSet<Resource>(Arrays.asList(testResource)))
-				.withThumbnail(testResource).withUser(testingUser).build());
+				.withThumbnail(testResource).withUser(testingUser).build();
 
 		content.setTitle(null);
-		content = contentDao.save(content);
+		contentDao.save(content);
 	}
 
 }

@@ -24,7 +24,7 @@ public class RolDAOTest {
 	public void shallCreateRol() {
 		Rol rol = new Rol();
 		rol.setName("ADMIN");
-		rol = rolDAO.save(rol);
+		rolDAO.save(rol);
 
 		Rol rolFromDB = rolDAO.findById(rol.getRolId());
 
@@ -35,11 +35,11 @@ public class RolDAOTest {
 	public void shallFindAll() {
 		Rol rol = new Rol();
 		rol.setName("ADMIN");
-		rol = rolDAO.save(rol);
+		rolDAO.save(rol);
 
 		Rol rol2 = new Rol();
 		rol2.setName("USER");
-		rol2 = rolDAO.save(rol2);
+		rolDAO.save(rol2);
 
 		assertEquals(rolDAO.findAll().size(), 2);
 	}
@@ -48,7 +48,7 @@ public class RolDAOTest {
 	public void shallFindByExample() {
 		Rol rol = new Rol();
 		rol.setName("ADMIN");
-		rol = rolDAO.save(rol);
+		rolDAO.save(rol);
 		
 		Rol example = new Rol();
 		example.setName("ADMIN");
@@ -62,11 +62,11 @@ public class RolDAOTest {
 	public void shallGetRolCount() {
 		Rol rol = new Rol();
 		rol.setName("ADMIN");
-		rol = rolDAO.save(rol);
+		rolDAO.save(rol);
 
 		Rol rol2 = new Rol();
 		rol2.setName("USER");
-		rol2 = rolDAO.save(rol2);
+		rolDAO.save(rol2);
 
 		assertEquals(rolDAO.countAll(), new Long(2));
 	}
@@ -75,11 +75,11 @@ public class RolDAOTest {
 	public void shallCountByExample() {
 		Rol rol = new Rol();
 		rol.setName("ADMIN");
-		rol = rolDAO.save(rol);
+		rolDAO.save(rol);
 
 		Rol rol2 = new Rol();
 		rol2.setName("USER");
-		rol2 = rolDAO.save(rol2);
+		rolDAO.save(rol2);
 		
 		Rol example = new Rol();
 		example.setName("ADMIN");
@@ -91,11 +91,11 @@ public class RolDAOTest {
 	public void shallDeleteRol() {
 		Rol rol = new Rol();
 		rol.setName("ADMIN");
-		rol = rolDAO.save(rol);
+		rolDAO.save(rol);
 
 		Rol rol2 = new Rol();
 		rol2.setName("USER");
-		rol2 = rolDAO.save(rol2);
+		rolDAO.save(rol2);
 		
 		rolDAO.delete(rol);
 
@@ -105,18 +105,18 @@ public class RolDAOTest {
 	@Test(expected=PersistenceException.class)
 	public void shallGetNullNameConstraintViolationException() {
 		Rol rol = new Rol();
-		rol = rolDAO.save(rol);
+		rolDAO.save(rol);
 	}
 	
 	@Test(expected=PersistenceException.class)
 	public void shallGetNotUniqueNameConstraintViolationException() {
 		Rol rol = new Rol();
 		rol.setName("ADMIN");
-		rol = rolDAO.save(rol);
+		rolDAO.save(rol);
 
 		Rol rol2 = new Rol();
 		rol2.setName("ADMIN");
-		rol2 = rolDAO.save(rol2);
+		rolDAO.save(rol2);
 	}
 	
 }

@@ -36,7 +36,7 @@ public class CommentDAOTest {
 
 	@Before
 	public void init() {
-		testingUser = userDao.save(testingUser);
+		userDao.save(testingUser);
 	}
 
 	@Test
@@ -44,7 +44,7 @@ public class CommentDAOTest {
 		Comment comment = new CommentBuilder().withCommentDate(new Date())
 				.withCommentText("Hello world!").withUser(testingUser).build();
 
-		comment = commentDao.save(comment);
+		commentDao.save(comment);
 
 		Comment commentFromDB = commentDao.findById(comment.getCommentId());
 
@@ -59,8 +59,8 @@ public class CommentDAOTest {
 				.withCommentText("Goodbye world!").withUser(testingUser)
 				.build();
 
-		comment = commentDao.save(comment);
-		comment2 = commentDao.save(comment2);
+		commentDao.save(comment);
+		commentDao.save(comment2);
 
 		Assert.assertEquals(2, commentDao.findAll().size());
 	}
@@ -69,7 +69,7 @@ public class CommentDAOTest {
 	public void shallFindByExampleOnUser() {
 		Comment comment = new CommentBuilder().withCommentDate(new Date())
 				.withCommentText("Hello world!").withUser(testingUser).build();
-		comment = commentDao.save(comment);
+		commentDao.save(comment);
 
 		Comment commentByExample = commentDao.findByExample(
 				new CommentBuilder().withUser(testingUser).build()).get(0);
@@ -82,7 +82,7 @@ public class CommentDAOTest {
 		Date now = new Date();
 		Comment comment = new CommentBuilder().withCommentDate(now)
 				.withCommentText("Hello world!").withUser(testingUser).build();
-		comment = commentDao.save(comment);
+		commentDao.save(comment);
 
 		Comment commentByExample = commentDao.findByExample(
 				new CommentBuilder().withCommentDate(now).build()).get(0);
@@ -95,7 +95,7 @@ public class CommentDAOTest {
 		String text = "Hello world!";
 		Comment comment = new CommentBuilder().withCommentDate(new Date())
 				.withCommentText(text).withUser(testingUser).build();
-		comment = commentDao.save(comment);
+		commentDao.save(comment);
 
 		Comment commentByExample = commentDao.findByExample(
 				new CommentBuilder().withCommentText(text).build()).get(0);
@@ -108,7 +108,7 @@ public class CommentDAOTest {
 		Comment comment = new CommentBuilder().withCommentDate(new Date())
 				.withCommentText("Hello world!").withUser(testingUser).build();
 
-		comment = commentDao.save(comment);
+		commentDao.save(comment);
 
 		Long countByExample = commentDao.countByExample(new CommentBuilder()
 				.withUser(testingUser).build());
@@ -118,10 +118,10 @@ public class CommentDAOTest {
 
 	@Test
 	public void shallDeleteComment() {
-		Comment comment = commentDao.save(new CommentBuilder()
+		Comment comment = commentDao.update(new CommentBuilder()
 				.withCommentDate(new Date()).withCommentText("Hello world!")
 				.withUser(testingUser).build());
-		Comment comment2 = commentDao.save(new CommentBuilder()
+		Comment comment2 = commentDao.update(new CommentBuilder()
 				.withCommentDate(new Date()).withCommentText("Goodbye world!")
 				.withUser(testingUser).build());
 
@@ -137,7 +137,7 @@ public class CommentDAOTest {
 	@Test
 	public void shallUpdateComment() {
 		String modifiedText = "Modificado!";
-		Comment comment = commentDao.save(new CommentBuilder()
+		Comment comment = commentDao.update(new CommentBuilder()
 				.withCommentDate(new Date()).withCommentText("Hello world!")
 				.withUser(testingUser).build());
 

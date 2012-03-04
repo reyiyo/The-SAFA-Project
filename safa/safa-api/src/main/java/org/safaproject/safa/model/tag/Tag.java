@@ -29,6 +29,20 @@ public class Tag {
 	@Column(name = "value", nullable = false)
 	private String value;
 
+	@Column(name = "iconURL")
+	private String iconURL;
+
+	public Tag() {
+		// Constructor for hibernate
+	}
+
+	public Tag(TagType tagType, String value, String iconURL) {
+		super();
+		this.tagType = tagType;
+		this.value = value;
+		this.iconURL = iconURL;
+	}
+
 	/**
 	 * @return the tagId
 	 */
@@ -72,6 +86,21 @@ public class Tag {
 	 */
 	public void setTagType(TagType tagType) {
 		this.tagType = tagType;
+	}
+
+	/**
+	 * @return the iconURL
+	 */
+	public String getIconURL() {
+		return iconURL;
+	}
+
+	/**
+	 * @param iconURL
+	 *            the iconURL to set
+	 */
+	public void setIconURL(String iconURL) {
+		this.iconURL = iconURL;
 	}
 
 }

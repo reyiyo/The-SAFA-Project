@@ -1,7 +1,7 @@
 package org.safaproject.safa.model.content.builder;
 
 import org.safaproject.safa.model.content.Resource;
-import org.safaproject.safa.model.content.ResourceType;
+import org.safaproject.safa.model.tag.Tag;
 
 /**
  * Builder for the Resource class. Must be reviewed if the object is built at
@@ -16,7 +16,7 @@ public class ResourceBuilder {
 
 	private String url;
 
-	private ResourceType resourceType;
+	private Tag resourceType;
 
 	private Long size;
 
@@ -27,7 +27,7 @@ public class ResourceBuilder {
 		return this;
 	}
 
-	public ResourceBuilder withResourceType(ResourceType resourceType) {
+	public ResourceBuilder withResourceType(Tag resourceType) {
 		this.resourceType = resourceType;
 		return this;
 	}
@@ -35,7 +35,7 @@ public class ResourceBuilder {
 	public ResourceBuilder withSize(Long size) {
 		this.size = size;
 		return this;
-	}	
+	}
 
 	public ResourceBuilder withDescription(String description) {
 		this.description = description;
