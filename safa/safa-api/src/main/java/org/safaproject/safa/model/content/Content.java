@@ -31,7 +31,7 @@ public class Content {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "contentId")
-	private String contentId;
+	private Long contentId;
 
 	@Column(name = "title")
 	private String title;
@@ -72,10 +72,32 @@ public class Content {
 	@JoinColumn(name = "contentId")
 	private Set<Comment> comments;
 
+	public Content() {
+		// Hibernate constructor
+	}
+
+	public Content(String title, String description, Date uploadDate,
+			User user, Set<Tag> tags, Set<Indicator> indicators,
+			boolean available, Set<Resource> resources, Resource thumbnail,
+			boolean reviewed, Set<Comment> comments) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.uploadDate = uploadDate;
+		this.user = user;
+		this.tags = tags;
+		this.indicators = indicators;
+		this.available = available;
+		this.resources = resources;
+		this.thumbnail = thumbnail;
+		this.reviewed = reviewed;
+		this.comments = comments;
+	}
+
 	/**
 	 * @return the contentId
 	 */
-	public String getContentId() {
+	public Long getContentId() {
 		return contentId;
 	}
 
@@ -83,7 +105,7 @@ public class Content {
 	 * @param contentId
 	 *            the contentId to set
 	 */
-	public void setContentId(String contentId) {
+	public void setContentId(Long contentId) {
 		this.contentId = contentId;
 	}
 
