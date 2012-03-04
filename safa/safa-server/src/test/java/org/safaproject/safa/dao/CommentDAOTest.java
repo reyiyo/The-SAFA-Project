@@ -2,6 +2,9 @@ package org.safaproject.safa.dao;
 
 import java.util.Date;
 
+import javax.persistence.PersistenceException;
+import javax.validation.ConstraintViolationException;
+
 import junit.framework.Assert;
 
 import org.junit.Before;
@@ -55,87 +58,129 @@ public class CommentDAOTest {
 		Comment comment2 = new CommentBuilder().withCommentDate(new Date())
 				.withCommentText("Goodbye world!").withUser(testingUser)
 				.build();
-		
+
 		comment = commentDao.save(comment);
 		comment2 = commentDao.save(comment2);
-		
+
 		Assert.assertEquals(2, commentDao.findAll().size());
 	}
-	
+
 	@Test
 	public void shallFindByExampleOnUser() {
 		Comment comment = new CommentBuilder().withCommentDate(new Date())
 				.withCommentText("Hello world!").withUser(testingUser).build();
 		comment = commentDao.save(comment);
-		
-		Comment commentByExample = commentDao.findByExample(new CommentBuilder().withUser(testingUser).build()).get(0);
-		
+
+		Comment commentByExample = commentDao.findByExample(
+				new CommentBuilder().withUser(testingUser).build()).get(0);
+
 		Assert.assertEquals(comment, commentByExample);
 	}
-	
+
 	@Test
 	public void shallFindByExampleOnCommentDate() {
 		Date now = new Date();
 		Comment comment = new CommentBuilder().withCommentDate(now)
 				.withCommentText("Hello world!").withUser(testingUser).build();
 		comment = commentDao.save(comment);
-		
-		Comment commentByExample = commentDao.findByExample(new CommentBuilder().withCommentDate(now).build()).get(0);
-		
+
+		Comment commentByExample = commentDao.findByExample(
+				new CommentBuilder().withCommentDate(now).build()).get(0);
+
 		Assert.assertEquals(comment, commentByExample);
 	}
-	
+
 	@Test
 	public void shallFindByExampleOnCommentText() {
 		String text = "Hello world!";
 		Comment comment = new CommentBuilder().withCommentDate(new Date())
 				.withCommentText(text).withUser(testingUser).build();
 		comment = commentDao.save(comment);
-		
-		Comment commentByExample = commentDao.findByExample(new CommentBuilder().withCommentText(text).build()).get(0);
-		
+
+		Comment commentByExample = commentDao.findByExample(
+				new CommentBuilder().withCommentText(text).build()).get(0);
+
 		Assert.assertEquals(comment, commentByExample);
 	}
-	
+
 	@Test
 	public void shallCountByExample() {
 		Comment comment = new CommentBuilder().withCommentDate(new Date())
 				.withCommentText("Hello world!").withUser(testingUser).build();
-		
+
 		comment = commentDao.save(comment);
-		
-		Long countByExample = commentDao.countByExample(new CommentBuilder().withUser(testingUser).build());
-		
+
+		Long countByExample = commentDao.countByExample(new CommentBuilder()
+				.withUser(testingUser).build());
+
 		Assert.assertEquals(Long.valueOf(1), countByExample);
 	}
-	
+
 	@Test
 	public void shallDeleteComment() {
-		Comment comment = commentDao.save(new CommentBuilder().withCommentDate(new Date())
-				.withCommentText("Hello world!").withUser(testingUser).build());
-		Comment comment2 = commentDao.save(new CommentBuilder().withCommentDate(new Date())
-				.withCommentText("Goodbye world!").withUser(testingUser)
-				.build());
-		
+		Comment comment = commentDao.save(new CommentBuilder()
+				.withCommentDate(new Date()).withCommentText("Hello world!")
+				.withUser(testingUser).build());
+		Comment comment2 = commentDao.save(new CommentBuilder()
+				.withCommentDate(new Date()).withCommentText("Goodbye world!")
+				.withUser(testingUser).build());
+
 		commentDao.delete(comment);
-		
+
 		Assert.assertEquals(Long.valueOf(1), commentDao.countAll());
-		
+
 		commentDao.delete(comment2);
-		
+
 		Assert.assertEquals(Long.valueOf(0), commentDao.countAll());
 	}
-	
+
 	@Test
 	public void shallUpdateComment() {
 		String modifiedText = "Modificado!";
-		Comment comment = commentDao.save(new CommentBuilder().withCommentDate(new Date())
-				.withCommentText("Hello world!").withUser(testingUser).build());
-		
+		Comment comment = commentDao.save(new CommentBuilder()
+				.withCommentDate(new Date()).withCommentText("Hello world!")
+				.withUser(testingUser).build());
+
 		comment.setCommentText(modifiedText);
 		commentDao.save(comment);
-		
-		Assert.assertEquals(comment.getCommentText(), commentDao.findAll().get(0).getCommentText());
 
+		Assert.assertEquals(comment.getCommentText(),
+				commentDao.findAll().get(0).getCommentText());
+
+	}
+
+	@Test(expected = PersistenceException.class)
+	public void shallFailBeacauseOfNullDate() {
+		Comment comment = new CommentBuilder().withCommentDate(new Date())
+				.withCommentText("Hello world!").withUser(testingUser).build();
+
+		comment.setCommentDate(null);
+		commentDao.save(comment);
+	}
+
+	@Test(expected = PersistenceException.class)
+	public void shallFailBeacauseOfNullUser() {
+		Comment comment = new CommentBuilder().withCommentDate(new Date())
+				.withCommentText("Hello world!").withUser(testingUser).build();
+
+		comment.setUser(null);
+		commentDao.save(comment);
+	}
+
+	@Test(expected = PersistenceException.class)
+	public void shallFailBeacauseOfNullText() {
+		Comment comment = new CommentBuilder().withCommentDate(new Date())
+				.withCommentText("Hello world!").withUser(testingUser).build();
+
+		comment.setCommentText(null);
+		commentDao.save(comment);
+	}
+
+	@Test(expected = ConstraintViolationException.class)
+	public void shallFailBeacauseOfBlankText() {
+		Comment comment = new CommentBuilder().withCommentDate(new Date())
+				.withCommentText("").withUser(testingUser).build();
+
+		commentDao.save(comment);
 	}
 }

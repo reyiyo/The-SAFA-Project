@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.safaproject.safa.model.user.User;
 
@@ -18,9 +19,9 @@ import org.safaproject.safa.model.user.User;
 public class Comment {
 
 	public Comment() {
-		//Constructor for hibernate
+		// Constructor for hibernate
 	}
-	
+
 	public Comment(Date commentDate, User user, String commentText) {
 		super();
 		this.commentDate = commentDate;
@@ -33,14 +34,15 @@ public class Comment {
 	@Column(name = "commentId")
 	private Long commentId;
 
-	@Column(name = "commentDate")
+	@Column(name = "commentDate", nullable = false)
 	private Date commentDate;
 
 	@ManyToOne
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "userId", nullable = false)
 	private User user;
 
-	@Column(name = "commentText")
+	@Column(name = "commentText", nullable = false)
+	@Size(min = 1)
 	private String commentText;
 
 	public Long getCommentId() {
