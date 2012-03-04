@@ -42,7 +42,7 @@ public class Comment {
 	private User user;
 
 	@Column(name = "commentText", nullable = false)
-	@Size(min = 1)
+	@Size(min = 1, message = "{Comment.commentText.Size}")
 	private String commentText;
 
 	public Long getCommentId() {

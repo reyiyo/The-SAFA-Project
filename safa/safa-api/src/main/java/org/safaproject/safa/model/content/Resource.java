@@ -28,20 +28,35 @@ public class Resource {
 	@Column(name = "resourceId")
 	private Long resourceId;
 
-	@Column(name = "url")
-	@URL
+	@Column(name = "url", nullable = false)
+	@URL(message = "{Resource.url.Url}")
 	private String url;
 
 	@ManyToOne
-	@JoinColumn(name = "resourceType")
+	@JoinColumn(name = "resourceType", nullable = false)
 	private ResourceType resourceType;
 
-	@Min(0)
-	@Column(name = "size")
+	@Column(name = "size", nullable = false)
+	@Min(value = 0, message = "{Resource.size.Min}")
 	private Long size;
 
 	@Column(name = "description")
 	private String description;
+
+	public Resource() {
+		// Constructor for hibernate
+	}
+
+	public Resource(String url, ResourceType resourceType, Long size,
+			String description) {
+
+		super();
+		this.url = url;
+		this.resourceType = resourceType;
+		this.size = size;
+		this.description = description;
+
+	}
 
 	/**
 	 * @return the resourceId

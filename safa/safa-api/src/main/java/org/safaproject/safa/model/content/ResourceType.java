@@ -9,10 +9,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
- * This class describes the type for a Resource. 
- *  
+ * This class describes the type for a Resource.
+ * 
  * @author reyiyo
- *
+ * 
  */
 @Entity
 public class ResourceType {
@@ -21,12 +21,23 @@ public class ResourceType {
 	private String name;
 
 	@ManyToOne
-	@JoinColumn(name = "resourceId")
+	@JoinColumn(name = "resourceId", nullable = true)
 	private Resource icon;
 
 	@OneToMany
-	@JoinColumn(name = "resourceId")
+	@JoinColumn(name = "resourceType")
 	private Set<Resource> resources;
+
+	public ResourceType() {
+		// Constructor for hibernate
+	}
+
+	public ResourceType(String name, Resource icon) {
+
+		super();
+		this.name = name;
+		this.icon = icon;
+	}
 
 	/**
 	 * @return the name

@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.safaproject.safa.model.indicator.Indicator;
 import org.safaproject.safa.model.tag.Tag;
@@ -33,20 +34,22 @@ public class Content {
 	@Column(name = "contentId")
 	private Long contentId;
 
-	@Column(name = "title")
+	@Column(name = "title", nullable = false)
+	@Size(min = 1, message = "{Content.title.Size}")
 	private String title;
 
-	@Column(name = "description")
+	@Column(name = "description", nullable = false)
+	@Size(min = 1, message = "{Content.description.Size}")
 	private String description;
 
-	@Column(name = "uploadDate")
+	@Column(name = "uploadDate", nullable = false)
 	private Date uploadDate;
 
 	@ManyToOne
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "userId", nullable = false)
 	private User user;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "TAG_CONTENT")
 	private Set<Tag> tags;
 
@@ -54,19 +57,20 @@ public class Content {
 	@JoinTable(name = "INDICATOR_CONTENT")
 	private Set<Indicator> indicators;
 
-	@Column(name = "available")
-	private boolean available = true;
+	@Column(name = "available", nullable = false)
+	private Boolean available = true;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name = "contentId")
+	@Size(min = 1, message = "{Content.resources.Size}")
 	private Set<Resource> resources;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idThumbnailResource")
+	@ManyToOne
+	@JoinColumn(name = "idThumbnailResource", nullable = false)
 	private Resource thumbnail;
 
-	@Column(name = "reviewed")
-	private boolean reviewed = false;
+	@Column(name = "reviewed", nullable = false)
+	private Boolean reviewed = false;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "contentId")
@@ -202,7 +206,7 @@ public class Content {
 	/**
 	 * @return the available
 	 */
-	public boolean isAvailable() {
+	public Boolean isAvailable() {
 		return available;
 	}
 
@@ -210,7 +214,7 @@ public class Content {
 	 * @param available
 	 *            the available to set
 	 */
-	public void setAvailable(boolean available) {
+	public void setAvailable(Boolean available) {
 		this.available = available;
 	}
 
@@ -247,7 +251,7 @@ public class Content {
 	/**
 	 * @return the reviewed
 	 */
-	public boolean isReviewed() {
+	public Boolean isReviewed() {
 		return reviewed;
 	}
 
@@ -255,7 +259,7 @@ public class Content {
 	 * @param reviewed
 	 *            the reviewed to set
 	 */
-	public void setReviewed(boolean reviewed) {
+	public void setReviewed(Boolean reviewed) {
 		this.reviewed = reviewed;
 	}
 
