@@ -28,18 +28,18 @@ public class Vote {
 	private Long voteId;
 
 	@ManyToOne
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "userId", nullable = false)
 	private User user;
 
 	@ManyToOne
-	@JoinColumn(name = "indicatorId")
+	@JoinColumn(name = "indicatorId", nullable = false)
 	private Indicator indicator;
 
 	@ManyToOne
-	@JoinColumn(name = "contentId")
+	@JoinColumn(name = "contentId", nullable = false)
 	private Content content;
 
-	@Column(name = "value")
+	@Column(name = "value", nullable = false)
 	private Integer value;
 
 	/**

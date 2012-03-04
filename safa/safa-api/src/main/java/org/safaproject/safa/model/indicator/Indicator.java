@@ -28,10 +28,10 @@ public class Indicator {
 	private Long indicatorId;
 
 	@ManyToOne
-	@JoinColumn(name = "indicatorName")
+	@JoinColumn(name = "indicatorName", nullable = false)
 	private IndicatorType indicatorType;
 
-	@Column(name = "value")
+	@Column(name = "value", nullable = false)
 	private Integer value;
 
 	/**

@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.safaproject.safa.model.content.Content;
 import org.safaproject.safa.model.user.User;
@@ -29,20 +30,23 @@ public class TagRequest {
 	private Long tagRequestId;
 
 	@ManyToOne
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "userId", nullable = false)
 	private User user;
 
-	@Column(name = "tagName")
+	@Column(name = "tagName", nullable = false)
+	@Size(min = 1, message = "{TagRequest.tagName.Size")
 	private String tagName;
 
-	@Column(name = "tagValue")
+	@Column(name = "tagValue", nullable = false)
+	@Size(min = 1, message = "{TagRequest.tagValue.Size")
 	private String tagValue;
 
-	@Column(name = "reason")
+	@Column(name = "reason", nullable = false)
+	@Size(min = 1, message = "{TagRequest.reason.Size")
 	private String reason;
 
 	@ManyToOne
-	@JoinColumn(name = "contentId")
+	@JoinColumn(name = "contentId", nullable = false)
 	private Content content;
 
 	/**
