@@ -82,7 +82,7 @@ var openid = {
 	cookie_name: 'openid_provider',
 	cookie_path: '/',
 	
-	img_path: '/safa-war/images/',
+	img_path: '/safa-web/images/',
 	
 	input_id: null,
 	provider_url: null,

@@ -1,4 +1,4 @@
-package org.safaproject.safa.web.controller;
+package org.safaproject.safa.web.controller.main;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;

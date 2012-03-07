@@ -1,4 +1,4 @@
-package org.safaproject.safa.web.controller.ajax;
+package org.safaproject.safa.web.controller.user;
 
 import org.safaproject.safa.model.user.Rol;
 import org.safaproject.safa.service.RolService;

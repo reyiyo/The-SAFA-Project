@@ -1,4 +1,4 @@
-package org.safaproject.safa.user;
+package org.safaproject.safa.web.security;
 
 import org.springframework.security.openid.OpenIDAttribute;
 
