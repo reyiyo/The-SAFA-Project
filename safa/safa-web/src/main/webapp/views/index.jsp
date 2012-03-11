@@ -6,18 +6,55 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <html>
+<head>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+	/* attach a submit handler to the form */
+	function testContenSearch() {
+		var request = {
+			"selectedTags" : [ {
+				"tagId" : 1,
+				"tagType" : {
+					"tagDataType" : "STRING",
+					"tagName" : "Universidad"
+				},
+				"value" : "UTN",
+				"iconURL" : ""
+			} ],
+			"firstResult" : 0,
+			"maxResults" : 10
+		};
+
+		$.ajax({
+			url : "../content/search",
+			type : "POST",
+			data : JSON.stringify(request),
+			success : function(data) {
+				alert(JSON.stringify(data));
+				console.log(data);
+			},
+			dataType : "json",
+			contentType : "application/json"
+		});
+	};
+</script>
+</head>
 <body>
 
 	<h1>OpenID Sample Home Page</h1>
 
 	<h1>En este jsp es donde habría que levantar el js de Pablo</h1>
-	
+
 	<p>Welcome!</p>
 
 	<h3>Technical Information</h3>
 	<p>
 		Your principal object is....:
 		<%=request.getUserPrincipal()%>
+	</p>
+
+	<p>
+		<button onclick="testContenSearch()">Test Content Search!</button>
 	</p>
 	<p>
 		<a href="../../j_spring_security_logout">Logout</a>

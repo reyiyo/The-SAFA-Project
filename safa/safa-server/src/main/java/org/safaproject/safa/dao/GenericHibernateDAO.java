@@ -14,7 +14,11 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Projections;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
+
+import com.googlecode.genericdao.search.ISearch;
+import com.googlecode.genericdao.search.jpa.JPASearchProcessor;
 
 /**
  * JPA implementation of the GenericDAO. Note that this implementation also
@@ -32,6 +36,9 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	private final Class<T> persistentClass;
 
 	protected EntityManager entityManager;
+
+	@Autowired
+	protected JPASearchProcessor searchProcessor;
 
 	@SuppressWarnings("unchecked")
 	public GenericHibernateDAO() {
@@ -216,11 +223,25 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 		final T savedEntity = getEntityManager().merge(entity);
 		return savedEntity;
 	}
-	
+
 	/**
 	 * @see org.safaproject.safa.dao.GenericDAO#persist(java.lang.Object)
 	 */
-	public void save(T entity){
+	public void save(T entity) {
 		getEntityManager().persist(entity);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<T> search(ISearch search) {
+		return searchProcessor.search(getEntityManager(), persistentClass,
+				search);
+	}
+
+	public JPASearchProcessor getSearchProcessor() {
+		return searchProcessor;
+	}
+
+	public void setSearchProcessor(JPASearchProcessor searchProcessor) {
+		this.searchProcessor = searchProcessor;
 	}
 }

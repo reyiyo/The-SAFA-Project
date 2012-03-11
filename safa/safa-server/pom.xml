@@ -19,7 +19,7 @@
 			<artifactId>safa-api</artifactId>
 			<version>${safa-api.version}</version>
 		</dependency>
-		
+
 		<!-- HIBERNATE DEPENDENCIES -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -54,7 +54,7 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${org.hibernate.version}</version>
 			<type>jar</type>
-			<scope>cojarmpile</scope>
+			<scope>compile</scope>
 		</dependency>
 
 		<!-- APACHE COMMONS DATASOURCE -->
@@ -69,6 +69,18 @@
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<version>${hsqldb.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.googlecode.genericdao</groupId>
+			<artifactId>search-hibernate</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.4.GA</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

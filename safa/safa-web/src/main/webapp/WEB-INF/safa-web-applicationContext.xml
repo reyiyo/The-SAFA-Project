@@ -13,7 +13,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 
 	<!-- Scans the classpath of this application for @Components to deploy as 
 		beans -->
-	<context:component-scan base-package="org.safaproject.safa.web.controller" />
+	<context:component-scan base-package="org.safaproject.safa.web" />
 
 	<!-- Activates various annotations to be detected in bean classes -->
 	<context:annotation-config />

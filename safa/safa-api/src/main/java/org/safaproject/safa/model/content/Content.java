@@ -66,7 +66,7 @@ public class Content {
 	private Set<Resource> resources;
 
 	@ManyToOne
-	@JoinColumn(name = "idThumbnailResource", nullable = false)
+	@JoinColumn(name = "idThumbnailResource")
 	private Resource thumbnail;
 
 	@Column(name = "reviewed", nullable = false)

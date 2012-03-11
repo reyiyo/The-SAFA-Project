@@ -11,7 +11,7 @@
 		<artifactId>safa</artifactId>
 		<version>${safa.version}</version>
 	</parent>
-	
+
 	<properties>
 		<org.springsecurity.version>3.1.0.CI-SNAPSHOT</org.springsecurity.version>
 	</properties>
@@ -23,7 +23,7 @@
 			<artifactId>safa-server</artifactId>
 			<version>${safa-server.version}</version>
 		</dependency>
-		
+
 		<!-- SPRING-SECURITY DEPENDENCIES -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -51,21 +51,32 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<!-- SPRING-MVC DEPENDENCIES -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
-		
+
 		<!-- Jackson JSON Mapper -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.6.4</version>
+			<version>1.8.5</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.8.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml</groupId>
+			<artifactId>jackson-module-hibernate</artifactId>
+			<version>1.9.0</version>
+		</dependency>
+
 		<!-- SERVLET -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

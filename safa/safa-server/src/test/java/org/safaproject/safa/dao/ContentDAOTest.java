@@ -31,6 +31,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.googlecode.genericdao.search.Filter;
+import com.googlecode.genericdao.search.Search;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:safa-unit-test-context.xml")
 @Transactional
@@ -222,6 +225,66 @@ public class ContentDAOTest {
 
 		Assert.assertEquals(modifiedTitle, contentDao.findAll().get(0)
 				.getTitle());
+	}
+
+	@Test
+	public void shallRetrieveContentWithTags() {
+
+		TagType universidad = new TagTypeBuilder().withTagName("Universidad")
+				.withTagDataType(TagDataTypes.STRING).build();
+		tagTypeDAO.save(universidad);
+
+		Tag utn = new TagBuilder().withTagType(universidad).withValue("UTN")
+				.build();
+		tagDAO.save(utn);
+
+		Tag uade = new TagBuilder().withTagType(universidad).withValue("UADE")
+				.build();
+		tagDAO.save(uade);
+
+		Content content = new ContentBuilder()
+				.withAvailable(true)
+				.withDescription("Desc")
+				.withReviewed(true)
+				.withTitle("Design Patterns")
+				.withUploadDate(new Date())
+				.withTags(new HashSet<Tag>(Arrays.asList(utn)))
+				.withResources(
+						new HashSet<Resource>(Arrays.asList(testResource)))
+				.withThumbnail(testResource).withUser(testingUser).build();
+
+		contentDao.save(content);
+
+		Search match = new Search(Content.class);
+		match.setFirstResult(0);
+		match.setMaxResults(10);
+
+		match.addFilterSome("tags",
+				Filter.equal(Filter.ROOT_ENTITY, utn));
+
+		Assert.assertEquals(1, contentDao.search(match).size());
+
+		Search notMatch = new Search(Content.class);
+		notMatch.setFirstResult(0);
+		notMatch.setMaxResults(10);
+		notMatch.addFilterSome("tags",
+				Filter.equal(Filter.ROOT_ENTITY, uade));
+
+		Assert.assertEquals(0, contentDao.search(notMatch).size());
+		
+		content.setTags(new HashSet<Tag>(Arrays.asList(utn, uade)));
+		contentDao.update(content);
+		
+		Search match2 = new Search(Content.class);
+		match2.setFirstResult(0);
+		match2.setMaxResults(10);
+
+		match2.addFilterSome("tags",
+				Filter.equal(Filter.ROOT_ENTITY, utn));
+
+		Assert.assertEquals(1, contentDao.search(match2).size());
+		
+
 	}
 
 	@Test

@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import com.googlecode.genericdao.search.ISearch;
+
 /**
  * Generic Repository, providing basic CRUD operations
  * 
@@ -123,4 +125,6 @@ public interface GenericDAO<T, ID extends Serializable> {
 	 *            the entity to delete
 	 */
 	T update(T entity);
+	
+	List<T> search(ISearch search);
 }

@@ -6,5 +6,7 @@
 	<bean id="rolService" class="org.safaproject.safa.service.RolServiceImpl" />
 	
 	<bean id="tagService" class="org.safaproject.safa.service.TagServiceImpl" />
+	
+	<bean id="contentService" class="org.safaproject.safa.service.ContentServiceImpl" />
 
 </beans>
