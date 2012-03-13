@@ -33,6 +33,15 @@ public class Indicator {
 
 	@Column(name = "value", nullable = false)
 	private Integer value;
+	
+	public Indicator() {
+		// Hibernate constructor
+	}
+	
+	public Indicator(IndicatorType indicatorType, Integer value) {
+		this.indicatorType = indicatorType;
+		this.value = value;
+	}
 
 	/**
 	 * @return the indicatorId

@@ -24,6 +24,16 @@ public class IndicatorType {
 
 	@Column(name = "maxValue", nullable = false)
 	private Integer maxValue;
+	
+	public IndicatorType() {
+		// Hibernate constructor
+	}
+	
+	public IndicatorType(String indicatorName, Integer minValue, Integer maxValue) {
+		this.indicatorName = indicatorName;
+		this.minValue = minValue;
+		this.maxValue = maxValue;
+	}
 
 	/**
 	 * @return the indicatorName
