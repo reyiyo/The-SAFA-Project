@@ -1,5 +1,6 @@
 package org.safaproject.safa.dao;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
@@ -19,6 +20,8 @@ import org.safaproject.safa.model.content.Resource;
 import org.safaproject.safa.model.content.builder.CommentBuilder;
 import org.safaproject.safa.model.content.builder.ContentBuilder;
 import org.safaproject.safa.model.content.builder.ResourceBuilder;
+import org.safaproject.safa.model.indicator.Indicator;
+import org.safaproject.safa.model.indicator.IndicatorType;
 import org.safaproject.safa.model.tag.Tag;
 import org.safaproject.safa.model.tag.TagDataTypes;
 import org.safaproject.safa.model.tag.TagType;
@@ -31,6 +34,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
 
@@ -57,6 +62,12 @@ public class ContentDAOTest {
 	@Autowired
 	private ResourceDAO resourceDAO;
 
+	@Autowired
+	private IndicatorTypeDAO indicatorTypeDAO;
+
+	@Autowired
+	private IndicatorDAO indicatorDAO;
+
 	private User testingUser = new UserBuilder().withUsername("Test")
 			.withEmail("test@test.com")
 			.withOpenIDurlToken("http://laputamadre.com").build();
@@ -78,6 +89,66 @@ public class ContentDAOTest {
 		tagTypeDAO.save(testTagType);
 		tagDAO.save(testResourceType);
 		resourceDAO.save(testResource);
+	}
+
+	@Test
+	public void shallSearch() {
+		IndicatorType indicatorType = new IndicatorType();
+		indicatorType.setMaxValue(700);
+		indicatorType.setMinValue(2);
+		indicatorType.setIndicatorName("Frula");
+		indicatorTypeDAO.save(indicatorType);
+
+		Indicator indicator = new Indicator();
+		indicator.setValue(250);
+		indicator.setIndicatorType(indicatorType);
+		indicatorDAO.save(indicator);
+		
+		Indicator indicator2 = new Indicator();
+		indicator2.setValue(450);
+		indicator2.setIndicatorType(indicatorType);
+		indicatorDAO.save(indicator2);
+
+		Content content = new ContentBuilder()
+				.withAvailable(true)
+				.withDescription("Desc")
+				.withReviewed(true)
+				.withThumbnail(testResource)
+				.withTitle("Design Patterns")
+				.withIndicators(
+						new HashSet<Indicator>(Arrays.asList(indicator)))
+				.withTags(new HashSet<Tag>(Arrays.asList(testResourceType)))
+				.withResources(
+						new HashSet<Resource>(Arrays.asList(testResource)))
+				.withUploadDate(new Date()).withUser(testingUser).build();
+		contentDao.save(content);
+
+		Tag testTag = new TagBuilder().withTagType(testTagType)
+				.withValue("ASD").build();
+		tagDAO.save(testTag);
+
+		Content content2 = new ContentBuilder()
+				.withAvailable(true)
+				.withDescription("Desc2")
+				.withReviewed(true)
+				.withThumbnail(testResource)
+				.withTitle("Design Patterns")
+				.withIndicators(
+						new HashSet<Indicator>(Arrays.asList(indicator2)))
+				.withTags(new HashSet<Tag>(Arrays.asList(testTag)))
+				.withResources(
+						new HashSet<Resource>(Arrays.asList(testResource)))
+				.withUploadDate(new Date()).withUser(testingUser).build();
+		contentDao.save(content2);
+
+		List<Tag> tags = new ArrayList<Tag>();
+		tags.add(testResourceType);
+		
+		@SuppressWarnings("unused")
+		List<Content> contents = contentDao.search(tags);
+
+		Assert.assertEquals(1, contents.size());
+		Assert.assertEquals(content, Iterables.getOnlyElement(contents));
 	}
 
 	@Test
@@ -259,31 +330,27 @@ public class ContentDAOTest {
 		match.setFirstResult(0);
 		match.setMaxResults(10);
 
-		match.addFilterSome("tags",
-				Filter.equal(Filter.ROOT_ENTITY, utn));
+		match.addFilterSome("tags", Filter.equal(Filter.ROOT_ENTITY, utn));
 
 		Assert.assertEquals(1, contentDao.search(match).size());
 
 		Search notMatch = new Search(Content.class);
 		notMatch.setFirstResult(0);
 		notMatch.setMaxResults(10);
-		notMatch.addFilterSome("tags",
-				Filter.equal(Filter.ROOT_ENTITY, uade));
+		notMatch.addFilterSome("tags", Filter.equal(Filter.ROOT_ENTITY, uade));
 
 		Assert.assertEquals(0, contentDao.search(notMatch).size());
-		
+
 		content.setTags(new HashSet<Tag>(Arrays.asList(utn, uade)));
 		contentDao.update(content);
-		
+
 		Search match2 = new Search(Content.class);
 		match2.setFirstResult(0);
 		match2.setMaxResults(10);
 
-		match2.addFilterSome("tags",
-				Filter.equal(Filter.ROOT_ENTITY, utn));
+		match2.addFilterSome("tags", Filter.equal(Filter.ROOT_ENTITY, utn));
 
 		Assert.assertEquals(1, contentDao.search(match2).size());
-		
 
 	}
 
