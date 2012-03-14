@@ -9,9 +9,23 @@
 <head>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-	/* attach a submit handler to the form */
-	function testContenSearch() {
-		var request = {
+	var defaultOrder = {
+		"selectedTags" : [ {
+			"tagId" : 1,
+			"tagType" : {
+				"tagDataType" : "STRING",
+				"tagName" : "Universidad"
+			},
+			"value" : "UTN",
+			"iconURL" : ""
+		} ],
+		"firstResult" : 0,
+		"maxResults" : 10,
+		"orderBy" : "default",
+		"orderDirection" : "DESC"
+	};
+	
+	var titleOrder = {
 			"selectedTags" : [ {
 				"tagId" : 1,
 				"tagType" : {
@@ -22,13 +36,17 @@
 				"iconURL" : ""
 			} ],
 			"firstResult" : 0,
-			"maxResults" : 10
+			"maxResults" : 10,
+			"orderBy" : "title",
+			"orderDirection" : "ASC"
 		};
+
+	function testContenSearch(searchRequest) {
 
 		$.ajax({
 			url : "../content/search",
 			type : "POST",
-			data : JSON.stringify(request),
+			data : JSON.stringify(searchRequest),
 			success : function(data) {
 				alert(JSON.stringify(data));
 				console.log(data);
@@ -54,7 +72,8 @@
 	</p>
 
 	<p>
-		<button onclick="testContenSearch()">Test Content Search!</button>
+		<button onclick="testContenSearch(defaultOrder)">Test Default Content Search!</button>
+		<button onclick="testContenSearch(titleOrder)">Test Simple Order Content Search!</button>
 	</p>
 	<p>
 		<a href="../../j_spring_security_logout">Logout</a>

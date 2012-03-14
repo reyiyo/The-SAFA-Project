@@ -142,8 +142,7 @@ public class ContentDAOTest {
 		List<Tag> tags = new ArrayList<Tag>();
 		tags.add(testResourceType);
 
-		@SuppressWarnings("unused")
-		List<Content> contents = contentDao.search(tags);
+		List<Content> contents = contentDao.search(tags, 0, 10);
 
 		Assert.assertEquals(1, contents.size());
 		Assert.assertEquals(content, Iterables.getOnlyElement(contents));

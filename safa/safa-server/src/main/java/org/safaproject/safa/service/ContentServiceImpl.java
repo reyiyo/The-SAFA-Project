@@ -2,37 +2,25 @@ package org.safaproject.safa.service;
 
 import java.util.List;
 
-import org.safaproject.safa.dao.ContentDAO;
-import org.safaproject.safa.dao.TagDAO;
 import org.safaproject.safa.model.content.Content;
+import org.safaproject.safa.model.content.OrderDirections;
 import org.safaproject.safa.model.tag.Tag;
+import org.safaproject.safa.service.search.SearchStrategyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.googlecode.genericdao.search.Filter;
-import com.googlecode.genericdao.search.Search;
 
 public class ContentServiceImpl implements ContentService {
 
 	@Autowired
-	private ContentDAO contentDAO;
+	private SearchStrategyFactory searchStrategyFactory;
 
-	@Autowired
-	private TagDAO tagDAO;
+	@Override
+	public List<Content> search(List<Tag> selectedTags, Integer firstResult,
+			Integer maxResults, String orderBy, OrderDirections orderDirections) {
 
-	public List<Content> search(final List<Tag> selectedTags,
-			final Integer firstResult, final Integer maxResults) {
+		return searchStrategyFactory.getStrategyFor(orderBy)
+				.search(selectedTags, firstResult, maxResults, orderBy,
+						orderDirections);
 
-		Search s = new Search(Content.class);
-
-		for (Tag tag : selectedTags) {
-			Tag attachedTag = tagDAO.findById(tag.getTagId());
-			s.addFilterSome("tags",
-					Filter.equal(Filter.ROOT_ENTITY, attachedTag));
-		}
-
-		s.setFirstResult(firstResult);
-		s.setMaxResults(maxResults);
-		return contentDAO.search(s);
 	}
 
 }

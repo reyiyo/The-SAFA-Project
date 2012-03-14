@@ -20,7 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "INDICATOR")
-public class Indicator {
+public class Indicator implements Comparable<Indicator> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,6 +41,17 @@ public class Indicator {
 	public Indicator(IndicatorType indicatorType, Integer value) {
 		this.indicatorType = indicatorType;
 		this.value = value;
+	}
+
+	@Override
+	public int compareTo(Indicator other) {
+		if (other.getIndicatorType().getIndicatorName()
+				.equals(this.getIndicatorType().getIndicatorName())) {
+			return this.getValue() - other.getValue();
+		} else {
+			throw new ClassCastException();
+		}
+
 	}
 
 	/**

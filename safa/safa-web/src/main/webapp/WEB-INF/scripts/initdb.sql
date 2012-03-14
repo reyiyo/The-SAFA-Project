@@ -1,8 +1,11 @@
 DELETE FROM TAG_CONTENT;
 DELETE FROM SAFA_USER_ROL;
+DELETE FROM INDICATOR_CONTENT;
 DELETE FROM ROL;
 UPDATE RESOURCE SET contentId=null WHERE resourceId=1;
 UPDATE CONTENT SET idThumbnailResource=null WHERE contentId=1;
+UPDATE RESOURCE SET contentId=null WHERE resourceId=3;
+UPDATE CONTENT SET idThumbnailResource=null WHERE contentId=2;
 DELETE FROM RESOURCE;
 DELETE FROM CONTENT;
 DELETE FROM SAFA_USER;
@@ -34,19 +37,22 @@ INSERT INTO TAG (tagId, tagName, value, iconURL) VALUES (8, 'Resource Type', 'PD
 INSERT INTO TAG (tagId, tagName, value, iconURL) VALUES (9, 'Resource Type', 'Imagen', 'http://rededuca.wikispaces.com/file/view/imagen/30143250/imagen');
 
 
-INSERT INTO RESOURCE (resourceId, url, resourceType, size, description, contentId) VALUES (1, 'http://www.mediafire.com/?oum7aa6t5bpscda', 8, 0, 'lalala', null);
+INSERT INTO RESOURCE (resourceId, url, resourceType, size, description, contentId) VALUES (1, 'http://www.mediafire.com/?oum7aa6t5bpscda', 8, 0, 'lalala1', null);
 INSERT INTO RESOURCE (resourceId, url, resourceType, size, description, contentId) VALUES (2, 'http://www.definicionabc.com/wp-content/uploads/apuntes.jpg', 9, 0, 'Default Content Thumbnail', null);
+INSERT INTO RESOURCE (resourceId, url, resourceType, size, description, contentId) VALUES (3, 'http://www.mediafire.com/?oum7aa6t5bpscda', 8, 0, 'lalala2', null);
 
 
 INSERT INTO SAFA_USER (userId, urlToken, username, password, email, locked) VALUES (1, 'http://openid.net/elToken', 'LaPosta', '123456', 'reyiyo@gmail.com', false);
 
-
+DELETE FROM INDICATOR_CONTENT;
 INSERT INTO SAFA_USER_ROL VALUES(1, 1);
 
 
-INSERT INTO CONTENT (contentId, title, description, uploadDate, userId, available, idThumbnailResource, reviewed) VALUES (1, 'Resumen pedorro', 'lalala', CURRENT_DATE, 1, true, 2, true);
+INSERT INTO CONTENT (contentId, title, description, uploadDate, userId, available, idThumbnailResource, reviewed) VALUES (1, 'Resumen pedorro1', 'lalala1', CURRENT_DATE, 1, true, 2, true);
+INSERT INTO CONTENT (contentId, title, description, uploadDate, userId, available, idThumbnailResource, reviewed) VALUES (2, 'Resumen pedorro2', 'lalala2', CURRENT_DATE, 1, true, 2, true);
 
 UPDATE RESOURCE SET contentId=1 WHERE resourceId=1
+UPDATE RESOURCE SET contentId=2 WHERE resourceId=3
 
 
 INSERT INTO TAG_CONTENT VALUES (1, 1);
@@ -54,3 +60,33 @@ INSERT INTO TAG_CONTENT VALUES (1, 2);
 INSERT INTO TAG_CONTENT VALUES (1, 4);
 INSERT INTO TAG_CONTENT VALUES (1, 6);
 INSERT INTO TAG_CONTENT VALUES (1, 7);
+
+INSERT INTO TAG_CONTENT VALUES (2, 1);
+INSERT INTO TAG_CONTENT VALUES (2, 2);
+INSERT INTO TAG_CONTENT VALUES (2, 4);
+INSERT INTO TAG_CONTENT VALUES (2, 6);
+INSERT INTO TAG_CONTENT VALUES (2, 7);
+
+DELETE FROM INDICATOR;
+DELETE FROM INDICATOR_TYPE;
+
+INSERT INTO INDICATOR_TYPE (indicatorName, minValue, maxValue) VALUES ('Votos', 0, 10);
+INSERT INTO INDICATOR_TYPE (indicatorName, minValue, maxValue) VALUES ('Completitud', 0, 10);
+INSERT INTO INDICATOR_TYPE (indicatorName, minValue, maxValue) VALUES ('Es la posta', 0, 10);
+
+INSERT INTO INDICATOR (indicatorId, indicatorName, value) VALUES (1, 'Votos', 1);
+INSERT INTO INDICATOR (indicatorId, indicatorName, value) VALUES (2, 'Completitud', 1);
+INSERT INTO INDICATOR (indicatorId, indicatorName, value) VALUES (3, 'Es la posta', 1);
+
+INSERT INTO INDICATOR (indicatorId, indicatorName, value) VALUES (4, 'Votos', 10);
+INSERT INTO INDICATOR (indicatorId, indicatorName, value) VALUES (5, 'Completitud', 10);
+INSERT INTO INDICATOR (indicatorId, indicatorName, value) VALUES (6, 'Es la posta', 10);
+
+
+INSERT INTO INDICATOR_CONTENT VALUES (1,1);
+INSERT INTO INDICATOR_CONTENT VALUES (1,2);
+INSERT INTO INDICATOR_CONTENT VALUES (1,3);
+
+INSERT INTO INDICATOR_CONTENT VALUES (2,4);
+INSERT INTO INDICATOR_CONTENT VALUES (2,5);
+INSERT INTO INDICATOR_CONTENT VALUES (2,6);

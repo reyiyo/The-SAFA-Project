@@ -1,10 +1,8 @@
 package org.safaproject.safa.web.controller.content;
 
-import java.util.List;
-
 import org.safaproject.safa.model.content.Content;
+import org.safaproject.safa.model.content.SearchRequest;
 import org.safaproject.safa.service.ContentService;
-import org.safaproject.safa.web.request.SearchRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,25 +20,11 @@ public class ContentController {
 	@RequestMapping(value = "/search", method = RequestMethod.POST, headers = "Accept=application/json")
 	public @ResponseBody
 	Content[] search(@RequestBody SearchRequest searchRequest) {
-		System.out.println("+++++++++++++++++++++++++++"
-				+ searchRequest.getSelectedTags().get(0).getValue());
-		System.out.println("+++++++++++++++++++++++++++"
-				+ searchRequest.getFirstResult());
-		System.out.println("+++++++++++++++++++++++++++"
-				+ searchRequest.getMaxResults());
 
-		List<Content> result = contentService.search(
-				searchRequest.getSelectedTags(),
-				searchRequest.getFirstResult(), searchRequest.getMaxResults());
+		return contentService.search(searchRequest.getSelectedTags(),
+				searchRequest.getFirstResult(), searchRequest.getMaxResults(),
+				searchRequest.getOrderBy(), searchRequest.getOrderDirection())
+				.toArray(new Content[0]);
 
-		if (result.size() < 1) {
-			System.out.println("+++++++++++++++++++++++++++ No result");
-		}
-
-		for (Content content : result) {
-			System.out.println("+++++++++++++++++++++++++++" + content);
-		}
-
-		return result.toArray(new Content[0]);
 	}
 }

@@ -1,4 +1,4 @@
-package org.safaproject.safa.web.request;
+package org.safaproject.safa.model.content;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,6 +13,8 @@ public class SearchRequest implements Serializable {
 	private List<Tag> selectedTags = new ArrayList<Tag>();
 	private Integer firstResult;
 	private Integer maxResults;
+	private String orderBy;
+	private OrderDirections orderDirection;
 
 	public SearchRequest() {
 
@@ -40,6 +42,22 @@ public class SearchRequest implements Serializable {
 
 	public void setMaxResults(Integer maxResults) {
 		this.maxResults = maxResults;
+	}
+
+	public String getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(String orderBy) {
+		this.orderBy = orderBy;
+	}
+
+	public OrderDirections getOrderDirection() {
+		return orderDirection;
+	}
+
+	public void setOrderDirection(OrderDirections orderDirection) {
+		this.orderDirection = orderDirection;
 	}
 
 }

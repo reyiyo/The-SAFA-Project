@@ -213,6 +213,7 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	@Override
 	public void delete(T entity) {
 		getEntityManager().remove(entity);
+		
 	}
 
 	/**
@@ -236,7 +237,7 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 		return searchProcessor.search(getEntityManager(), persistentClass,
 				search);
 	}
-
+	
 	public JPASearchProcessor getSearchProcessor() {
 		return searchProcessor;
 	}
