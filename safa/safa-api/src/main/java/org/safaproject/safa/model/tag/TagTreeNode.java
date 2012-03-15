@@ -47,6 +47,17 @@ public class TagTreeNode {
 	@ManyToOne
 	@NotNull
 	private Tag myTag;
+	
+	public TagTreeNode() {
+		//	Hibernate constructor
+	}
+	
+	public TagTreeNode(List<TagTreeNode> childs, TagTreeNode parent, String nodeName, Tag myTag) {
+		this.childs = childs;
+		this.parent = parent;
+		this.nodeName = nodeName;
+		this.myTag = myTag;
+	}
 
 	/**
 	 * @return the tagTreeNodeId

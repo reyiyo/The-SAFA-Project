@@ -3,6 +3,8 @@ package org.safaproject.safa.model.tag.builder;
 import org.safaproject.safa.model.tag.TagDataTypes;
 import org.safaproject.safa.model.tag.TagType;
 
+import com.google.common.base.Preconditions;
+
 public class TagTypeBuilder {
 
 	private String tagName;
@@ -20,6 +22,8 @@ public class TagTypeBuilder {
 	}
 
 	public TagType build() {
+		Preconditions.checkNotNull(tagDataType);
+		
 		return new TagType(tagName, tagDataType);
 	}
 

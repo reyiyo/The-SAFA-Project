@@ -197,19 +197,20 @@ public class ContentDAOTest {
 	public void shallFindByExample() {
 		String title = "Design Patterns";
 		String desc = "Desc";
+		Date date = new Date();
 		Content content = new ContentBuilder()
 				.withAvailable(true)
 				.withDescription(desc)
 				.withReviewed(true)
 				.withTitle(title)
-				.withUploadDate(new Date())
+				.withUploadDate(date)
 				.withResources(
 						new HashSet<Resource>(Arrays.asList(testResource)))
 				.withThumbnail(testResource).withUser(testingUser).build();
 		contentDao.save(content);
 
 		Content contentByExample = contentDao.findByExample(
-				new ContentBuilder().withTitle(title).withDescription(desc)
+				new ContentBuilder().withUploadDate(date).withTitle(title).withDescription(desc)
 						.withReviewed(true).withAvailable(true).build()).get(0);
 
 		Assert.assertEquals(content, contentByExample);
@@ -219,19 +220,20 @@ public class ContentDAOTest {
 	public void shallCountByExample() {
 		String title = "Design Patterns";
 		String desc = "Desc";
+		Date date = new Date();
 		contentDao.save(new ContentBuilder()
 				.withAvailable(true)
 				.withDescription(desc)
 				.withReviewed(true)
 				.withTitle(title)
-				.withUploadDate(new Date())
+				.withUploadDate(date)
 				.withThumbnail(testResource)
 				.withResources(
 						new HashSet<Resource>(Arrays.asList(testResource)))
 				.withUser(testingUser).build());
 
 		Long countByExample = contentDao.countByExample(new ContentBuilder()
-				.withTitle(title).withDescription(desc).withReviewed(true)
+				.withTitle(title).withDescription(desc).withReviewed(true).withUploadDate(date)
 				.withAvailable(true).build());
 
 		Assert.assertEquals(Long.valueOf(1), countByExample);

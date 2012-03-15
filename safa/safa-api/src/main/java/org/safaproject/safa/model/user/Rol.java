@@ -24,6 +24,14 @@ public class Rol {
 
 	@Column(name = "name", unique = true, nullable = false)
 	private String name;
+	
+	public Rol() {
+		//	Hibernate constructor
+	}
+	
+	public Rol(String name) {
+		this.name = name;
+	}
 
 	public Long getRolId() {
 		return rolId;

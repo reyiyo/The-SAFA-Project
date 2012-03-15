@@ -73,7 +73,7 @@ public class TagDAOTest {
 		tagDAO.save(new TagBuilder().withValue("2010/01/01")
 				.withTagType(examDate).build());
 
-		Tag example = new TagBuilder().withValue("Lidia Capurro").build();
+		Tag example = new TagBuilder().withValue("Lidia Capurro").withTagType(teacher).build();
 
 		/**
 		 * NOTE: findByExample does NOT take into account relationships. It only
@@ -91,7 +91,7 @@ public class TagDAOTest {
 		tagDAO.save(new TagBuilder().withValue("2010/01/01")
 				.withTagType(examDate).build());
 
-		Tag example = new TagBuilder().withValue("Lidia Capurro").build();
+		Tag example = new TagBuilder().withValue("Lidia Capurro").withTagType(teacher).build();
 
 		/**
 		 * NOTE: countByExample does NOT take into account relationships. It

@@ -5,6 +5,8 @@ import java.util.Date;
 import org.safaproject.safa.model.content.Comment;
 import org.safaproject.safa.model.user.User;
 
+import com.google.common.base.Preconditions;
+
 /**
  * Builder for the Comment class. Must be reviewed if the object is built at the
  * end of the process (build method), or at the beggining and then just fill the
@@ -37,6 +39,10 @@ public class CommentBuilder {
 	}
 
 	public Comment build() {
+		Preconditions.checkNotNull(user);
+		Preconditions.checkNotNull(commentDate);
+		Preconditions.checkNotNull(commentText);
+		
 		return new Comment(commentDate, user, commentText);
 	}
 }

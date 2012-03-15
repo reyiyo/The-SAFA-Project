@@ -7,6 +7,8 @@ import org.safaproject.safa.model.user.Rol;
 import org.safaproject.safa.model.user.User;
 import org.safaproject.safa.model.user.UserProfile;
 
+import com.google.common.base.Preconditions;
+
 public class UserBuilder {
 
 	private User user;
@@ -55,6 +57,10 @@ public class UserBuilder {
 	}
 	
 	public User build(){
+		Preconditions.checkNotNull(openIDurlToken);
+		Preconditions.checkNotNull(username);
+		Preconditions.checkNotNull(email);
+		
 		this.user = new User(this.openIDurlToken, this.username, this.email, this.rols);
 		this.user.setIsLocked(isLocked);
 		this.user.setPassword(password);

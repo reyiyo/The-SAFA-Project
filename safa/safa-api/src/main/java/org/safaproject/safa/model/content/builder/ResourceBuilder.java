@@ -3,6 +3,8 @@ package org.safaproject.safa.model.content.builder;
 import org.safaproject.safa.model.content.Resource;
 import org.safaproject.safa.model.tag.Tag;
 
+import com.google.common.base.Preconditions;
+
 /**
  * Builder for the Resource class. Must be reviewed if the object is built at
  * the end of the process (build method), or at the beggining and then just fill
@@ -43,6 +45,10 @@ public class ResourceBuilder {
 	}
 
 	public Resource build() {
+		Preconditions.checkNotNull(url);
+		Preconditions.checkNotNull(resourceType);
+		Preconditions.checkNotNull(size);
+		
 		return new Resource(url, resourceType, size, description);
 	}
 

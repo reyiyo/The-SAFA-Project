@@ -11,6 +11,8 @@ import org.safaproject.safa.model.indicator.Indicator;
 import org.safaproject.safa.model.tag.Tag;
 import org.safaproject.safa.model.user.User;
 
+import com.google.common.base.Preconditions;
+
 public class ContentBuilder {
 
 	private String title;
@@ -81,6 +83,10 @@ public class ContentBuilder {
 	}
 	
 	public Content build() {
+		Preconditions.checkNotNull(title);
+		Preconditions.checkNotNull(description);
+		Preconditions.checkNotNull(uploadDate);
+		
 		return new Content(title,description,uploadDate,user,tags,indicators,available,resources,thumbnail,reviewed,comments);
 	}
 	

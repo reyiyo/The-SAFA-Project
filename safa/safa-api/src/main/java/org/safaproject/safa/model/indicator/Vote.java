@@ -41,6 +41,17 @@ public class Vote {
 
 	@Column(name = "value", nullable = false)
 	private Integer value;
+	
+	public Vote() {
+		// Hibernate constructor
+	}
+	
+	public Vote(User user, Indicator indicator, Content content, Integer value) {
+		this.user = user;
+		this.indicator = indicator;
+		this.content = content;
+		this.value = value;
+	}
 
 	/**
 	 * @param voteId

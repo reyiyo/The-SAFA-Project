@@ -48,6 +48,18 @@ public class TagRequest {
 	@ManyToOne
 	@JoinColumn(name = "contentId", nullable = false)
 	private Content content;
+	
+	public TagRequest() {
+		// Hibernate constructor
+	}
+	
+	public TagRequest(User user, String tagName, String tagValue, String reason, Content content) {
+		this.user = user;
+		this.tagName = tagName;
+		this.tagValue = tagValue;
+		this.reason = reason;
+		this.content = content;
+	}
 
 	/**
 	 * @return the tagRequestId
