@@ -8,9 +8,9 @@ import java.util.Map;
 
 import javax.persistence.NoResultException;
 
-import org.safaproject.safa.dao.RolDAO;
+import org.safaproject.safa.dao.RoleDAO;
 import org.safaproject.safa.dao.UserDAO;
-import org.safaproject.safa.model.user.Rol;
+import org.safaproject.safa.model.user.Role;
 import org.safaproject.safa.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -33,7 +33,7 @@ public class SafaUserDetailsService implements UserDetailsService,
 	private UserDAO userDAO;
 
 	@Autowired
-	private RolDAO rolDAO;
+	private RoleDAO roleDAO;
 
 	@Override
 	public UserDetails loadUserByUsername(final String username)
@@ -79,8 +79,8 @@ public class SafaUserDetailsService implements UserDetailsService,
 			final Map<String, OpenIDAttribute> attributes) {
 
 		User user = new User(openIdUrl, attributes.get(USERNAME).getValues()
-				.get(0), "null@null.com", new HashSet<Rol>(Arrays.asList(rolDAO
-				.getDefaultRol())));
+				.get(0), "null@null.com", new HashSet<Role>(Arrays.asList(roleDAO
+				.getDefaultRole())));
 
 		userDAO.save(user);
 
@@ -89,7 +89,7 @@ public class SafaUserDetailsService implements UserDetailsService,
 	}
 
 	/**
-	 * Wraps {@link org.safaproject.safa.model.user.Rol} roles to
+	 * Wraps {@link org.safaproject.safa.model.user.Role} roles to
 	 * {@link SimpleGrantedAuthority} objects
 	 * 
 	 * @param roleswith
@@ -98,7 +98,7 @@ public class SafaUserDetailsService implements UserDetailsService,
 	 */
 	public static List<GrantedAuthority> getGrantedAuthorities(User user) {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		for (Rol role : user.getRols()) {
+		for (Role role : user.getRoles()) {
 			authorities.add(new SimpleGrantedAuthority(role.getName()));
 		}
 		return authorities;

@@ -33,7 +33,7 @@ public class TagTreeNode {
 
 	@OneToMany
 	@JoinColumn(name = "childId")
-	private List<TagTreeNode> childs;
+	private List<TagTreeNode> children;
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -52,8 +52,8 @@ public class TagTreeNode {
 		//	Hibernate constructor
 	}
 	
-	public TagTreeNode(List<TagTreeNode> childs, TagTreeNode parent, String nodeName, Tag myTag) {
-		this.childs = childs;
+	public TagTreeNode(List<TagTreeNode> children, TagTreeNode parent, String nodeName, Tag myTag) {
+		this.children = children;
 		this.parent = parent;
 		this.nodeName = nodeName;
 		this.myTag = myTag;
@@ -75,18 +75,18 @@ public class TagTreeNode {
 	}
 
 	/**
-	 * @return the childs
+	 * @return the children
 	 */
-	public List<TagTreeNode> getChilds() {
-		return childs;
+	public List<TagTreeNode> getChildren() {
+		return children;
 	}
 
 	/**
-	 * @param childs
-	 *            the childs to set
+	 * @param children
+	 *            the children to set
 	 */
-	public void setChilds(List<TagTreeNode> childs) {
-		this.childs = childs;
+	public void setChildren(List<TagTreeNode> children) {
+		this.children = children;
 	}
 
 	/**

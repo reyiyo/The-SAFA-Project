@@ -9,7 +9,7 @@ import com.google.common.base.Preconditions;
 
 public class TagTreeNodeBuilder {
 
-	private List<TagTreeNode> childs;
+	private List<TagTreeNode> children;
 
 	private TagTreeNode parent;
 
@@ -17,8 +17,8 @@ public class TagTreeNodeBuilder {
 	
 	private Tag myTag;
 	
-	public TagTreeNodeBuilder withChilds(List<TagTreeNode> childs) {
-		this.childs = childs;
+	public TagTreeNodeBuilder withChildren(List<TagTreeNode> children) {
+		this.children = children;
 		return this;
 	}
 	
@@ -42,6 +42,6 @@ public class TagTreeNodeBuilder {
 		Preconditions.checkNotNull(parent);
 		Preconditions.checkNotNull(myTag);
 		
-		return new TagTreeNode(childs, parent, nodeName, myTag);
+		return new TagTreeNode(children, parent, nodeName, myTag);
 	}
 }

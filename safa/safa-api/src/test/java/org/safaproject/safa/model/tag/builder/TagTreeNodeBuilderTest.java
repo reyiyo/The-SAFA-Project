@@ -13,18 +13,18 @@ public class TagTreeNodeBuilderTest {
 
 	@Test
 	public void shallBuild() {
-		List<TagTreeNode> childs = new ArrayList<TagTreeNode>();
+		List<TagTreeNode> children = new ArrayList<TagTreeNode>();
 		TagTreeNode parent = new TagTreeNode();
 		Tag myTag = new Tag();
 		
 		TagTreeNode tagTreeNode = new TagTreeNodeBuilder()
 				.withNodeName("Node")
-				.withChilds(childs)
+				.withChildren(children)
 				.withParent(parent)
 				.withMyTag(myTag)
 				.build();
 		
-		Assert.assertEquals(childs, tagTreeNode.getChilds());
+		Assert.assertEquals(children, tagTreeNode.getChildren());
 		Assert.assertEquals(parent, tagTreeNode.getParent());
 		Assert.assertEquals(myTag, tagTreeNode.getMyTag());
 		Assert.assertEquals("Node", tagTreeNode.getNodeName());
@@ -33,7 +33,7 @@ public class TagTreeNodeBuilderTest {
 	@Test(expected = NullPointerException.class)
 	public void shallFailBecauseOfNullNodeName() {
 		new TagTreeNodeBuilder()
-				.withChilds(new ArrayList<TagTreeNode>())
+				.withChildren(new ArrayList<TagTreeNode>())
 				.withParent(new TagTreeNode())
 				.withMyTag(new Tag())
 				.build();
@@ -43,7 +43,7 @@ public class TagTreeNodeBuilderTest {
 	public void shallFailBecauseOfNullParent() {
 		new TagTreeNodeBuilder()
 				.withNodeName("Node")
-				.withChilds(new ArrayList<TagTreeNode>())
+				.withChildren(new ArrayList<TagTreeNode>())
 				.withMyTag(new Tag())
 				.build();
 	}
@@ -52,7 +52,7 @@ public class TagTreeNodeBuilderTest {
 	public void shallFailBecauseOfNullTag() {
 		new TagTreeNodeBuilder()
 				.withNodeName("Node")
-				.withChilds(new ArrayList<TagTreeNode>())
+				.withChildren(new ArrayList<TagTreeNode>())
 				.withParent(new TagTreeNode())
 				.build();
 	}

@@ -6,7 +6,7 @@ import java.util.Set;
 import junit.framework.Assert;
 
 import org.junit.Test;
-import org.safaproject.safa.model.user.Rol;
+import org.safaproject.safa.model.user.Role;
 import org.safaproject.safa.model.user.User;
 import org.safaproject.safa.model.user.UserProfile;
 
@@ -15,7 +15,7 @@ public class UserBuilderTest {
 	@Test
 	public void shallBuild() {
 		UserProfile profile = new UserProfile();
-		Set<Rol> rols = new HashSet<Rol>();
+		Set<Role> roles = new HashSet<Role>();
 		
 		User user = new UserBuilder()
 				.withEmail("test@test.com")
@@ -23,7 +23,7 @@ public class UserBuilderTest {
 				.withOpenIDurlToken("1234asd")
 				.withPassword("password")
 				.withProfile(profile)
-				.withRols(rols)
+				.withRoles(roles)
 				.withUsername("username")
 				.build();
 		
@@ -32,7 +32,7 @@ public class UserBuilderTest {
 		Assert.assertEquals("1234asd", user.getOpenIDurlToken());
 		Assert.assertEquals("password", user.getPassword());
 		Assert.assertEquals(profile, user.getProfile());
-		Assert.assertEquals(rols, user.getRols());
+		Assert.assertEquals(roles, user.getRoles());
 		Assert.assertEquals("username", user.getUsername());
 	}
 	
@@ -43,7 +43,7 @@ public class UserBuilderTest {
 			.withLocked(true)
 			.withPassword("password")
 			.withProfile(new UserProfile())
-			.withRols(new HashSet<Rol>())
+			.withRoles(new HashSet<Role>())
 			.withUsername("username")
 			.build();
 	}
@@ -56,7 +56,7 @@ public class UserBuilderTest {
 			.withOpenIDurlToken("1234asd")
 			.withPassword("password")
 			.withProfile(new UserProfile())
-			.withRols(new HashSet<Rol>())
+			.withRoles(new HashSet<Role>())
 			.build();
 	}
 	
@@ -67,7 +67,7 @@ public class UserBuilderTest {
 			.withOpenIDurlToken("1234asd")
 			.withPassword("password")
 			.withProfile(new UserProfile())
-			.withRols(new HashSet<Rol>())
+			.withRoles(new HashSet<Role>())
 			.withUsername("username")
 			.build();
 	}

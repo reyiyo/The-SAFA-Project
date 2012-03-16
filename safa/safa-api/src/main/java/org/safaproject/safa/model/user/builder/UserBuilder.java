@@ -3,7 +3,7 @@ package org.safaproject.safa.model.user.builder;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.safaproject.safa.model.user.Rol;
+import org.safaproject.safa.model.user.Role;
 import org.safaproject.safa.model.user.User;
 import org.safaproject.safa.model.user.UserProfile;
 
@@ -21,7 +21,7 @@ public class UserBuilder {
 
 	private String email;
 
-	private Set<Rol> rols = new HashSet<Rol>();
+	private Set<Role> roles = new HashSet<Role>();
 
 	private UserProfile profile;
 
@@ -43,8 +43,8 @@ public class UserBuilder {
 		this.email = email;
 		return this;
 	}
-	public UserBuilder withRols(Set<Rol> rols) {
-		this.rols = rols;
+	public UserBuilder withRoles(Set<Role> roles) {
+		this.roles = roles;
 		return this;
 	}
 	public UserBuilder withProfile(UserProfile profile) {
@@ -61,7 +61,7 @@ public class UserBuilder {
 		Preconditions.checkNotNull(username);
 		Preconditions.checkNotNull(email);
 		
-		this.user = new User(this.openIDurlToken, this.username, this.email, this.rols);
+		this.user = new User(this.openIDurlToken, this.username, this.email, this.roles);
 		this.user.setIsLocked(isLocked);
 		this.user.setPassword(password);
 		this.user.setProfile(profile);

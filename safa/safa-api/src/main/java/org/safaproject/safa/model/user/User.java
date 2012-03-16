@@ -52,8 +52,8 @@ public class User {
 	private String email;
 
 	@ManyToMany
-	@JoinTable(name = "SAFA_USER_ROL")
-	private Set<Rol> rols;
+	@JoinTable(name = "SAFA_USER_ROLE")
+	private Set<Role> roles;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "profileId")
@@ -67,11 +67,11 @@ public class User {
 	}
 
 	public User(String openIDurlToken, String username, String email,
-			Set<Rol> rols) {
+			Set<Role> roles) {
 		this.openIDurlToken = openIDurlToken;
 		this.username = username;
 		this.email = email;
-		this.rols = rols;
+		this.roles = roles;
 		this.isLocked = false;
 	}
 
@@ -151,18 +151,18 @@ public class User {
 	}
 
 	/**
-	 * @return the rols
+	 * @return the roles
 	 */
-	public Set<Rol> getRols() {
-		return rols;
+	public Set<Role> getRoles() {
+		return roles;
 	}
 
 	/**
-	 * @param rols
-	 *            the rols to set
+	 * @param roles
+	 *            the roles to set
 	 */
-	public void setRols(Set<Rol> rols) {
-		this.rols = rols;
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 	/**
