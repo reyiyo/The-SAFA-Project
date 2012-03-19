@@ -33,6 +33,10 @@ public class IndicatorTypeBuilder {
 		Preconditions.checkNotNull(minValue);
 		Preconditions.checkNotNull(maxValue);
 		
+		return this.buildPlaneObject();
+	}
+
+	public IndicatorType buildPlaneObject() {
 		return new IndicatorType(indicatorName, minValue, maxValue);
 	}
 }

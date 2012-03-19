@@ -4,6 +4,6 @@ import org.safaproject.safa.model.indicator.IndicatorType;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class IndicatorTypeDAO extends GenericHibernateDAO<IndicatorType, Long> {
+public class IndicatorTypeDAO extends GenericHibernateDAO<IndicatorType, String> {
 
 }
