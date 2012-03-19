@@ -27,6 +27,13 @@ public class IndicatorBuilder {
 		Preconditions.checkState(value <= indicatorType.getMaxValue());
 		Preconditions.checkState(value >= indicatorType.getMinValue());
 		
+		return this.buildPlaneObject();
+	}
+
+	/**
+	 * Builds without preconditions
+	 */
+	public Indicator buildPlaneObject() {
 		return new Indicator(indicatorType, value);
 	}
 }

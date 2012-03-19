@@ -5,6 +5,7 @@ import java.util.List;
 import junit.framework.Assert;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.safaproject.safa.model.indicator.Indicator;
@@ -115,5 +116,21 @@ public class IndicatorDAOTest {
 		Indicator indicatorFromDB = indicatorDAO.findById(indicator.getIndicatorId());
 		
 		Assert.assertEquals(indicatorType, indicatorFromDB.getIndicatorType());
+	}
+	
+	@Ignore
+	@Test(expected=RuntimeException.class)
+	public void shallFailBecauseOutOfMaxRangeFromIndicatorType() {
+		Indicator indicator = new IndicatorBuilder().withIndicatorType(indicatorType).withValue(30).buildPlaneObject();
+		
+		indicatorDAO.save(indicator);
+	}
+	
+	@Ignore
+	@Test(expected=RuntimeException.class)
+	public void shallFailBecauseOutOfMinRangeFromIndicatorType() {
+		Indicator indicator = new IndicatorBuilder().withIndicatorType(indicatorType).withValue(4).buildPlaneObject();
+		
+		indicatorDAO.save(indicator);
 	}
 }
