@@ -49,6 +49,13 @@ public class ResourceBuilder {
 		Preconditions.checkNotNull(resourceType);
 		Preconditions.checkNotNull(size);
 		
+		return this.buildPlaneObject();
+	}
+	
+	/**
+	 * Builds the object without checking the preconditions.
+	 */
+	public Resource buildPlaneObject() {
 		return new Resource(url, resourceType, size, description);
 	}
 
