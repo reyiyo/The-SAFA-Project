@@ -1,5 +1,6 @@
 package org.safaproject.safa.web.controller.content;
 
+import org.safaproject.safa.exception.ContentNotFoundException;
 import org.safaproject.safa.model.content.Content;
 import org.safaproject.safa.model.content.SearchRequest;
 import org.safaproject.safa.service.ContentService;
@@ -26,5 +27,12 @@ public class ContentController {
 				searchRequest.getOrderBy(), searchRequest.getOrderDirection())
 				.toArray(new Content[0]);
 
+	}
+
+	@RequestMapping(value = "/get", method = RequestMethod.GET, headers = "Accept=application/json")
+	public @ResponseBody
+	Content get(@RequestBody Long contentId) throws ContentNotFoundException {
+
+		return contentService.get(contentId);
 	}
 }

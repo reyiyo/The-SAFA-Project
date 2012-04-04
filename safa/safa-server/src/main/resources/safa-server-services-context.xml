@@ -9,7 +9,7 @@
 	<bean id="tagService" class="org.safaproject.safa.service.TagServiceImpl" />
 
 	<bean id="contentService" class="org.safaproject.safa.service.ContentServiceImpl" />
-
+	
 	<util:map id="searchStrategies" key-type="java.lang.String"
 		value-type="org.safaproject.safa.service.search.SearchStrategy">
 		<entry key="default">
