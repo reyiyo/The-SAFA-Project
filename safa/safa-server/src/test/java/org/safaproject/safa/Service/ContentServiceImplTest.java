@@ -1,8 +1,7 @@
 package org.safaproject.safa.Service;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.stub;
+import org.junit.Assert;
+import org.mockito.Mockito;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -30,7 +29,7 @@ public class ContentServiceImplTest {
 	@Before
 	public void setUp() {
 		contentService = new ContentServiceImpl();
-		contentDAOMock = mock(ContentDAO.class);
+		contentDAOMock = Mockito.mock(ContentDAO.class);
 	}
 
 	@Test
@@ -38,22 +37,22 @@ public class ContentServiceImplTest {
 
 		final Long id = 1l;
 		final Content content = createContent();
-		stub(contentDAOMock.findById(id)).toReturn(content);
+		Mockito.stub(contentDAOMock.findById(id)).toReturn(content);
 
 		contentService.setContentDAO(contentDAOMock);
 
 		final Content contentRecieved = contentService.get(id);
 
-		assertEquals(id, contentRecieved.getContentId());
-		assertEquals(content.getDescription(), contentRecieved.getDescription());
-		assertEquals(content.getTitle(), contentRecieved.getTitle());
+		Assert.assertEquals(id, contentRecieved.getContentId());
+		Assert.assertEquals(content.getDescription(), contentRecieved.getDescription());
+		Assert.assertEquals(content.getTitle(), contentRecieved.getTitle());
 
 	}
 
 	@Test(expected = ContentNotFoundException.class)
 	public void shallNotFoundContent() throws ContentNotFoundException {
 
-		stub(contentDAOMock.findById(CONTENT_ID)).toReturn(null);
+		Mockito.stub(contentDAOMock.findById(CONTENT_ID)).toReturn(null);
 
 		contentService.setContentDAO(contentDAOMock);
 

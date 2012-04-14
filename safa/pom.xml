@@ -33,6 +33,7 @@
 		<jetty.version>6.1.4</jetty.version>
 		<jetty.plugin.version>6.1.10</jetty.plugin.version>
 		<guava.version>10.0.1</guava.version>
+		<mokito.version>1.9.0</mokito.version>
 	</properties>
 
 	<dependencies>
