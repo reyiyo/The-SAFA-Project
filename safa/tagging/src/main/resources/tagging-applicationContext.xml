@@ -6,5 +6,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.springframework.org/schema/data/neo4j http://www.springframework.org/schema/data/neo4j/spring-neo4j-2.0.xsd">
 
 	<neo4j:config storeDirectory="data/graph.db" />
+	
+	<neo4j:repositories base-package="org.safaproject.safa.tagging.repository"/>
 
 </beans>

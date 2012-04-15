@@ -4,13 +4,13 @@
 	<artifactId>tagging</artifactId>
 	<version>${tagging.version}</version>
 	<name>Safa Tagging</name>
-	
+
 	<parent>
 		<groupId>org.safaproject</groupId>
 		<artifactId>safa</artifactId>
 		<version>${safa.version}</version>
 	</parent>
-	
+
 	<properties>
 		<org.springframework.data.version>2.0.0.RELEASE</org.springframework.data.version>
 	</properties>
@@ -20,6 +20,11 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-neo4j</artifactId>
 			<version>${org.springframework.data.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.neo4j</groupId>
+			<artifactId>neo4j-cypher</artifactId>
+			<version>1.6.M02</version>
 		</dependency>
 	</dependencies>
 </project>
