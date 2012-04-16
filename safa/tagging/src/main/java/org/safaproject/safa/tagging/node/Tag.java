@@ -1,22 +1,38 @@
 package org.safaproject.safa.tagging.node;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.springframework.data.neo4j.annotation.RelatedTo;
 
 @NodeEntity
 public class Tag {
 
 	@GraphId
 	private Long nodeId;
-	
+
 	private TagType tagType;
-	
+
 	@Indexed
 	private String value;
 
+	@RelatedTo(type = "FROM", direction = Direction.OUTGOING)
+	private Set<Tag> parents = new HashSet<Tag>();
+
 	public Tag() {
 
+	}
+
+	public Boolean isChildOf(Tag otherTag) {
+		return this.parents.contains(otherTag);
+	}
+
+	public void addParent(Tag parent) {
+		this.parents.add(parent);
 	}
 
 	public Tag(TagType tagType, String value) {
@@ -65,5 +81,13 @@ public class Tag {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public Set<Tag> getParents() {
+		return parents;
+	}
+
+	public void setParents(Set<Tag> parents) {
+		this.parents = parents;
 	}
 }

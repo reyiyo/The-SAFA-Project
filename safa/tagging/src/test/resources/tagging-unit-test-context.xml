@@ -5,6 +5,6 @@
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 http://www.springframework.org/schema/data/neo4j http://www.springframework.org/schema/data/neo4j/spring-neo4j-2.0.xsd">
 
-	<import resource="classpath:applicationContext.xml" />
+	<import resource="classpath:tagging-applicationContext.xml" />
 
 </beans>

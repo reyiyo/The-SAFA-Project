@@ -13,13 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:tagging-unit-test-context.xml")
 @Transactional
-public class SimpleEntityTest {
+public class TagTypeEntityTest {
 
 	@Autowired
 	Neo4jTemplate template;
 
 	@Test
-	@Transactional
 	public void persistedTagTypeShouldBeRetrievableFromGraphDb() {
 
 		TagType universidad = template.save(new TagType("Universidad"));
@@ -34,24 +33,6 @@ public class SimpleEntityTest {
 	}
 
 	@Test
-	@Transactional
-	public void persistedTagShouldBeRetrievableFromGraphDb() {
-		TagType universidad = template.save(new TagType("Universidad"));
-		Tag utn = template.save(new Tag(universidad, "UTN"));
-		Tag retrievedTag = template.findOne(utn.getNodeId(), Tag.class);
-
-		Assert.assertEquals("retrieved tag type matches persisted one", utn,
-				retrievedTag);
-
-		Assert.assertEquals("retrieved Tag value matches", "UTN",
-				retrievedTag.getValue());
-
-		Assert.assertEquals("retrieved Tag Type matches", universidad,
-				retrievedTag.getTagType());
-	}
-
-	@Test
-	@Transactional
 	public void persistedTagTypeShouldBeRetrievableFromGraphDbByIndex() {
 		String name = "Universidad";
 		TagType universidad = template.save(new TagType(name));
@@ -66,27 +47,6 @@ public class SimpleEntityTest {
 
 		Assert.assertEquals("retrieved Tag Type name matches", name,
 				retrievedTagType.getName());
-	}
-
-	@Test
-	@Transactional
-	public void persistedTagShouldBeRetrievableFromGraphDbByIndex() {
-		String value = "UTN";
-		TagType universidad = template.save(new TagType("Universidad"));
-		Tag utn = template.save(new Tag(universidad, value));
-
-		GraphRepository<Tag> tagRepository = template.repositoryFor(Tag.class);
-
-		Tag retrievedTag = tagRepository.findByPropertyValue("value", value);
-
-		Assert.assertEquals("retrieved tag type matches persisted one", utn,
-				retrievedTag);
-
-		Assert.assertEquals("retrieved Tag value matches", "UTN",
-				retrievedTag.getValue());
-
-		Assert.assertEquals("retrieved Tag Type matches", universidad,
-				retrievedTag.getTagType());
 	}
 
 }

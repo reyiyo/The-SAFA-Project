@@ -1,8 +1,13 @@
 package org.safaproject.safa.tagging.node;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.springframework.data.neo4j.annotation.RelatedTo;
 
 @NodeEntity
 public class TagType {
@@ -13,12 +18,23 @@ public class TagType {
 	@Indexed
 	private String name;
 
+	@RelatedTo(type = "DEPENDS", direction = Direction.OUTGOING)
+	private Set<TagType> dependencies = new HashSet<TagType>();
+
 	public TagType() {
 
 	}
 
 	public TagType(String name) {
 		this.name = name;
+	}
+
+	public Boolean dependsOf(TagType otherTagType) {
+		return this.dependencies.contains(otherTagType);
+	}
+
+	public void addDependency(TagType dependency) {
+		this.dependencies.add(dependency);
 	}
 
 	@Override
@@ -54,5 +70,13 @@ public class TagType {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Set<TagType> getDependencies() {
+		return dependencies;
+	}
+
+	public void setDependencies(Set<TagType> dependencies) {
+		this.dependencies = dependencies;
 	}
 }
