@@ -13,7 +13,7 @@
 	</parent>
 
 	<properties>
-		<org.springsecurity.version>3.1.0.CI-SNAPSHOT</org.springsecurity.version>
+		<org.springsecurity.version>3.1.0.RC2</org.springsecurity.version>
 	</properties>
 
 	<dependencies>
@@ -25,6 +25,11 @@
 		</dependency>
 
 		<!-- SPRING-SECURITY DEPENDENCIES -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>3.1.1.RELEASE</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
@@ -53,6 +58,16 @@
 		</dependency>
 
 		<!-- SPRING-MVC DEPENDENCIES -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.5.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -146,6 +161,11 @@
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
+		</repository>
+		<repository>
+			<id>org.springframework.maven.milestone</id>
+			<name>Spring Maven Milestone Repository</name>
+			<url>http://maven.springframework.org/milestone</url>
 		</repository>
 	</repositories>
 

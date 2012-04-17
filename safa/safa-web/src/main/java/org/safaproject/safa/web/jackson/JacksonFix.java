@@ -1,19 +1,18 @@
 package org.safaproject.safa.web.jackson;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter;
 
-@Component
 public class JacksonFix {
+	
+	@Autowired
 	private AnnotationMethodHandlerAdapter annotationMethodHandlerAdapter;
+	
+	@Autowired
 	private HibernateAwareObjectMapper objectMapper;
 
-	@PostConstruct
 	public void init() {
 		HttpMessageConverter<?>[] messageConverters = annotationMethodHandlerAdapter
 				.getMessageConverters();
