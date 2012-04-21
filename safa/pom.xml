@@ -23,13 +23,14 @@
 		<tagging.version>0.1-SNAPSHOT</tagging.version>
 		<java.version>1.6</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<org.springframework.version>3.1.0.RELEASE</org.springframework.version>
-		<org.hibernate.version>3.6.8.Final</org.hibernate.version>
-		<hsqldb.version>2.2.6</hsqldb.version>
-		<commons-dbcp.version>1.4</commons-dbcp.version>
+		<org.springframework.version>3.1.1.RELEASE</org.springframework.version>
+		<cglib.version>2.2.2</cglib.version>
+		<org.hibernate.version>4.1.1.Final</org.hibernate.version>
 		<org.hibernate.javax.persistence.version>1.0.1.Final</org.hibernate.javax.persistence.version>
 		<org.hibernate.annotations.version>3.5.6-Final</org.hibernate.annotations.version>
 		<org.hibernate.validator.version>4.2.0.Final</org.hibernate.validator.version>
+		<hsqldb.version>2.2.6</hsqldb.version>
+		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<log4j.version>1.2.14</log4j.version>
 		<junit.version>4.8.1</junit.version>
 		<jetty.version>6.1.4</jetty.version>
@@ -108,6 +109,14 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>${cglib.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
 
 		<!-- LOGGING DEPENDENCIES -->
 		<dependency>

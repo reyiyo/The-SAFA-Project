@@ -20,7 +20,7 @@
 			<version>${org.hibernate.javax.persistence.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>

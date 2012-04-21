@@ -30,27 +30,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>${org.hibernate.annotations.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${org.hibernate.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>${org.hibernate.annotations.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${org.hibernate.version}</version>
 			<type>jar</type>
@@ -75,6 +54,12 @@
 			<groupId>com.googlecode.genericdao</groupId>
 			<artifactId>search-hibernate</artifactId>
 			<version>1.1.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-core</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>javassist</groupId>
@@ -82,14 +67,14 @@
 			<version>3.4.GA</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- MOCKITO -->
 		<dependency>
 			<groupId>org.mockito</groupId>
-		  	<artifactId>mockito-all</artifactId>
-		  	<version>${mokito.version}</version>
-		  	<scope>test</scope>
-	  	</dependency>
+			<artifactId>mockito-all</artifactId>
+			<version>${mokito.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

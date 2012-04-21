@@ -47,8 +47,7 @@ INSERT INTO SAFA_USER (userId, urlToken, username, password, email, locked) VALU
 DELETE FROM INDICATOR_CONTENT;
 INSERT INTO SAFA_USER_ROLE VALUES(1, 1);
 
-
-INSERT INTO CONTENT (contentId, title, description, uploadDate, userId, available, idThumbnailResource, reviewed) VALUES (1, 'Resumen pedorro1', 'lalala1', CURRENT_DATE, 1, true, 2, true);
+INSERT INTO CONTENT (contentId, available, description, reviewed, idThumbnailResource, title, uploadDate, userId) VALUES (1, true, 'lalala1', true, 2, 'Resumen pedorro1', CURRENT_DATE, 1);
 INSERT INTO CONTENT (contentId, title, description, uploadDate, userId, available, idThumbnailResource, reviewed) VALUES (2, 'Resumen pedorro2', 'lalala2', CURRENT_DATE, 1, true, 2, true);
 
 UPDATE RESOURCE SET contentId=1 WHERE resourceId=1
