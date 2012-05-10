@@ -6,8 +6,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.safaproject.safa.tagging.node.Tag;
-import org.safaproject.safa.tagging.node.TagType;
+import org.safaproject.safa.node.Tag;
+import org.safaproject.safa.node.TagType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.neo4j.support.Neo4jTemplate;
 import org.springframework.data.neo4j.support.node.Neo4jHelper;
@@ -29,7 +29,7 @@ public class TagRepositoryTest {
 
 	@Autowired
 	private Neo4jTemplate template;
-
+	
 	@Rollback(false)
 	@BeforeTransaction
 	public void clearDatabase() {

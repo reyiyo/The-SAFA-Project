@@ -11,36 +11,15 @@
 		<version>${safa.version}</version>
 	</parent>
 
-	<properties>
-		<org.springframework.data.version>2.0.0.RELEASE</org.springframework.data.version>
-		<neo4j.version>1.6.2</neo4j.version>
-	</properties>
-
 	<dependencies>
+		<!-- SAFA DEPENDENCIES -->
 		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-neo4j</artifactId>
-			<version>${org.springframework.data.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>slf4j-log4j12</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>neo4j</artifactId>
-					<groupId>org.neo4j</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>neo4j-cypher-dsl</artifactId>
-					<groupId>org.neo4j</groupId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.safaproject</groupId>
+			<artifactId>safa-api</artifactId>
+			<version>${safa-api.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.neo4j</groupId>
-			<artifactId>neo4j</artifactId>
-			<version>${neo4j.version}</version>
-		</dependency>
+		
+		<!-- NEO4J DEPENDENCIES -->
 		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j-cypher</artifactId>

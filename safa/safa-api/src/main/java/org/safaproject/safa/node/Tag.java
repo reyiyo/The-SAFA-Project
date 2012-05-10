@@ -1,4 +1,4 @@
-package org.safaproject.safa.tagging.node;
+package org.safaproject.safa.node;
 
 import java.util.HashSet;
 import java.util.Set;

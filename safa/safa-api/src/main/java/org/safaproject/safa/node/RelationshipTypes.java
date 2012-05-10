@@ -1,4 +1,4 @@
-package org.safaproject.safa.tagging.node;
+package org.safaproject.safa.node;
 
 public abstract class RelationshipTypes {
 	
