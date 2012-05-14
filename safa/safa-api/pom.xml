@@ -11,7 +11,7 @@
 		<artifactId>safa</artifactId>
 		<version>${safa.version}</version>
 	</parent>
-	
+
 	<dependencies>
 		<!-- HIBERNATE DEPENDENCIES -->
 		<dependency>
@@ -34,16 +34,48 @@
 			<version>${org.springframework.data.version}</version>
 			<exclusions>
 				<exclusion>
-					<artifactId>slf4j-log4j12</artifactId>
 					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
 				</exclusion>
 				<exclusion>
+					<groupId>org.neo4j</groupId>
 					<artifactId>neo4j</artifactId>
-					<groupId>org.neo4j</groupId>
 				</exclusion>
 				<exclusion>
-					<artifactId>neo4j-cypher-dsl</artifactId>
 					<groupId>org.neo4j</groupId>
+					<artifactId>neo4j-cypher-dsl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-tx</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-test</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-orm</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-test</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-aspects</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>cglib</groupId>
+					<artifactId>cglib</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
