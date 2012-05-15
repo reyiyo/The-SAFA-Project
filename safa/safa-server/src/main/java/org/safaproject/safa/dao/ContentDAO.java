@@ -14,8 +14,8 @@ public class ContentDAO extends GenericHibernateDAO<Content, Long> {
 			Integer maxResults) {
 		return entityManager
 				.createQuery(
-						"Select c from Content c left join c.indicators i "
-								+ "where :_tags = some elements(c.tags)"
+						"Select c from Content c left join c.indicators i left join c.tags t "
+								+ "where t in (:_tags)"
 								+ " group by c order by avg(i.value) DESC")
 				.setParameter("_tags", tags).setFirstResult(firstResult)
 				.setMaxResults(maxResults).getResultList();
