@@ -14,11 +14,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Projections;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
-
-import com.googlecode.genericdao.search.ISearch;
-import com.googlecode.genericdao.search.jpa.JPASearchProcessor;
 
 /**
  * JPA implementation of the GenericDAO. Note that this implementation also
@@ -37,9 +33,6 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 
 	protected EntityManager entityManager;
 
-	@Autowired
-	protected JPASearchProcessor searchProcessor;
-
 	@SuppressWarnings("unchecked")
 	public GenericHibernateDAO() {
 		this.persistentClass = (Class<T>) ((ParameterizedType) getClass()
@@ -54,7 +47,6 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	/**
 	 * @see org.safaproject.safa.dao.GenericDAO#countAll
 	 */
-	@Override
 	public Long countAll() {
 		return countByCriteria();
 	}
@@ -62,7 +54,6 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	/**
 	 * @see org.safaproject.safa.dao.GenericDAO#countByExample(java.lang.Object)
 	 */
-	@Override
 	public Long countByExample(final T exampleInstance) {
 		Session session = (Session) getEntityManager().getDelegate();
 		Criteria crit = session.createCriteria(getEntityClass());
@@ -75,7 +66,6 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	/**
 	 * @see org.safaproject.safa.dao.GenericDAO#findAll()
 	 */
-	@Override
 	public List<T> findAll() {
 		return findByCriteria();
 	}
@@ -84,7 +74,6 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	 * @see org.safaproject.safa.dao.GenericDAO#findByExample(java.lang.Object)
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<T> findByExample(final T exampleInstance) {
 		Session session = (Session) getEntityManager().getDelegate();
 		Example example = Example.create(exampleInstance).excludeZeroes()
@@ -98,7 +87,6 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	/**
 	 * @see org.safaproject.safa.dao.GenericDAO#findById(java.io.Serializable)
 	 */
-	@Override
 	public T findById(final ID id) {
 		final T result = getEntityManager().find(persistentClass, id);
 		return result;
@@ -109,7 +97,6 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	 *      java.lang.Object[])
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<T> findByNamedQuery(final String name, Object... params) {
 		Query query = getEntityManager().createNamedQuery(name);
 
@@ -126,7 +113,6 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	 *      java.util.Map)
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<T> findByNamedQueryAndNamedParams(final String name,
 			final Map<String, ? extends Object> params) {
 		Query query = getEntityManager().createNamedQuery(name);
@@ -143,7 +129,6 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	/**
 	 * @see org.safaproject.safa.dao.GenericDAO#getEntityClass()
 	 */
-	@Override
 	public Class<T> getEntityClass() {
 		return persistentClass;
 	}
@@ -210,16 +195,14 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	/**
 	 * @see org.safaproject.safa.dao.GenericDAO#delete(java.lang.Object)
 	 */
-	@Override
 	public void delete(T entity) {
 		getEntityManager().remove(entity);
-		
+
 	}
 
 	/**
 	 * @see org.safaproject.safa.dao.GenericDAO#save(java.lang.Object)
 	 */
-	@Override
 	public T update(T entity) {
 		final T savedEntity = getEntityManager().merge(entity);
 		return savedEntity;
@@ -230,19 +213,5 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	 */
 	public void save(T entity) {
 		getEntityManager().persist(entity);
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<T> search(ISearch search) {
-		return searchProcessor.search(getEntityManager(), persistentClass,
-				search);
-	}
-	
-	public JPASearchProcessor getSearchProcessor() {
-		return searchProcessor;
-	}
-
-	public void setSearchProcessor(JPASearchProcessor searchProcessor) {
-		this.searchProcessor = searchProcessor;
 	}
 }

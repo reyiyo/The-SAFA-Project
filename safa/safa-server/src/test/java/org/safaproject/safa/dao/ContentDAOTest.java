@@ -12,7 +12,6 @@ import javax.persistence.PersistenceException;
 import junit.framework.Assert;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.safaproject.safa.model.content.Comment;
@@ -38,8 +37,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Iterables;
-import com.googlecode.genericdao.search.Filter;
-import com.googlecode.genericdao.search.Search;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:safa-unit-test-context.xml")
@@ -211,8 +208,9 @@ public class ContentDAOTest {
 		contentDao.save(content);
 
 		Content contentByExample = contentDao.findByExample(
-				new ContentBuilder().withUploadDate(date).withTitle(title).withDescription(desc)
-						.withReviewed(true).withAvailable(true).build()).get(0);
+				new ContentBuilder().withUploadDate(date).withTitle(title)
+						.withDescription(desc).withReviewed(true)
+						.withAvailable(true).build()).get(0);
 
 		Assert.assertEquals(content, contentByExample);
 	}
@@ -234,8 +232,8 @@ public class ContentDAOTest {
 				.withUser(testingUser).build());
 
 		Long countByExample = contentDao.countByExample(new ContentBuilder()
-				.withTitle(title).withDescription(desc).withReviewed(true).withUploadDate(date)
-				.withAvailable(true).build());
+				.withTitle(title).withDescription(desc).withReviewed(true)
+				.withUploadDate(date).withAvailable(true).build());
 
 		Assert.assertEquals(Long.valueOf(1), countByExample);
 	}
@@ -299,8 +297,7 @@ public class ContentDAOTest {
 	}
 
 	@Test
-	@Ignore
-	public void shallRetrieveContentWithTags() {
+	public void shallRetrieveContentWithTagsCriteria() {
 
 		TagType universidad = new TagTypeBuilder().withTagName("Universidad")
 				.withTagDataType(TagDataTypes.STRING).build();
@@ -327,32 +324,20 @@ public class ContentDAOTest {
 
 		contentDao.save(content);
 
-		Search match = new Search(Content.class);
-		match.setFirstResult(0);
-		match.setMaxResults(10);
+		Assert.assertEquals(1,
+				contentDao.getContentCriteriaBuilder().withTag(utn).list()
+						.size());
 
-		match.addFilterSome("tags", Filter.equal(Filter.ROOT_ENTITY, utn));
-
-		Assert.assertEquals(1, contentDao.search(match).size());
-
-		Search notMatch = new Search(Content.class);
-		notMatch.setFirstResult(0);
-		notMatch.setMaxResults(10);
-		notMatch.addFilterSome("tags", Filter.equal(Filter.ROOT_ENTITY, uade));
-
-		Assert.assertEquals(0, contentDao.search(notMatch).size());
+		Assert.assertEquals(0,
+				contentDao.getContentCriteriaBuilder().withTag(uade).list()
+						.size());
 
 		content.setTags(new HashSet<Tag>(Arrays.asList(utn, uade)));
 		contentDao.update(content);
 
-		Search match2 = new Search(Content.class);
-		match2.setFirstResult(0);
-		match2.setMaxResults(10);
-
-		match2.addFilterSome("tags", Filter.equal(Filter.ROOT_ENTITY, utn));
-
-		Assert.assertEquals(1, contentDao.search(match2).size());
-
+		Assert.assertEquals(1,
+				contentDao.getContentCriteriaBuilder().withTag(utn).list()
+						.size());
 	}
 
 	@Test

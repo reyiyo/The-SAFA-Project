@@ -2,6 +2,7 @@ package org.safaproject.safa.dao;
 
 import java.util.List;
 
+import org.safaproject.safa.dao.criteria.ContentCriteriaBuilder;
 import org.safaproject.safa.model.content.Content;
 import org.safaproject.safa.model.tag.Tag;
 import org.springframework.stereotype.Repository;
@@ -19,5 +20,9 @@ public class ContentDAO extends GenericHibernateDAO<Content, Long> {
 								+ " group by c order by avg(i.value) DESC")
 				.setParameter("_tags", tags).setFirstResult(firstResult)
 				.setMaxResults(maxResults).getResultList();
+	}
+	
+	public ContentCriteriaBuilder getContentCriteriaBuilder() {
+		return new ContentCriteriaBuilder(entityManager);
 	}
 }

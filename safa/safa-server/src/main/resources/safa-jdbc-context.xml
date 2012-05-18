@@ -19,13 +19,4 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
 		p:dataSource-ref="dataSource" p:entityManagerFactory-ref="entityManagerFactory" />
 
-	<bean id="searchProcessor" class="com.googlecode.genericdao.search.jpa.JPASearchProcessor">
-		<constructor-arg ref="metadataUtil" />
-	</bean>
-
-	<bean id="metadataUtil" class="org.safaproject.safa.dao.search.HibernateMetadataUtil"
-		factory-method="getInstanceForEntityManagerFactory">
-		<constructor-arg ref="entityManagerFactory" />
-	</bean>
-
 </beans>
