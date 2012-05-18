@@ -1,4 +1,4 @@
-package org.safaproject.safa.Service;
+package org.safaproject.safa.service;
 
 import org.junit.Assert;
 import org.mockito.Mockito;
