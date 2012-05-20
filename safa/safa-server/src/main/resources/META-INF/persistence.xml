@@ -8,7 +8,6 @@
 		<class>org.safaproject.safa.model.content.Content</class>
 		<class>org.safaproject.safa.model.indicator.Indicator</class>
 		<class>org.safaproject.safa.model.tag.TagType</class>
-		<class>org.safaproject.safa.model.tag.TagTreeNode</class>
 		<class>org.safaproject.safa.model.tag.TagRequest</class>
 		<class>org.safaproject.safa.model.user.Role</class>
 		<class>org.safaproject.safa.model.tag.Tag</class>
