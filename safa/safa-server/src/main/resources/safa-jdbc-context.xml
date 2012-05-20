@@ -14,7 +14,7 @@
 	<bean id="jpaVendorAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
 		p:showSql="${jpa.showSql}" p:generateDdl="${jpa.generateDdl}"
-		p:database="${jpa.database}" />
+		p:databasePlatform="${jpa.database}" />
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
 		p:dataSource-ref="dataSource" p:entityManagerFactory-ref="entityManagerFactory" />

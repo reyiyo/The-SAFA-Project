@@ -2,6 +2,8 @@ package org.safaproject.safa.dao;
 
 import static org.junit.Assert.assertEquals;
 
+import javax.validation.ConstraintViolationException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.safaproject.safa.model.tag.TagDataTypes;
@@ -137,13 +139,12 @@ public class TagTypeDAOTest {
 
 	}
 
-	@Test
+	@Test(expected = ConstraintViolationException.class)
 	public void shallFailBecauseOfNullDataType() {
 		TagType tagType = new TagType();
 		tagType.setTagName("Career");
 		tagType.setTagDataType(null);
 		tagTypeDAO.save(tagType);
-		// TODO: Investigate why this constraint is not being evaluated
 	}
 
 }

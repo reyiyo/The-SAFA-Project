@@ -30,7 +30,6 @@ public class TagType {
 	@Column(name = "tagDataType")
 	@Enumerated(EnumType.STRING)
 	@NotNull
-	// TODO: Investigate why this constraint is not being evaluated
 	private TagDataTypes tagDataType;
 
 	public TagType() {

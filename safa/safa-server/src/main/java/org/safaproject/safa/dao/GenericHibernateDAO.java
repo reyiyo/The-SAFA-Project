@@ -213,5 +213,6 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements
 	 */
 	public void save(T entity) {
 		getEntityManager().persist(entity);
+		getEntityManager().flush();
 	}
 }
