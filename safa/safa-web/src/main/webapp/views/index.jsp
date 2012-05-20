@@ -40,6 +40,38 @@
 			"orderBy" : "title",
 			"orderDirection" : "ASC"
 		};
+	
+	var filterTagRequest = {
+			"tagType" : {
+				"tagDataType" : "STRING",
+				"tagName" : "Facultad"
+			},
+			"selectedTags" : [ {
+				"tagId" : 1,
+				"tagType" : {
+					"tagDataType" : "STRING",
+					"tagName" : "Universidad"
+				},
+				"value" : "UTN",
+				"iconURL" : ""
+			} ],
+			"value" : "FR"
+		};
+	
+	function testTagFilter(filterRequest) {
+		$.ajax({
+			url : "../tags/filterTags",
+			type : "POST",
+			data : JSON.stringify(filterRequest),
+			success : function(data) {
+				alert(JSON.stringify(data));
+				console.log(data);
+				console.log(JSON.stringify(data));
+			},
+			dataType : "json",
+			contentType : "application/json"
+		});
+	}
 
 	function testContenSearch(searchRequest) {
 
@@ -74,6 +106,9 @@
 	<p>
 		<button onclick="testContenSearch(defaultOrder)">Test Default Content Search!</button>
 		<button onclick="testContenSearch(titleOrder)">Test Simple Order Content Search!</button>
+	</p>
+	<p>
+		<button onclick="testTagFilter(filterTagRequest)">Test Tag Filter!</button>
 	</p>
 	<p>
 		<a href="../../j_spring_security_logout">Logout</a>

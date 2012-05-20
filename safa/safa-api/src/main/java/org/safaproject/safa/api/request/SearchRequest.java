@@ -1,9 +1,10 @@
-package org.safaproject.safa.model.content;
+package org.safaproject.safa.api.request;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.safaproject.safa.model.content.OrderDirections;
 import org.safaproject.safa.model.tag.Tag;
 
 public class SearchRequest implements Serializable {

@@ -43,6 +43,10 @@ public class TagType {
 		this.tagDataType = tagDataType;
 	}
 
+	public String toString() {
+		return this.getTagName();
+	}
+
 	/**
 	 * @return the tagName
 	 */

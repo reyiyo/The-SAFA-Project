@@ -13,15 +13,17 @@ public class ContentCriteriaBuilder extends EntityCriteriaBuilder<Content> {
 	public ContentCriteriaBuilder(EntityManager entityManager) {
 		super(entityManager, Content.class);
 	}
+	
+	private static final String TAGS = "tags";
 
 	public ContentCriteriaBuilder withTag(Tag tag) {
-		this.isMember("tags", tag);
+		this.isMember(TAGS, tag);
 		return this;
 	}
 
 	public ContentCriteriaBuilder withTags(List<Tag> tags) {
 		for (Tag t : tags) {
-			this.isMember("tags", t);
+			this.isMember(TAGS, t);
 		}
 		return this;
 	}

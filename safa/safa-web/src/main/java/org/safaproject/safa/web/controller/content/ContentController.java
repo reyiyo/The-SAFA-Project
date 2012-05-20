@@ -1,8 +1,8 @@
 package org.safaproject.safa.web.controller.content;
 
+import org.safaproject.safa.api.request.SearchRequest;
 import org.safaproject.safa.exception.ContentNotFoundException;
 import org.safaproject.safa.model.content.Content;
-import org.safaproject.safa.model.content.SearchRequest;
 import org.safaproject.safa.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

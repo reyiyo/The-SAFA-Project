@@ -95,6 +95,12 @@ public class EntityCriteriaBuilder<Entity> {
 				criteriaBuilder.isMember(criteriaBuilder.literal(value), list));
 	}
 
+	protected void like(String field, String value) {
+		Expression<String> fieldValue = root.get(field);
+		whereClause = criteriaBuilder.and(whereClause,
+				criteriaBuilder.like(fieldValue, "%" + value + "%"));
+	}
+
 	@SuppressWarnings("unchecked")
 	protected EntityCriteriaBuilder<Entity> orderBy(OrderDirections direction,
 			String... fields) {

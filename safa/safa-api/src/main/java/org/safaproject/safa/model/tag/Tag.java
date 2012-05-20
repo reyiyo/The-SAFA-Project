@@ -43,6 +43,10 @@ public class Tag {
 		this.iconURL = iconURL;
 	}
 
+	public String toString() {
+		return this.getTagType().toString() + ": " + this.getValue();
+	}
+
 	/**
 	 * @return the tagId
 	 */

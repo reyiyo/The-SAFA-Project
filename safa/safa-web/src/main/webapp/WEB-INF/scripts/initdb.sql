@@ -29,6 +29,7 @@ INSERT INTO TAG_TYPE (tagName, tagDataType) VALUES ('Resource Type', 'NUMERIC');
 INSERT INTO TAG (tagId, tagName, value, iconURL) VALUES (1, 'Universidad', 'UTN', '');
 INSERT INTO TAG (tagId, tagName, value, iconURL) VALUES (2, 'Facultad', 'FRBA', '');
 INSERT INTO TAG (tagId, tagName, value, iconURL) VALUES (3, 'Facultad', 'FRC', '');
+INSERT INTO TAG (tagId, tagName, value, iconURL) VALUES (10, 'Facultad', 'FRSF', '');
 INSERT INTO TAG (tagId, tagName, value, iconURL) VALUES (4, 'Materia', 'Matemática Discreta', '');
 INSERT INTO TAG (tagId, tagName, value, iconURL) VALUES (5, 'Materia', 'Paradigmas de Programación', '');
 INSERT INTO TAG (tagId, tagName, value, iconURL) VALUES (6, 'Profesor', 'Susana Granado Peralta', '');
