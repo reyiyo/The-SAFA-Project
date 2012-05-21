@@ -144,6 +144,21 @@ public class EntityCriteriaBuilder<Entity> {
 		return query;
 	}
 
+	/**
+	 * Gets a query of type <code>CriteriaQuery<<Long>></code> to use for
+	 * selecting the Max value of @param field
+	 * 
+	 * @return <code>CriteriaQuery<<Long>></code> for counting results
+	 */
+	@SuppressWarnings("unchecked")
+	public CriteriaQuery<Long> getQueryForMax(String field) {
+		Path<Number> path = root.get(field);
+		Expression<Number> maxExpression = criteriaBuilder.max(path);
+		query.select(criteriaBuilder.coalesce(maxExpression, 0));
+		query.where(whereClause);
+		return query;
+	}
+
 	public List<Entity> list() {
 		return this.list(0, maxRows);
 	}
@@ -154,6 +169,17 @@ public class EntityCriteriaBuilder<Entity> {
 		q.setMaxResults(maxRows);
 		return q.getResultList();
 
+	}
+
+	public Entity getSingleResult() {
+		TypedQuery<Entity> q = this.entityManager.createQuery(this.getQuery());
+		return q.getSingleResult();
+	}
+
+	protected Long selectMax(String field) {
+		TypedQuery<Long> q = this.entityManager.createQuery(this
+				.getQueryForMax(field));
+		return q.getSingleResult();
 	}
 
 	/**
