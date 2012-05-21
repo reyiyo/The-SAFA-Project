@@ -17,6 +17,14 @@
 		<spring-social-facebook.version>1.1.0.BUILD-SNAPSHOT</spring-social-facebook.version>
 		<spring-security-crypto.version>3.1.0.RELEASE</spring-security-crypto.version>
 	</properties>
+	
+	<repositories>
+		<repository>
+			<id>org.springframework.maven.snapshot</id>
+			<name>Spring Maven Snapshot Repository</name>
+			<url>http://maven.springframework.org/snapshot</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 

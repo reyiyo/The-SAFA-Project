@@ -1,5 +1,6 @@
 package org.safaproject.safa.dao.criteria;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
@@ -10,6 +11,8 @@ import javax.persistence.criteria.Predicate;
 
 import org.safaproject.safa.model.user.SocialUser;
 import org.springframework.util.MultiValueMap;
+
+import com.google.common.collect.Lists;
 
 public class SocialUserCriteriaBuilder extends
 		EntityCriteriaBuilder<SocialUser> {
@@ -35,6 +38,12 @@ public class SocialUserCriteriaBuilder extends
 
 	public SocialUserCriteriaBuilder withProviderUserId(String providerUserId) {
 		this.withValue(PROVIDER_USER_ID, providerUserId);
+		return this;
+	}
+
+	public SocialUserCriteriaBuilder withProviderUserIds(
+			Collection<String> providerUserIds) {
+		this.in(PROVIDER_USER_ID, Lists.newArrayList(providerUserIds));
 		return this;
 	}
 
