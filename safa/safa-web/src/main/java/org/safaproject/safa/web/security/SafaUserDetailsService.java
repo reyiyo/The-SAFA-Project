@@ -21,9 +21,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.openid.OpenIDAttribute;
 import org.springframework.security.openid.OpenIDAuthenticationToken;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Maps;
 
+@Transactional
 public class SafaUserDetailsService implements UserDetailsService,
 		AuthenticationUserDetailsService<OpenIDAuthenticationToken> {
 
