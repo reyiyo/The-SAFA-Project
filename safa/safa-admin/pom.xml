@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<artifactId>safa</artifactId>
+		<groupId>org.safaproject</groupId>
+		<version>${safa.version}</version>
+	</parent>
+	
+	<groupId>org.safaproject</groupId>
+	<artifactId>safa-admin</artifactId>
+	<version>0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>Safa Admin</name>
+	<description>The SAFA Administration module</description>
+	
+	<build>
+		<pluginManagement />
+		<plugins>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>surefire-it</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<skip>false</skip>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>plugins</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.grails</groupId>
+				<artifactId>grails-maven-plugin</artifactId>
+				<version>${grails.version}</version>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<goals>
+							<goal>init</goal>
+							<goal>maven-clean</goal>
+							<goal>validate</goal>
+							<goal>config-directories</goal>
+							<goal>maven-compile</goal>
+							<goal>maven-test</goal>
+							<goal>maven-war</goal>
+							<goal>maven-functional-test</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<profiles>
+		<profile>
+			<id>tools</id>
+			<activation>
+				<property>
+					<name>java.vendor</name>
+					<value>Sun Microsystems Inc.</value>
+				</property>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>com.sun</groupId>
+					<artifactId>tools</artifactId>
+					<version>${java.version}</version>
+					<scope>system</scope>
+					<systemPath>${java.home}/../lib/tools.jar</systemPath>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+	
+	<repositories>
+		<repository>
+			<id>grails</id>
+			<name>grails</name>
+			<url>http://repo.grails.org/grails/core</url>
+		</repository>
+	</repositories>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.grails</groupId>
+			<artifactId>grails-dependencies</artifactId>
+			<version>${grails.version}</version>
+			<type>pom</type>
+		</dependency>
+	</dependencies>
+	
+	<properties>
+		<grails.version>2.0.3</grails.version>
+	</properties>
+</project>
