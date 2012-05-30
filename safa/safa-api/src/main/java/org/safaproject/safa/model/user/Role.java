@@ -2,6 +2,8 @@ package org.safaproject.safa.model.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,12 +25,13 @@ public class Role {
 	private Long roleId;
 
 	@Column(name = "name", unique = true, nullable = false)
+	@Enumerated(EnumType.STRING)
 	private String name;
-	
+
 	public Role() {
-		//	Hibernate constructor
+		// Hibernate constructor
 	}
-	
+
 	public Role(String name) {
 		this.name = name;
 	}

@@ -1,12 +1,18 @@
 package org.safaproject.safa.model.user;
 
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -24,7 +30,8 @@ public class SocialUser {
 	public SocialUser(String userId, String providerId, String providerUserId,
 			int rank, String displayName, String profileUrl, String imageUrl,
 			String accessToken, String secret, String refreshToken,
-			Long expireTime, Date createDate) {
+			Long expireTime, Date createDate, Set<Role> roles,
+			UserProfile profile, Boolean locked) {
 		this.userId = userId;
 		this.providerId = providerId;
 		this.providerUserId = providerUserId;
@@ -37,15 +44,19 @@ public class SocialUser {
 		this.refreshToken = refreshToken;
 		this.expireTime = expireTime;
 		this.createDate = createDate;
+		this.roles = roles;
+		this.profile = profile;
+		this.isLocked = locked;
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	/**
 	 * A local identifier for the user, in our case the username.
 	 */
+	@Column(nullable = false)
 	private String userId;
 
 	/**
@@ -109,11 +120,22 @@ public class SocialUser {
 
 	private Date createDate = new Date();
 
-	public int getId() {
+	@ManyToMany
+	@JoinTable(name = "SAFA_USER_ROLE")
+	private Set<Role> roles;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "profileId")
+	private UserProfile profile;
+
+	@Column(name = "locked")
+	private Boolean isLocked = false;
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -211,6 +233,30 @@ public class SocialUser {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	public UserProfile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(UserProfile profile) {
+		this.profile = profile;
+	}
+
+	public Boolean getIsLocked() {
+		return isLocked;
+	}
+
+	public void setIsLocked(Boolean isLocked) {
+		this.isLocked = isLocked;
 	}
 
 }

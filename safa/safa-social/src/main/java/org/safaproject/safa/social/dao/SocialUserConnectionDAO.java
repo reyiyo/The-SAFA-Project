@@ -1,6 +1,5 @@
 package org.safaproject.safa.social.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -8,17 +7,17 @@ import javax.inject.Inject;
 
 import org.safaproject.safa.dao.SocialUserDAO;
 import org.safaproject.safa.model.user.SocialUser;
+import org.safaproject.safa.social.service.SocialUserService;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
-import org.springframework.social.connect.ConnectionKey;
 import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UsersConnectionRepository;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 public class SocialUserConnectionDAO implements UsersConnectionRepository {
@@ -30,7 +29,8 @@ public class SocialUserConnectionDAO implements UsersConnectionRepository {
 
 	private final TextEncryptor textEncryptor;
 
-	private ConnectionSignUp connectionSignUp;
+	@Inject
+	private SocialUserService socialUserService;
 
 	public SocialUserConnectionDAO(
 			ConnectionFactoryLocator connectionFactoryLocator,
@@ -56,32 +56,25 @@ public class SocialUserConnectionDAO implements UsersConnectionRepository {
 				new SocialUserToId()));
 	}
 
+	/**
+	 * If no user with that Connection is found, a new SocialUser is created in
+	 * the System
+	 **/
 	@Override
 	public List<String> findUserIdsWithConnection(Connection<?> connection) {
-		List<String> usrs = new ArrayList<String>();
-		ConnectionKey key = connection.getKey();
+		List<SocialUser> users = socialUserService
+				.findUsersWithConnection(connection);
 
-		List<SocialUser> users = socialUserDAO.getSocialUserCriteriaBuilder()
-				.withProviderId(key.getProviderId())
-				.withProviderUserId(key.getProviderUserId()).list();
-
-		if (!users.isEmpty()) {
-			for (SocialUser user : users) {
-				usrs.add(user.getUserId());
-			}
-			return usrs;
+		if (users.isEmpty()) {
+			SocialUser newUser = socialUserService
+					.createUserWithConnection(connection);
+			users.add(newUser);
+			createConnectionRepository(newUser.getUserId()).addConnection(
+					connection);
 		}
 
-		if (connectionSignUp != null) {
-			String newUserId = connectionSignUp.execute(connection);
-			if (newUserId == null)
-				// auto signup failed, so we need to go to a sign up form
-				return usrs;
-			createConnectionRepository(newUserId).addConnection(connection);
-			usrs.add(newUserId);
-		}
-		// if empty we should go to the sign up form
-		return usrs;
+		return Lists.newArrayList(Collections2.transform(users,
+				new SocialUserToId()));
 	}
 
 	public void setSocialUserDAO(SocialUserDAO socialUserDAO) {
@@ -92,17 +85,8 @@ public class SocialUserConnectionDAO implements UsersConnectionRepository {
 		return connectionFactoryLocator;
 	}
 
-	/**
-	 * The command to execute to create a new local user profile in the event no
-	 * user id could be mapped to a connection. Allows for implicitly creating a
-	 * user profile from connection data during a provider sign-in attempt.
-	 * Defaults to null, indicating explicit sign-up will be required to
-	 * complete the provider sign-in attempt.
-	 * 
-	 * @see #findUserIdWithConnection(Connection)
-	 */
-	public void setConnectionSignUp(ConnectionSignUp connectionSignUp) {
-		this.connectionSignUp = connectionSignUp;
+	public void setSocialUserService(SocialUserService socialUserService) {
+		this.socialUserService = socialUserService;
 	}
 
 	private class SocialUserToId implements Function<SocialUser, String> {

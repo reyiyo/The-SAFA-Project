@@ -52,8 +52,8 @@ public class SafaUserDetailsService implements UserDetailsService,
 
 	private UserDetails createWebUser(User user) {
 		return new org.springframework.security.core.userdetails.User(
-				user.getUsername(), "", user.getIsLocked(),
-				user.getIsLocked(), user.getIsLocked(), user.getIsLocked(),
+				user.getUsername(), "", user.getIsLocked(), user.getIsLocked(),
+				user.getIsLocked(), user.getIsLocked(),
 				getGrantedAuthorities(user));
 	}
 
@@ -81,8 +81,8 @@ public class SafaUserDetailsService implements UserDetailsService,
 			final Map<String, OpenIDAttribute> attributes) {
 
 		User user = new User(openIdUrl, attributes.get(USERNAME).getValues()
-				.get(0), "null@null.com", new HashSet<Role>(Arrays.asList(roleDAO
-				.getDefaultRole())));
+				.get(0), "null@null.com", new HashSet<Role>(
+				Arrays.asList(roleDAO.getDefaultRole())));
 
 		userDAO.save(user);
 

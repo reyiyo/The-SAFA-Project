@@ -2,7 +2,7 @@ package org.safaproject.safa.dao;
 
 import static org.junit.Assert.assertEquals;
 
-import javax.validation.ConstraintViolationException;
+import javax.persistence.PersistenceException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -139,7 +139,7 @@ public class TagTypeDAOTest {
 
 	}
 
-	@Test(expected = ConstraintViolationException.class)
+	@Test(expected = PersistenceException.class)
 	public void shallFailBecauseOfNullDataType() {
 		TagType tagType = new TagType();
 		tagType.setTagName("Career");

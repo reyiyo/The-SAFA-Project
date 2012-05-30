@@ -6,7 +6,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 /**
  * This class defines the type of a tag.
@@ -27,9 +26,8 @@ public class TagType {
 	@Column(name = "tagName")
 	private String tagName;
 
-	@Column(name = "tagDataType")
+	@Column(name = "tagDataType", nullable = false)
 	@Enumerated(EnumType.STRING)
-	@NotNull
 	private TagDataTypes tagDataType;
 
 	public TagType() {

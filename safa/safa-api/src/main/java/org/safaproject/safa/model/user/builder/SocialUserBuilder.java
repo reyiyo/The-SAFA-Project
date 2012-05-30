@@ -1,8 +1,11 @@
 package org.safaproject.safa.model.user.builder;
 
 import java.util.Date;
+import java.util.Set;
 
+import org.safaproject.safa.model.user.Role;
 import org.safaproject.safa.model.user.SocialUser;
+import org.safaproject.safa.model.user.UserProfile;
 
 public class SocialUserBuilder {
 
@@ -30,6 +33,12 @@ public class SocialUserBuilder {
 
 	private Date createDate = new Date();
 
+	private Set<Role> roles;
+
+	private UserProfile profile;
+
+	private Boolean locked;
+
 	public SocialUserBuilder withUserId(String userId) {
 		this.userId = userId;
 		return this;
@@ -39,7 +48,7 @@ public class SocialUserBuilder {
 		this.providerUserId = providerUserId;
 		return this;
 	}
-	
+
 	public SocialUserBuilder withProviderId(String providerId) {
 		this.providerId = providerId;
 		return this;
@@ -90,10 +99,25 @@ public class SocialUserBuilder {
 		return this;
 	}
 
+	public SocialUserBuilder withRoles(Set<Role> roles) {
+		this.roles = roles;
+		return this;
+	}
+
+	public SocialUserBuilder withProfile(UserProfile profile) {
+		this.profile = profile;
+		return this;
+	}
+
+	public SocialUserBuilder withLocked(Boolean locked) {
+		this.locked = locked;
+		return this;
+	}
+
 	public SocialUser build() {
 		return new SocialUser(userId, providerId, providerUserId, rank,
 				displayName, profileUrl, imageUrl, accessToken, secret,
-				refreshToken, expireTime, createDate);
+				refreshToken, expireTime, createDate, roles, profile, locked);
 	}
 
 }

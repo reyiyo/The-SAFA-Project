@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 
+import org.safaproject.safa.dao.RoleDAO;
 import org.safaproject.safa.dao.SocialUserDAO;
 import org.safaproject.safa.model.user.SocialUser;
 import org.safaproject.safa.model.user.builder.SocialUserBuilder;
@@ -25,10 +26,15 @@ import org.springframework.social.connect.NotConnectedException;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+import com.google.common.collect.Sets;
+
 public class ConnectionDAO implements ConnectionRepository {
 
 	@Inject
 	private SocialUserDAO socialUserDAO;
+
+	@Inject
+	private RoleDAO roleDAO;
 
 	private final String userId;
 
@@ -63,7 +69,9 @@ public class ConnectionDAO implements ConnectionRepository {
 					.withAccessToken(encrypt(data.getAccessToken()))
 					.withSecret(encrypt(data.getSecret()))
 					.withRefreshToken(encrypt(data.getRefreshToken()))
-					.withExpireTime(data.getExpireTime()).build());
+					.withExpireTime(data.getExpireTime())
+					.withRoles(Sets.newHashSet(roleDAO.getDefaultRole()))
+					.withLocked(false).build());
 
 		} catch (PersistenceException e) {
 			throw new DuplicateConnectionException(connection.getKey());
@@ -248,6 +256,10 @@ public class ConnectionDAO implements ConnectionRepository {
 
 	public void setSocialUserDAO(SocialUserDAO socialUserDAO) {
 		this.socialUserDAO = socialUserDAO;
+	}
+
+	public void setRoleDAO(RoleDAO roleDAO) {
+		this.roleDAO = roleDAO;
 	}
 
 	private final class ServiceProviderConnectionMapper {
