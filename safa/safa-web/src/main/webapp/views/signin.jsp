@@ -72,5 +72,14 @@ body {
 	</form>
 	<!-- /Simple OpenID Selector -->
 
+	<p>Or login with Facebook :)</p>
+
+	<form id="fb_signin" action="<c:url value="/signin/facebook"/>"	method="POST">
+		<input type="hidden" name="scope" value="publish_stream,offline_access">
+			<a href="javascript:document.forms.fb_signin.submit()" title="Log In With Facebook">
+				<img src="<c:url value="/images/facebook.gif"/>" width="14" height="14" />
+			</a>
+	</form>
+
 </body>
 </html>

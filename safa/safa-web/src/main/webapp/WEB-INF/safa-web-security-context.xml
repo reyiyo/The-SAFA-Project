@@ -10,13 +10,16 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-    <http pattern="/safa/auth/*" security="none" />
+    <!-- <http pattern="/safa/auth/*" security="none" />
+    <http pattern="/signin/*" security="none" />
+    <http pattern="/signup/*" security="none" />
     <http pattern="/images/*" security="none" />
     <http pattern="/css/*" security="none" />
-    <http pattern="/js/*" security="none" />
+    <http pattern="/js/*" security="none" /> -->
 
-    <http>
+    <!-- <http>
         <intercept-url pattern="/**" access="ROLE_USER"/>
+        <intercept-url pattern="/connect/**" access="IS_AUTHENTICATED_REMEMBERED" />
         <logout/>
         <openid-login login-page="/safa/auth/login" user-service-ref="registeringUserService"
                 authentication-failure-url="/safa/auth/login?login_error=true" default-target-url="/safa/main/index" >
@@ -42,9 +45,25 @@
 
     <authentication-manager alias="authenticationManager"/>
 
-<!--
+
     A custom UserDetailsService which will allow any user to authenticate and "register" their IDs in an internal map
     for use if they return to the site. This is the most common usage pattern for sites which use OpenID.
- -->
-    <b:bean id="registeringUserService" class="org.safaproject.safa.web.security.SafaUserDetailsService" />
+
+    <b:bean id="registeringUserService" class="org.safaproject.safa.web.security.SafaUserDetailsService" /> -->
+    
+    <authentication-manager alias="authenticationManager"/>
+    
+    <http use-expressions="true">
+		<!-- Authentication policy -->
+		<form-login login-page="/signin" login-processing-url="/signin/authenticate" authentication-failure-url="/signin?param.error=bad_credentials" />
+		<logout logout-url="/signout" delete-cookies="JSESSIONID" />
+		<intercept-url pattern="/safa/auth/**" access="permitAll" />
+		<intercept-url pattern="/css/**" access="permitAll" />
+		<intercept-url pattern="/js/**" access="permitAll" />
+		<intercept-url pattern="/images/**" access="permitAll" />
+		<intercept-url pattern="/signin/**" access="permitAll" />
+		<intercept-url pattern="/signup/**" access="permitAll" />
+		<intercept-url pattern="/disconnect/facebook" access="permitAll" />
+		<intercept-url pattern="/**" access="isAuthenticated()"  />
+	</http>
 </b:beans>

@@ -13,10 +13,14 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 
 	<!-- Scans the classpath of this application for @Components to deploy as 
 		beans -->
-	<context:component-scan base-package="org.safaproject.safa.web" />
+	<context:component-scan
+		base-package="org.safaproject.safa.web, org.safaproject.safa.social.config" />
 
 	<!-- Activates various annotations to be detected in bean classes -->
 	<context:annotation-config />
+
+	<context:property-placeholder
+		location="WEB-INF/web-config.properties, classpath:hsql.properties" />
 
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven>
@@ -38,6 +42,18 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 		<property name="prefix" value="/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+
+	<bean class="org.springframework.social.connect.web.ConnectController">
+		<property name="applicationUrl" value="${site.url}" />
+	</bean>
+
+	<bean class="org.springframework.social.connect.web.ProviderSignInController">
+		<property name="applicationUrl" value="${site.url}" />
+		<property name="signUpUrl" value="/signup" />
+		<property name="signInUrl" value="/signin" />
+	</bean>
+
+	<bean id="signInAdapter" class="org.safaproject.safa.web.security.SignInAdapterImpl" />
 
 	<jdbc:initialize-database data-source="dataSource">
 		<jdbc:script location="WEB-INF/scripts/initdb.sql" />

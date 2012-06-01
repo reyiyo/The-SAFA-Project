@@ -10,7 +10,9 @@ import org.safaproject.safa.model.user.SocialUser;
 import org.safaproject.safa.social.exception.UserNotFoundException;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
+import org.springframework.stereotype.Service;
 
+@Service("socialUserService")
 public class SocialUserServiceImpl implements SocialUserService {
 
 	@Inject
