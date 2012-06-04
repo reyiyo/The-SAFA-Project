@@ -3,11 +3,10 @@ package org.safaproject.safa.social.dao;
 import java.util.List;
 import java.util.Set;
 
-import javax.inject.Inject;
-
 import org.safaproject.safa.dao.SocialUserDAO;
 import org.safaproject.safa.model.user.SocialUser;
 import org.safaproject.safa.social.service.SocialUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
@@ -22,14 +21,14 @@ import com.google.common.collect.Sets;
 
 public class SocialUserConnectionDAO implements UsersConnectionRepository {
 
-	@Inject
+	@Autowired
 	private SocialUserDAO socialUserDAO;
 
 	private final ConnectionFactoryLocator connectionFactoryLocator;
 
 	private final TextEncryptor textEncryptor;
 
-	@Inject
+	@Autowired
 	private SocialUserService socialUserService;
 
 	public SocialUserConnectionDAO(
