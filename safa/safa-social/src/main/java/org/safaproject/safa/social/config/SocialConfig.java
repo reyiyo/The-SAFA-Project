@@ -7,6 +7,7 @@ import org.safaproject.safa.dao.SocialUserDAO;
 import org.safaproject.safa.social.dao.ConnectionDAO;
 import org.safaproject.safa.social.dao.SocialUserConnectionDAO;
 import org.safaproject.safa.social.service.SocialUserService;
+import org.safaproject.safa.social.service.URLFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
@@ -30,7 +31,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ComponentScan(basePackages = "org.safaproject.safa.social", excludeFilters = { @Filter(Configuration.class) })
-@PropertySource("classpath:application.properties")
+@PropertySource(value={"classpath:application.properties","classpath:urls.properties"})
 @EnableTransactionManagement
 public class SocialConfig {
 
@@ -46,6 +47,14 @@ public class SocialConfig {
 	@Inject
 	private RoleDAO roleDAO;
 
+	@Bean
+	public URLFactory urlFactory() {
+		URLFactory urlFactory = new URLFactory();
+		urlFactory.setDomain(environment.getProperty("url.domain"));
+		urlFactory.setContentTemplate(environment.getProperty("url.contentTemplate"));
+		return urlFactory;
+	}
+	
 	@Bean
 	public ConnectionFactoryLocator connectionFactoryLocator() {
 		ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
@@ -85,5 +94,20 @@ public class SocialConfig {
 		Connection<Facebook> facebook = connectionRepository().findPrimaryConnection(Facebook.class);
 		return facebook != null ? facebook.getApi() : new FacebookTemplate();
 	}
+/*	
+ * Future implementation.
+	@Bean
+	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	
+	public Twitter twitter() {
+		Connection<Twitter> twitter = connectionRepository().findPrimaryConnection(Twitter.class);
+		return twitter != null ? twitter.getApi() : new TwitterTemplate();
+	}
 
+	@Bean
+	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	
+	public LinkedIn linkedin() {
+		Connection<LinkedIn> linkedin = connectionRepository().findPrimaryConnection(LinkedIn.class);
+		return linkedin != null ? linkedin.getApi() : null;
+	}
+*/
 }
