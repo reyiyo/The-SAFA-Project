@@ -75,6 +75,11 @@
 	</repositories>
 	<dependencies>
 		<dependency>
+			<groupId>org.safaproject</groupId>
+			<artifactId>safa-api</artifactId>
+			<version>${safa-api.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.grails</groupId>
 			<artifactId>grails-bootstrap</artifactId>
 			<version>${grails.version}</version>
@@ -171,14 +176,6 @@
 				</exclusion>
 				<exclusion>
 					<artifactId>hibernate</artifactId>
-					<groupId>org.hibernate</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>hibernate-annotations</artifactId>
-					<groupId>org.hibernate</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>hibernate-commons-annotations</artifactId>
 					<groupId>org.hibernate</groupId>
 				</exclusion>
 				<exclusion>

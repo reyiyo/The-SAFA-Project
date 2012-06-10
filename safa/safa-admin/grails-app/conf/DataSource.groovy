@@ -1,4 +1,6 @@
+import org.codehaus.groovy.grails.orm.hibernate.cfg.GrailsAnnotationConfiguration
 dataSource {
+	configClass = GrailsAnnotationConfiguration.class
     pooled = true
     driverClassName = "org.hsqldb.jdbcDriver"
     username = "sa"
