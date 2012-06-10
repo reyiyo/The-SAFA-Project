@@ -8,6 +8,7 @@ import org.safaproject.safa.social.dao.ConnectionDAO;
 import org.safaproject.safa.social.dao.SocialUserConnectionDAO;
 import org.safaproject.safa.social.service.SocialUserService;
 import org.safaproject.safa.social.service.URLFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
@@ -38,13 +39,13 @@ public class SocialConfig {
 	@Inject
 	private Environment environment;
 
-	@Inject
+	@Autowired
 	private SocialUserService socialUserService;
 
-	@Inject
+	@Autowired
 	private SocialUserDAO socialUserDAO;
 
-	@Inject
+	@Autowired
 	private RoleDAO roleDAO;
 
 	@Bean
