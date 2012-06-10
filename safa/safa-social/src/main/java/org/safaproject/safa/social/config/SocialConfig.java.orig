@@ -7,7 +7,11 @@ import org.safaproject.safa.dao.SocialUserDAO;
 import org.safaproject.safa.social.dao.ConnectionDAO;
 import org.safaproject.safa.social.dao.SocialUserConnectionDAO;
 import org.safaproject.safa.social.service.SocialUserService;
+<<<<<<< HEAD
+import org.springframework.beans.factory.annotation.Autowired;
+=======
 import org.safaproject.safa.social.service.URLFactory;
+>>>>>>> Social facebook initial commit
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
