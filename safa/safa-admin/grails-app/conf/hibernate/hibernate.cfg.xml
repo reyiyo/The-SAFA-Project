@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<mapping class="org.safaproject.safa.model.content.Comment" />
+		<mapping class="org.safaproject.safa.model.content.Content" />
+		<mapping class="org.safaproject.safa.model.indicator.Indicator" />
+		<mapping class="org.safaproject.safa.model.tag.TagType" />
+		<mapping class="org.safaproject.safa.model.tag.TagRequest" />
+		<mapping class="org.safaproject.safa.model.user.Role" />
+		<mapping class="org.safaproject.safa.model.tag.Tag" />
+		<mapping class="org.safaproject.safa.model.indicator.IndicatorType" />
+		<mapping class="org.safaproject.safa.model.content.Resource" />
+		<mapping class="org.safaproject.safa.model.user.User" />
+		<mapping class="org.safaproject.safa.model.user.UserProfile" />
+		<mapping class="org.safaproject.safa.model.indicator.Vote" />
+		<mapping class="org.safaproject.safa.model.tag.TagDataTypes" />
+	</session-factory>
+</hibernate-configuration>
