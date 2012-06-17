@@ -49,20 +49,6 @@ public class TagTypeDAOTest {
 	}
 
 	@Test
-	public void shallFindByExample() {
-		TagType tagType = new TagTypeBuilder().withTagName("University")
-				.withTagDataType(TagDataTypes.STRING).build();
-		tagTypeDAO.save(tagType);
-
-		TagType example = new TagType();
-		example.setTagName("University");
-
-		TagType tagTypeFromDB = tagTypeDAO.findByExample(example).get(0);
-
-		assertEquals(tagType, tagTypeFromDB);
-	}
-
-	@Test
 	public void shallGetTagsTypeCount() {
 		TagType tagType1 = new TagTypeBuilder().withTagName("University")
 				.withTagDataType(TagDataTypes.STRING).build();
@@ -73,24 +59,6 @@ public class TagTypeDAOTest {
 		tagTypeDAO.save(tagType2);
 
 		assertEquals(tagTypeDAO.countAll(), new Long(2));
-	}
-
-	@Test
-	public void shallCountByExample() {
-		TagType tagType1 = new TagTypeBuilder().withTagName("University")
-				.withTagDataType(TagDataTypes.STRING).build();
-		tagTypeDAO.save(tagType1);
-
-		TagType tagType2 = new TagTypeBuilder().withTagName("Exam Date")
-				.withTagDataType(TagDataTypes.DATE).build();
-		tagTypeDAO.save(tagType2);
-
-		TagType example = new TagType();
-
-		example.setTagName("Exam Date");
-		example.setTagDataType(TagDataTypes.STRING);
-
-		assertEquals(tagTypeDAO.countByExample(example), new Long(1));
 	}
 
 	@Test

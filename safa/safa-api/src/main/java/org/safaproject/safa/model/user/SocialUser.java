@@ -1,7 +1,6 @@
 package org.safaproject.safa.model.user;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,17 +9,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "SOCIAL_USER", uniqueConstraints = {
-		@UniqueConstraint(columnNames = { "userId", "providerId",
+		@UniqueConstraint(columnNames = { "socialUserId", "providerId",
 				"providerUserId" }),
-		@UniqueConstraint(columnNames = { "userId", "providerId", "rank" }) })
+		@UniqueConstraint(columnNames = { "socialUserId", "providerId", "rank" }) })
 public class SocialUser {
 
 	public SocialUser() {
@@ -30,9 +27,8 @@ public class SocialUser {
 	public SocialUser(String userId, String providerId, String providerUserId,
 			int rank, String displayName, String profileUrl, String imageUrl,
 			String accessToken, String secret, String refreshToken,
-			Long expireTime, Date createDate, Set<Role> roles,
-			UserProfile profile, Boolean locked) {
-		this.userId = userId;
+			Long expireTime, Date createDate, UserProfile profile, User safaUser) {
+		this.socialUserId = userId;
 		this.providerId = providerId;
 		this.providerUserId = providerUserId;
 		this.rank = rank;
@@ -44,9 +40,8 @@ public class SocialUser {
 		this.refreshToken = refreshToken;
 		this.expireTime = expireTime;
 		this.createDate = createDate;
-		this.roles = roles;
 		this.profile = profile;
-		this.isLocked = locked;
+		this.safaUser = safaUser;
 	}
 
 	@Id
@@ -57,7 +52,7 @@ public class SocialUser {
 	 * A local identifier for the user, in our case the username.
 	 */
 	@Column(nullable = false)
-	private String userId;
+	private String socialUserId;
 
 	/**
 	 * This is the string provider id value, e.g. "facebook", "twitter", etc.
@@ -78,7 +73,7 @@ public class SocialUser {
 	 * user and this value will generally be 1
 	 */
 	@Column(nullable = false)
-	private int rank;
+	private Integer rank;
 
 	/**
 	 * Some profile data field that may or may not be sent to your application
@@ -120,16 +115,13 @@ public class SocialUser {
 
 	private Date createDate = new Date();
 
-	@ManyToMany
-	@JoinTable(name = "SAFA_USER_ROLE")
-	private Set<Role> roles;
-
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "profileId")
 	private UserProfile profile;
 
-	@Column(name = "locked")
-	private Boolean isLocked = false;
+	@ManyToOne
+	@JoinColumn(name = "safaUser")
+	private User safaUser;
 
 	public Long getId() {
 		return id;
@@ -139,12 +131,12 @@ public class SocialUser {
 		this.id = id;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getSocialUserId() {
+		return socialUserId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setSocialUserId(String socialUserId) {
+		this.socialUserId = socialUserId;
 	}
 
 	public String getProviderId() {
@@ -235,14 +227,6 @@ public class SocialUser {
 		this.createDate = createDate;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
 	public UserProfile getProfile() {
 		return profile;
 	}
@@ -251,12 +235,12 @@ public class SocialUser {
 		this.profile = profile;
 	}
 
-	public Boolean getIsLocked() {
-		return isLocked;
+	public void setSafaUser(User safaUser) {
+		this.safaUser = safaUser;
 	}
 
-	public void setIsLocked(Boolean isLocked) {
-		this.isLocked = isLocked;
+	public User getSafaUser() {
+		return safaUser;
 	}
 
 }

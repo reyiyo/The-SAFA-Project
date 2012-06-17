@@ -3,7 +3,9 @@ package org.safaproject.safa.service;
 import org.safaproject.safa.dao.RoleDAO;
 import org.safaproject.safa.model.user.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RoleServiceImpl implements RoleService {
 
 	@Autowired

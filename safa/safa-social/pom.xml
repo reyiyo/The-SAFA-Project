@@ -13,12 +13,13 @@
 	<description>Safa Social Module</description>
 
 	<properties>
-		<spring-social.version>1.0.2.RELEASE</spring-social.version>
-		<spring-social-facebook.version>1.1.0.BUILD-SNAPSHOT</spring-social-facebook.version>
+		<spring-social.version>1.0.0.RELEASE</spring-social.version>
+		<spring-social-facebook.version>1.0.0.RELEASE</spring-social-facebook.version>
+		<spring-social-twitter.version>1.0.0.RELEASE</spring-social-twitter.version>
 		<spring-security-crypto.version>3.1.0.RELEASE</spring-security-crypto.version>
-		<org.springsecurity.version>3.1.0.RC2</org.springsecurity.version>
+		<org.springsecurity.version>3.1.0.RELEASE</org.springsecurity.version>
 	</properties>
-	
+
 	<repositories>
 		<repository>
 			<id>org.springframework.maven.snapshot</id>
@@ -45,7 +46,7 @@
 			<artifactId>safa-server</artifactId>
 			<version>${safa-server.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
@@ -75,6 +76,11 @@
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-facebook</artifactId>
 			<version>${spring-social-facebook.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-twitter</artifactId>
+			<version>${spring-social-twitter.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>

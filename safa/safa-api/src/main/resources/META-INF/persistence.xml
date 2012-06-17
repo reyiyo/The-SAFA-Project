@@ -6,16 +6,17 @@
 		transaction-type="RESOURCE_LOCAL">
 		<class>org.safaproject.safa.model.content.Comment</class>
 		<class>org.safaproject.safa.model.content.Content</class>
-		<class>org.safaproject.safa.model.indicator.Indicator</class>
-		<class>org.safaproject.safa.model.tag.TagType</class>
-		<class>org.safaproject.safa.model.tag.TagRequest</class>
-		<class>org.safaproject.safa.model.user.Role</class>
-		<class>org.safaproject.safa.model.tag.Tag</class>
-		<class>org.safaproject.safa.model.indicator.IndicatorType</class>
 		<class>org.safaproject.safa.model.content.Resource</class>
-		<class>org.safaproject.safa.model.user.User</class>
-		<class>org.safaproject.safa.model.user.UserProfile</class>
+		<class>org.safaproject.safa.model.indicator.Indicator</class>
+		<class>org.safaproject.safa.model.indicator.IndicatorType</class>
 		<class>org.safaproject.safa.model.indicator.Vote</class>
+		<class>org.safaproject.safa.model.tag.Tag</class>
 		<class>org.safaproject.safa.model.tag.TagDataTypes</class>
+		<class>org.safaproject.safa.model.tag.TagRequest</class>
+		<class>org.safaproject.safa.model.tag.TagType</class>
+		<class>org.safaproject.safa.model.user.Role</class>
+		<class>org.safaproject.safa.model.user.User</class>
+		<class>org.safaproject.safa.model.user.SocialUser</class>
+		<class>org.safaproject.safa.model.user.UserProfile</class>
 	</persistence-unit>
 </persistence>

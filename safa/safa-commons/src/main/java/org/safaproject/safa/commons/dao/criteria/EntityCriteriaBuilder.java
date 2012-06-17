@@ -1,4 +1,4 @@
-package org.safaproject.safa.dao.criteria;
+package org.safaproject.safa.commons.dao.criteria;
 
 import java.util.Collection;
 import java.util.Date;
@@ -31,7 +31,7 @@ public class EntityCriteriaBuilder<Entity> {
 	protected Class<Entity> domainClass;
 
 	@SuppressWarnings("unchecked")
-	protected EntityCriteriaBuilder(EntityManager entityManager,
+	public EntityCriteriaBuilder(EntityManager entityManager,
 			Class<Entity> domainClass) {
 		this.entityManager = entityManager;
 		this.domainClass = domainClass;
@@ -151,7 +151,7 @@ public class EntityCriteriaBuilder<Entity> {
 	 * @return <code>CriteriaQuery<<Long>></code> for counting results
 	 */
 	@SuppressWarnings("unchecked")
-	public CriteriaQuery<Long> getQueryForMax(String field) {
+	public CriteriaQuery<Number> getQueryForMax(String field) {
 		Path<Number> path = root.get(field);
 		Expression<Number> maxExpression = criteriaBuilder.max(path);
 		query.select(criteriaBuilder.coalesce(maxExpression, 0));
@@ -176,8 +176,8 @@ public class EntityCriteriaBuilder<Entity> {
 		return q.getSingleResult();
 	}
 
-	protected Long selectMax(String field) {
-		TypedQuery<Long> q = this.entityManager.createQuery(this
+	protected Number selectMax(String field) {
+		TypedQuery<Number> q = this.entityManager.createQuery(this
 				.getQueryForMax(field));
 		return q.getSingleResult();
 	}

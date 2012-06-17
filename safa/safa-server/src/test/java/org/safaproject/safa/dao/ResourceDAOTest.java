@@ -75,38 +75,6 @@ public class ResourceDAOTest {
 	}
 	
 	@Test
-	public void shallFindByExample() {
-		Long size = 10L;
-		String URL = "http://tuvieja.com";
-		Resource testResource = new ResourceBuilder().withDescription("no la toco ni con un palo")
-				.withSize(size).withUrl(URL)
-				.withResourceType(testResourceType).build();
-		resourceDAO.save(testResource);
-		
-		Resource resourceByExample = resourceDAO.findByExample(new ResourceBuilder().withDescription("no la toco ni con un palo")
-				.withSize(size).withUrl(URL)
-				.withResourceType(testResourceType).build()).get(0);
-		
-		Assert.assertEquals(testResource, resourceByExample);
-	}
-	
-	@Test
-	public void shallCountByExample() {
-		Long size = 10L;
-		String URL = "http://tuvieja.com";
-		Resource testResource = new ResourceBuilder().withDescription("no la toco ni con un palo")
-				.withSize(size).withUrl(URL)
-				.withResourceType(testResourceType).build();
-		resourceDAO.save(testResource);
-		
-		Long countByExample = resourceDAO.countByExample(new ResourceBuilder().withDescription("no la toco ni con un palo")
-				.withSize(size).withUrl(URL)
-				.withResourceType(testResourceType).build());
-		
-		Assert.assertEquals(new Long(1), countByExample);
-	}
-	
-	@Test
 	public void shallDeleteResource() {
 		Resource testResource = new ResourceBuilder().withDescription("no la toco ni con un palo")
 				.withSize(10L).withUrl("http://tuvieja.com")

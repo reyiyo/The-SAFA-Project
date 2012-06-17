@@ -1,69 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-  -  Namespace-based OpenID configuration
-  -->
-
-<b:beans xmlns="http://www.springframework.org/schema/security"
-    xmlns:b="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-    <!-- <http pattern="/safa/auth/*" security="none" />
-    <http pattern="/signin/*" security="none" />
-    <http pattern="/signup/*" security="none" />
-    <http pattern="/images/*" security="none" />
-    <http pattern="/css/*" security="none" />
-    <http pattern="/js/*" security="none" /> -->
+	<beans:bean id="userDetailsService"
+		class="org.safaproject.safa.web.security.UserDetailsServiceImpl" />
 
-    <!-- <http>
-        <intercept-url pattern="/**" access="ROLE_USER"/>
-        <intercept-url pattern="/connect/**" access="IS_AUTHENTICATED_REMEMBERED" />
-        <logout/>
-        <openid-login login-page="/safa/auth/login" user-service-ref="registeringUserService"
-                authentication-failure-url="/safa/auth/login?login_error=true" default-target-url="/safa/main/index" >
-            <attribute-exchange identifier-match="https://www.google.com/.*">
-                <openid-attribute name="email" type="http://axschema.org/contact/email" required="true" count="1"/>
-                <openid-attribute name="firstname" type="http://axschema.org/namePerson/first" required="true" />
-                <openid-attribute name="lastname" type="http://axschema.org/namePerson/last" required="true" />
-            </attribute-exchange>
-            <attribute-exchange identifier-match=".*yahoo.com.*">
-                <openid-attribute name="email" type="http://axschema.org/contact/email" required="true"/>
-                <openid-attribute name="fullname" type="http://axschema.org/namePerson" required="true" />
-            </attribute-exchange>
-            <attribute-exchange identifier-match=".*myopenid.com.*">
-                <openid-attribute name="email" type="http://schema.openid.net/contact/email" required="true"/>
-                <openid-attribute name="fullname" type="http://schema.openid.net/namePerson" required="true" />
-            </attribute-exchange>
-        </openid-login>
-        <remember-me token-repository-ref="tokenRepo"/>
-    </http>
+	<!-- need this to fix a bug in spring security 3.0.6 that causes an NPE 
+		when logging out -->
+	<beans:bean id="myLogoutSuccessHandler"
+		class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler">
+		<beans:property name="defaultTargetUrl" value="/" />
+		<beans:property name="alwaysUseDefaultTargetUrl" value="true" />
+	</beans:bean>
 
-    <b:bean id="tokenRepo"
-            class="org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl" />
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="userDetailsService" />
+	</authentication-manager>
 
-    <authentication-manager alias="authenticationManager"/>
+	<http auto-config="true">
+		<intercept-url pattern="/css/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/img/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/js/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/login/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/signup*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/signin/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/connect/**" access="IS_AUTHENTICATED_REMEMBERED" />
+		<intercept-url pattern="/**" access="IS_AUTHENTICATED_REMEMBERED" />
 
+		<form-login authentication-failure-url="/login?loginError=true"
+			login-page="/login" default-target-url="/" />
+		<!--always-use-default-target="true" -->
 
-    A custom UserDetailsService which will allow any user to authenticate and "register" their IDs in an internal map
-    for use if they return to the site. This is the most common usage pattern for sites which use OpenID.
+		<!-- need success handler to fix a bug in spring security 3.0.6 that causes 
+			an NPE when logging out -->
+		<logout logout-url="/logout" invalidate-session="true"
+			success-handler-ref="myLogoutSuccessHandler" />
+		<!--<logout logout-url="/logout" logout-success-url="/"/> -->
 
-    <b:bean id="registeringUserService" class="org.safaproject.safa.web.security.SafaUserDetailsService" /> -->
-    
-    <authentication-manager alias="authenticationManager"/>
-    
-    <http use-expressions="true">
-		<!-- Authentication policy -->
-		<form-login login-page="/signin" login-processing-url="/signin/authenticate" authentication-failure-url="/signin?param.error=bad_credentials" />
-		<logout logout-url="/signout" delete-cookies="JSESSIONID" />
-		<intercept-url pattern="/safa/auth/**" access="permitAll" />
-		<intercept-url pattern="/css/**" access="permitAll" />
-		<intercept-url pattern="/js/**" access="permitAll" />
-		<intercept-url pattern="/images/**" access="permitAll" />
-		<intercept-url pattern="/signin/**" access="permitAll" />
-		<intercept-url pattern="/signup/**" access="permitAll" />
-		<intercept-url pattern="/disconnect/facebook" access="permitAll" />
-		<intercept-url pattern="/**" access="isAuthenticated()"  />
+		<remember-me user-service-ref="userDetailsService" key="springsocialsecuritykey" />
 	</http>
-</b:beans>
+</beans:beans>

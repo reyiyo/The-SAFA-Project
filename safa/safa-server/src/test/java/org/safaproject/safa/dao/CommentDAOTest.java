@@ -30,9 +30,7 @@ public class CommentDAOTest {
 	@Autowired
 	private UserDAO userDao;
 
-	private User testingUser = new UserBuilder().withUsername("Test")
-			.withEmail("test@test.com")
-			.withOpenIDurlToken("http://laputamadre.com").build();
+	private User testingUser = new UserBuilder().withUsername("Test").build();
 
 	@Before
 	public void init() {
@@ -63,65 +61,6 @@ public class CommentDAOTest {
 		commentDao.save(comment2);
 
 		Assert.assertEquals(2, commentDao.findAll().size());
-	}
-
-	@Test
-	public void shallFindByExampleOnUser() {
-		Date date = new Date();
-		Comment comment = new CommentBuilder().withCommentDate(date)
-				.withCommentText("Hello world!").withUser(testingUser).build();
-		commentDao.save(comment);
-
-		Comment commentByExample = commentDao.findByExample(
-				new CommentBuilder().withUser(testingUser)
-						.withCommentDate(date).withCommentText("Hello world!")
-						.build()).get(0);
-
-		Assert.assertEquals(comment, commentByExample);
-	}
-
-	@Test
-	public void shallFindByExampleOnCommentDate() {
-		Date now = new Date();
-		Comment comment = new CommentBuilder().withCommentDate(now)
-				.withCommentText("Hello world!").withUser(testingUser).build();
-		commentDao.save(comment);
-
-		Comment commentByExample = commentDao.findByExample(
-				new CommentBuilder().withCommentText("Hello world!")
-						.withUser(testingUser).withCommentDate(now).build())
-				.get(0);
-
-		Assert.assertEquals(comment, commentByExample);
-	}
-
-	@Test
-	public void shallFindByExampleOnCommentText() {
-		String text = "Hello world!";
-		Date now = new Date();
-		Comment comment = new CommentBuilder().withCommentDate(now)
-				.withCommentText(text).withUser(testingUser).build();
-		commentDao.save(comment);
-
-		Comment commentByExample = commentDao.findByExample(
-				new CommentBuilder().withCommentDate(now).withUser(testingUser)
-						.withCommentText(text).build()).get(0);
-
-		Assert.assertEquals(comment, commentByExample);
-	}
-
-	@Test
-	public void shallCountByExample() {
-		Date now = new Date();
-		Comment comment = new CommentBuilder().withCommentDate(now)
-				.withCommentText("Hello world!").withUser(testingUser).build();
-
-		commentDao.save(comment);
-
-		Long countByExample = commentDao.countByExample(new CommentBuilder()
-				.withUser(testingUser).withCommentDate(now).withCommentText("Hello world!").build());
-
-		Assert.assertEquals(Long.valueOf(1), countByExample);
 	}
 
 	@Test

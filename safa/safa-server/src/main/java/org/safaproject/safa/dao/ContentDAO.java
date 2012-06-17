@@ -2,13 +2,14 @@ package org.safaproject.safa.dao;
 
 import java.util.List;
 
+import org.safaproject.safa.commons.dao.GenericJPADAO;
 import org.safaproject.safa.dao.criteria.ContentCriteriaBuilder;
 import org.safaproject.safa.model.content.Content;
 import org.safaproject.safa.model.tag.Tag;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ContentDAO extends GenericHibernateDAO<Content, Long> {
+public class ContentDAO extends GenericJPADAO<Content, Long> {
 
 	@SuppressWarnings("unchecked")
 	public List<Content> search(List<Tag> tags, Integer firstResult,
@@ -22,7 +23,8 @@ public class ContentDAO extends GenericHibernateDAO<Content, Long> {
 				.setMaxResults(maxResults).getResultList();
 	}
 	
-	public ContentCriteriaBuilder getContentCriteriaBuilder() {
+	@Override
+	public ContentCriteriaBuilder getCriteriaBuilder() {
 		return new ContentCriteriaBuilder(entityManager);
 	}
 }

@@ -1,3 +1,4 @@
+<%@page import="org.safaproject.safa.web.security.UserDetailsImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -24,40 +25,40 @@
 		"orderBy" : "default",
 		"orderDirection" : "DESC"
 	};
-	
+
 	var titleOrder = {
-			"selectedTags" : [ {
-				"tagId" : 1,
-				"tagType" : {
-					"tagDataType" : "STRING",
-					"tagName" : "Universidad"
-				},
-				"value" : "UTN",
-				"iconURL" : ""
-			} ],
-			"firstResult" : 0,
-			"maxResults" : 10,
-			"orderBy" : "title",
-			"orderDirection" : "ASC"
-		};
-	
-	var filterTagRequest = {
+		"selectedTags" : [ {
+			"tagId" : 1,
 			"tagType" : {
 				"tagDataType" : "STRING",
-				"tagName" : "Facultad"
+				"tagName" : "Universidad"
 			},
-			"selectedTags" : [ {
-				"tagId" : 1,
-				"tagType" : {
-					"tagDataType" : "STRING",
-					"tagName" : "Universidad"
-				},
-				"value" : "UTN",
-				"iconURL" : ""
-			} ],
-			"value" : "FR"
-		};
-	
+			"value" : "UTN",
+			"iconURL" : ""
+		} ],
+		"firstResult" : 0,
+		"maxResults" : 10,
+		"orderBy" : "title",
+		"orderDirection" : "ASC"
+	};
+
+	var filterTagRequest = {
+		"tagType" : {
+			"tagDataType" : "STRING",
+			"tagName" : "Facultad"
+		},
+		"selectedTags" : [ {
+			"tagId" : 1,
+			"tagType" : {
+				"tagDataType" : "STRING",
+				"tagName" : "Universidad"
+			},
+			"value" : "UTN",
+			"iconURL" : ""
+		} ],
+		"value" : "FR"
+	};
+
 	function testTagFilter(filterRequest) {
 		$.ajax({
 			url : "../tags/filterTags",
@@ -91,27 +92,35 @@
 </head>
 <body>
 
-	<h1>OpenID Sample Home Page</h1>
 
-	<h1>En este jsp es donde habría que levantar el js de Pablo</h1>
+	<marquee style="font-family: Book Antiqua; color: #FFFFFF"
+		bgcolor="#000080" scrollamount="10">
+		Welcome! <b><%=request.getUserPrincipal().getName()%></b>
+	</marquee>
 
-	<p>Welcome!</p>
+	<h1>The SAFA Project Home Page</h1>
+	<h2>En este jsp es donde habría que levantar el js de Pablo</h2>
 
+
+	<br />
 	<h3>Technical Information</h3>
 	<p>
-		Your principal object is....:
+		Your principal object is:<br />
 		<%=request.getUserPrincipal()%>
 	</p>
 
 	<p>
-		<button onclick="testContenSearch(defaultOrder)">Test Default Content Search!</button>
-		<button onclick="testContenSearch(titleOrder)">Test Simple Order Content Search!</button>
+		<button onclick="testContenSearch(defaultOrder)">Test Default
+			Content Search!</button>
+		<button onclick="testContenSearch(titleOrder)">Test Simple
+			Order Content Search!</button>
 	</p>
 	<p>
-		<button onclick="testTagFilter(filterTagRequest)">Test Tag Filter!</button>
+		<button onclick="testTagFilter(filterTagRequest)">Test Tag
+			Filter!</button>
 	</p>
 	<p>
-		<a href="../../j_spring_security_logout">Logout</a>
+		<a href="../logout">Logout</a>
 	</p>
 </body>
 </html>

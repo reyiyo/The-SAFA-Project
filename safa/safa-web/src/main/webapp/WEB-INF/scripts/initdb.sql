@@ -43,7 +43,7 @@ INSERT INTO RESOURCE (resourceId, url, resourceType, size, description, contentI
 INSERT INTO RESOURCE (resourceId, url, resourceType, size, description, contentId) VALUES (3, 'http://www.mediafire.com/?oum7aa6t5bpscda', 8, 0, 'lalala2', null);
 
 
-INSERT INTO SAFA_USER (userId, urlToken, username, password, email, locked) VALUES (1, 'http://openid.net/elToken', 'LaPosta', '123456', 'reyiyo@gmail.com', false);
+INSERT INTO SAFA_USER (userId, username, password, locked) VALUES (1, 'LaPosta', '123456', false);
 
 DELETE FROM INDICATOR_CONTENT;
 INSERT INTO SAFA_USER_ROLE VALUES(1, 1);

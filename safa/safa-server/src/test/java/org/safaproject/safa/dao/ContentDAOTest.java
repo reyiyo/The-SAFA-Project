@@ -67,9 +67,7 @@ public class ContentDAOTest {
 	@Autowired
 	private IndicatorDAO indicatorDAO;
 
-	private User testingUser = new UserBuilder().withUsername("Test")
-			.withEmail("test@test.com")
-			.withOpenIDurlToken("http://laputamadre.com").build();
+	private User testingUser = new UserBuilder().withUsername("Test").build();
 
 	private TagType testTagType = new TagTypeBuilder()
 			.withTagName("Resource Type").withTagDataType(TagDataTypes.STRING)
@@ -192,53 +190,6 @@ public class ContentDAOTest {
 	}
 
 	@Test
-	public void shallFindByExample() {
-		String title = "Design Patterns";
-		String desc = "Desc";
-		Date date = new Date();
-		Content content = new ContentBuilder()
-				.withAvailable(true)
-				.withDescription(desc)
-				.withReviewed(true)
-				.withTitle(title)
-				.withUploadDate(date)
-				.withResources(
-						new HashSet<Resource>(Arrays.asList(testResource)))
-				.withThumbnail(testResource).withUser(testingUser).build();
-		contentDao.save(content);
-
-		Content contentByExample = contentDao.findByExample(
-				new ContentBuilder().withUploadDate(date).withTitle(title)
-						.withDescription(desc).withReviewed(true)
-						.withAvailable(true).build()).get(0);
-
-		Assert.assertEquals(content, contentByExample);
-	}
-
-	@Test
-	public void shallCountByExample() {
-		String title = "Design Patterns";
-		String desc = "Desc";
-		Date date = new Date();
-		contentDao.save(new ContentBuilder()
-				.withAvailable(true)
-				.withDescription(desc)
-				.withReviewed(true)
-				.withTitle(title)
-				.withUploadDate(date)
-				.withThumbnail(testResource)
-				.withResources(
-						new HashSet<Resource>(Arrays.asList(testResource)))
-				.withUser(testingUser).build());
-
-		Long countByExample = contentDao.countByExample(new ContentBuilder()
-				.withTitle(title).withDescription(desc).withReviewed(true)
-				.withUploadDate(date).withAvailable(true).build());
-
-		Assert.assertEquals(Long.valueOf(1), countByExample);
-	}
-
-	@Test
 	public void shallDeleteContent() {
 		Content content = new ContentBuilder()
 				.withAvailable(true)
@@ -325,18 +276,18 @@ public class ContentDAOTest {
 		contentDao.save(content);
 
 		Assert.assertEquals(1,
-				contentDao.getContentCriteriaBuilder().withTag(utn).list()
+				contentDao.getCriteriaBuilder().withTag(utn).list()
 						.size());
 
 		Assert.assertEquals(0,
-				contentDao.getContentCriteriaBuilder().withTag(uade).list()
+				contentDao.getCriteriaBuilder().withTag(uade).list()
 						.size());
 
 		content.setTags(new HashSet<Tag>(Arrays.asList(utn, uade)));
 		contentDao.update(content);
 
 		Assert.assertEquals(1,
-				contentDao.getContentCriteriaBuilder().withTag(utn).list()
+				contentDao.getCriteriaBuilder().withTag(utn).list()
 						.size());
 	}
 

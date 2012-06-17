@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+
+	<!-- Configures the @Controller programming model -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean
+				class="org.safaproject.safa.web.jackson.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper">
+					<bean class="org.safaproject.safa.web.jackson.HibernateAwareObjectMapper" />
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/js/**" location="/js/" />
+	<mvc:resources mapping="/images/**" location="/images/" />
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="handlerExceptionResolver"
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="Exception">error</prop>
+			</props>
+		</property>
+	</bean>
+
+	<mvc:view-controller path="/login" view-name="login" />
+
+	<bean class="org.springframework.social.connect.web.ConnectController">
+		<!-- relies on by-type autowiring for the constructor-args -->
+		<property name="applicationUrl" value="${site.url}" />
+	</bean>
+
+	<bean class="org.springframework.social.connect.web.ProviderSignInController">
+		<!-- relies on by-type autowiring for the constructor-args -->
+		<property name="applicationUrl" value="${site.url}" />
+		<property name="signInUrl" value="/login" />
+	</bean>
+
+	<bean id="signInAdapter" class="org.safaproject.safa.web.security.SignInAdapterImpl" />
+</beans>

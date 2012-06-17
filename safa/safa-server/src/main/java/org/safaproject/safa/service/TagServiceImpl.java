@@ -7,8 +7,10 @@ import org.safaproject.safa.dao.TagTypeDAO;
 import org.safaproject.safa.model.tag.Tag;
 import org.safaproject.safa.model.tag.TagType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class TagServiceImpl implements TagService {
 
 	@Autowired
@@ -29,7 +31,7 @@ public class TagServiceImpl implements TagService {
 	public List<Tag> filterTags(TagType tagType, List<Tag> selectedTags,
 			String value) {
 
-		return tagDAO.getTagCriteriaBuilder().withTagType(tagType)
+		return tagDAO.getCriteriaBuilder().withTagType(tagType)
 				.withValueLike(value).list();
 	}
 

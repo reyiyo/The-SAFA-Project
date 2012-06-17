@@ -62,26 +62,6 @@ public class IndicatorDAOTest {
 	}
 	
 	@Test
-	public void shallFindByExample() {
-		Indicator indicator = new IndicatorBuilder().withIndicatorType(indicatorType).withValue(8).build();
-		indicatorDAO.save(indicator);
-
-		Indicator indicatorByExample = indicatorDAO.findByExample(new IndicatorBuilder().withIndicatorType(indicatorType).withValue(8).build()).get(0);
-		
-		Assert.assertEquals(indicator, indicatorByExample);
-	}
-	
-	@Test
-	public void shallCountByExample() {
-		Indicator indicator = new IndicatorBuilder().withIndicatorType(indicatorType).withValue(8).build();
-		indicatorDAO.save(indicator);
-
-		Long countByExample = indicatorDAO.countByExample(new IndicatorBuilder().withIndicatorType(indicatorType).withValue(8).build());
-		
-		Assert.assertEquals(new Long(1), countByExample);
-	}
-	
-	@Test
 	public void shallDeleteIndicator() {
 		Indicator indicator = new IndicatorBuilder().withIndicatorType(indicatorType).withValue(8).build();
 		Indicator indicator2 = new IndicatorBuilder().withIndicatorType(indicatorType).withValue(9).build();

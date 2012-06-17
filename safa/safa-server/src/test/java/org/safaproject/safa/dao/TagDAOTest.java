@@ -66,43 +66,6 @@ public class TagDAOTest {
 	}
 
 	@Test
-	public void shallFindByExample() {
-		tagDAO.save(new TagBuilder().withValue("Lidia Capurro")
-				.withTagType(teacher).build());
-
-		tagDAO.save(new TagBuilder().withValue("2010/01/01")
-				.withTagType(examDate).build());
-
-		Tag example = new TagBuilder().withValue("Lidia Capurro").withTagType(teacher).build();
-
-		/**
-		 * NOTE: findByExample does NOT take into account relationships. It only
-		 * looks for basic data fields. For example, this will NOT work as
-		 * expected: example.setTagType(tagTypeDAO.findById("Teacher"));
-		 */
-		assertEquals(1, tagDAO.findByExample(example).size());
-	}
-
-	@Test
-	public void shallCountByExample() {
-		tagDAO.save(new TagBuilder().withValue("Lidia Capurro")
-				.withTagType(teacher).build());
-
-		tagDAO.save(new TagBuilder().withValue("2010/01/01")
-				.withTagType(examDate).build());
-
-		Tag example = new TagBuilder().withValue("Lidia Capurro").withTagType(teacher).build();
-
-		/**
-		 * NOTE: countByExample does NOT take into account relationships. It
-		 * only looks for basic data fields. For example, this will NOT work as
-		 * expected: example.setTagType(tagTypeDAO.findById("Teacher"));
-		 */
-
-		assertEquals(Long.valueOf(1), tagDAO.countByExample(example));
-	}
-
-	@Test
 	public void shallDeleteTag() {
 		Tag tag1 = new TagBuilder().withValue("Lidia Capurro")
 				.withTagType(teacher).build();

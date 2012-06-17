@@ -2,6 +2,7 @@ package org.safaproject.safa.dao.criteria;
 
 import javax.persistence.EntityManager;
 
+import org.safaproject.safa.commons.dao.criteria.EntityCriteriaBuilder;
 import org.safaproject.safa.model.tag.Tag;
 import org.safaproject.safa.model.tag.TagType;
 

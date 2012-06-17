@@ -1,9 +1,11 @@
-package org.safaproject.safa.dao;
+package org.safaproject.safa.commons.dao;
 
 import java.io.Serializable;
 
 import java.util.List;
 import java.util.Map;
+
+import org.safaproject.safa.commons.dao.criteria.EntityCriteriaBuilder;
 
 /**
  * Generic Repository, providing basic CRUD operations
@@ -39,20 +41,6 @@ public interface GenericDAO<T, ID extends Serializable> {
 	List<T> findAll();
 
 	/**
-	 * Find entities based on an example
-	 * 
-	 * 
-	 * NOTE: findByExample does NOT take into account relationships. It only
-	 * looks for basic data fields. For example, this will NOT work as expected:
-	 * example.setTagType(tagTypeDAO.findById("Teacher"));
-	 * 
-	 * @param exampleInstance
-	 *            the example
-	 * @return the list of entities
-	 */
-	List<T> findByExample(T exampleInstance);
-
-	/**
 	 * Find using a named query
 	 * 
 	 * @param queryName
@@ -78,24 +66,11 @@ public interface GenericDAO<T, ID extends Serializable> {
 			Map<String, ? extends Object> params);
 
 	/**
-	 * Counts all entities
+	 * Performs a count operation on the query results
 	 * 
-	 * @return the number of entities
+	 * @return Long the number of hits that match the query
 	 */
 	Long countAll();
-
-	/**
-	 * Count entities based on an example
-	 * 
-	 * NOTE: countByExample does NOT take into account relationships. It only
-	 * looks for basic data fields. For example, this will NOT work as expected:
-	 * example.setTagType(tagTypeDAO.findById("Teacher"));
-	 * 
-	 * @param exampleInstance
-	 *            the search criteria
-	 * @return the number of entities
-	 */
-	Long countByExample(T exampleInstance);
 
 	/**
 	 * Saves a NEW entity.
@@ -123,5 +98,12 @@ public interface GenericDAO<T, ID extends Serializable> {
 	 *            the entity to delete
 	 */
 	T update(T entity);
+
+	/**
+	 * Returns the concrete EntityCriteriaBuilder for each domain object
+	 * 
+	 * @return A builder that extends EntityCriteriaBuilder
+	 */
+	EntityCriteriaBuilder<T> getCriteriaBuilder();
 
 }

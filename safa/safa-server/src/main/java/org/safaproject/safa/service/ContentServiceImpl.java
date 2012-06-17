@@ -9,7 +9,9 @@ import org.safaproject.safa.model.content.OrderDirections;
 import org.safaproject.safa.model.tag.Tag;
 import org.safaproject.safa.service.search.SearchStrategyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ContentServiceImpl implements ContentService {
 
 	@Autowired

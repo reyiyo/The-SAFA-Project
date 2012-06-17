@@ -45,20 +45,6 @@ public class RoleDAOTest {
 	}
 	
 	@Test
-	public void shallFindByExample() {
-		Role role = new Role();
-		role.setName("ADMIN");
-		roleDAO.save(role);
-		
-		Role example = new Role();
-		example.setName("ADMIN");
-
-		Role roleFromDB = roleDAO.findByExample(example).get(0);
-
-		assertEquals(role, roleFromDB);
-	}
-	
-	@Test
 	public void shallGetRoleCount() {
 		Role role = new Role();
 		role.setName("ADMIN");
@@ -69,22 +55,6 @@ public class RoleDAOTest {
 		roleDAO.save(role2);
 
 		assertEquals(roleDAO.countAll(), new Long(2));
-	}
-	
-	@Test
-	public void shallCountByExample() {
-		Role role = new Role();
-		role.setName("ADMIN");
-		roleDAO.save(role);
-
-		Role role2 = new Role();
-		role2.setName("USER");
-		roleDAO.save(role2);
-		
-		Role example = new Role();
-		example.setName("ADMIN");
-
-		assertEquals(roleDAO.countByExample(example), new Long(1));
 	}
 	
 	@Test

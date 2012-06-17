@@ -37,7 +37,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-openid</artifactId>
+			<artifactId>spring-security-config</artifactId>
 			<version>${org.springsecurity.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
@@ -50,10 +50,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
+			<artifactId>spring-security-taglibs</artifactId>
 			<version>${org.springsecurity.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework</groupId>

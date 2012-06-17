@@ -13,51 +13,18 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 
 	<!-- Scans the classpath of this application for @Components to deploy as 
 		beans -->
-	<context:component-scan
-		base-package="org.safaproject.safa.web, org.safaproject.safa.social.config" />
+	<context:component-scan base-package="org.safaproject.safa.web" />
 
 	<!-- Activates various annotations to be detected in bean classes -->
 	<context:annotation-config />
 
 	<context:property-placeholder
-		location="WEB-INF/web-config.properties, classpath:hsql.properties" />
-
-	<!-- Configures the @Controller programming model -->
-	<mvc:annotation-driven>
-		<mvc:message-converters>
-			<bean
-				class="org.safaproject.safa.web.jackson.MappingJackson2HttpMessageConverter">
-				<property name="objectMapper">
-					<bean class="org.safaproject.safa.web.jackson.HibernateAwareObjectMapper" />
-				</property>
-			</bean>
-		</mvc:message-converters>
-	</mvc:annotation-driven>
-	
-	<mvc:resources mapping="/css/**" location="/css/" />
-	<mvc:resources mapping="/js/**" location="/js/" />
-	<mvc:resources mapping="/images/**" location="/images/" />
+		location="WEB-INF/web-config.properties, classpath:hsql.properties, classpath:social.properties" />
 
 	<import resource="classpath:safa-server-applicationContext.xml" />
+	<import resource="classpath:safa-social-applicationContext.xml" />
+	<import resource="safa-web-mvc-context.xml" />
 	<import resource="safa-web-security-context.xml" />
-
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/views/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
-
-	<bean class="org.springframework.social.connect.web.ConnectController">
-		<property name="applicationUrl" value="${site.url}" />
-	</bean>
-
-	<bean class="org.springframework.social.connect.web.ProviderSignInController">
-		<property name="applicationUrl" value="${site.url}" />
-		<property name="signUpUrl" value="/signup" />
-		<property name="signInUrl" value="/signin" />
-	</bean>
-
-	<bean id="signInAdapter" class="org.safaproject.safa.web.security.SignInAdapterImpl" />
 
 	<jdbc:initialize-database data-source="dataSource">
 		<jdbc:script location="WEB-INF/scripts/initdb.sql" />

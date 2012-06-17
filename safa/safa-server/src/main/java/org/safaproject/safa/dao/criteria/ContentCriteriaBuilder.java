@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.safaproject.safa.commons.dao.criteria.EntityCriteriaBuilder;
 import org.safaproject.safa.model.content.Content;
 import org.safaproject.safa.model.content.OrderDirections;
 import org.safaproject.safa.model.tag.Tag;

@@ -17,7 +17,7 @@ public class SimpleOrderSearchStrategy extends SearchStrategy {
 	public List<Content> search(List<Tag> selectedTags, Integer firstResult,
 			Integer maxResults, String orderBy, OrderDirections orderDirection) {
 
-		return contentDAO.getContentCriteriaBuilder().withTags(selectedTags)
+		return contentDAO.getCriteriaBuilder().withTags(selectedTags)
 				.orderBy(orderDirection, orderBy).list(firstResult, maxResults);
 	}
 	

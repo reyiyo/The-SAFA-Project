@@ -29,9 +29,7 @@ public class TagRequestBuilderTest {
 
 	@Test(expected = NullPointerException.class)
 	public void shallFailBecauseOfNullContent() {
-		User user = new UserBuilder().withEmail("sarasa@frula.com")
-				.withLocked(true).withOpenIDurlToken("token")
-				.withPassword("password").withUsername("username").build();
+		User user = new UserBuilder().build();
 
 		new TagRequestBuilder().withReason("Reason").withTagName("tagName")
 				.withTagValue("tagValue").withUser(user).build();
@@ -42,9 +40,7 @@ public class TagRequestBuilderTest {
 		Content content = new ContentBuilder().withAvailable(true)
 				.withDescription("Desc").withReviewed(true)
 				.withTitle("Design Patterns").build();
-		User user = new UserBuilder().withEmail("sarasa@frula.com")
-				.withLocked(true).withOpenIDurlToken("token")
-				.withPassword("password").withUsername("username").build();
+		User user = new UserBuilder().withUsername("username").build();
 
 		new TagRequestBuilder().withContent(content).withTagName("tagName")
 				.withTagValue("tagValue").withUser(user).build();
@@ -55,9 +51,7 @@ public class TagRequestBuilderTest {
 		Content content = new ContentBuilder().withAvailable(true)
 				.withDescription("Desc").withReviewed(true)
 				.withTitle("Design Patterns").build();
-		User user = new UserBuilder().withEmail("sarasa@frula.com")
-				.withLocked(true).withOpenIDurlToken("token")
-				.withPassword("password").withUsername("username").build();
+		User user = new UserBuilder().withUsername("username").build();
 
 		new TagRequestBuilder().withContent(content).withReason("Reason")
 				.withTagValue("tagValue").withUser(user).build();
@@ -68,9 +62,7 @@ public class TagRequestBuilderTest {
 		Content content = new ContentBuilder().withAvailable(true)
 				.withDescription("Desc").withReviewed(true)
 				.withTitle("Design Patterns").build();
-		User user = new UserBuilder().withEmail("sarasa@frula.com")
-				.withLocked(true).withOpenIDurlToken("token")
-				.withPassword("password").withUsername("username").build();
+		User user = new UserBuilder().withUsername("username").build();
 
 		new TagRequestBuilder().withContent(content).withReason("Reason")
 				.withTagName("tagName").withUser(user).build();

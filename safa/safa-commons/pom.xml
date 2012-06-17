@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>safa-commons</artifactId>
+	<packaging>jar</packaging>
+	<version>${safa-commons.version}</version>
+	<name>Safa Commons</name>
+
+	<parent>
+		<artifactId>safa</artifactId>
+		<groupId>org.safaproject</groupId>
+		<version>${safa.version}</version>
+	</parent>
+
+	<dependencies>
+		<!-- SAFA DEPENDENCIES -->
+		<dependency>
+			<groupId>org.safaproject</groupId>
+			<artifactId>safa-api</artifactId>
+			<version>${safa-api.version}</version>
+		</dependency>
+		
+		<!-- SPRING DEPENDENCIES -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${org.springframework.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${org.springframework.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+</project>
