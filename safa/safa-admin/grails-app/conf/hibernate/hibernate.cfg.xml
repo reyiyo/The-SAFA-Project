@@ -14,6 +14,7 @@
 		<mapping class="org.safaproject.safa.model.indicator.IndicatorType" />
 		<mapping class="org.safaproject.safa.model.content.Resource" />
 		<mapping class="org.safaproject.safa.model.user.User" />
+		<mapping class="org.safaproject.safa.model.user.SocialUser" />
 		<mapping class="org.safaproject.safa.model.user.UserProfile" />
 		<mapping class="org.safaproject.safa.model.indicator.Vote" />
 		<mapping class="org.safaproject.safa.model.tag.TagDataTypes" />

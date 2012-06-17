@@ -34,7 +34,10 @@
 		<constructor-arg value="#{request.userPrincipal.name}" />
 		<aop:scoped-proxy proxy-target-class="false" />
 	</bean>
-	
-	<!-- <bean class="org.safaproject.safa.social.dao.ConnectionSignUpImpl"/> -->
+
+	<bean id="urlFactory" class="org.safaproject.safa.social.service.URLFactory">
+		<property name="domain" value="${url.domain}" />
+		<property name="contentTemplate" value="url.contentTemplate" />
+	</bean>
 
 </beans>

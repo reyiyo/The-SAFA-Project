@@ -19,7 +19,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	<context:annotation-config />
 
 	<context:property-placeholder
-		location="WEB-INF/web-config.properties, classpath:hsql.properties, classpath:social.properties" />
+		location="WEB-INF/web-config.properties, classpath:hsql.properties, classpath:social.properties, classpath:urls.properties" />
 
 	<import resource="classpath:safa-server-applicationContext.xml" />
 	<import resource="classpath:safa-social-applicationContext.xml" />
