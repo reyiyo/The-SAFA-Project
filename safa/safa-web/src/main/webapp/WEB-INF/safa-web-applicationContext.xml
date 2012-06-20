@@ -27,7 +27,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	<import resource="safa-web-security-context.xml" />
 
 	<jdbc:initialize-database data-source="dataSource">
-		<jdbc:script location="WEB-INF/scripts/initdb.sql" />
+		<jdbc:script location="classpath:scripts/initdb.sql" />
 	</jdbc:initialize-database>
 
 </beans>
