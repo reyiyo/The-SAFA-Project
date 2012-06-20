@@ -26,7 +26,7 @@ public class RoleDAOTest {
 		role.setName("ADMIN");
 		roleDAO.save(role);
 
-		Role roleFromDB = roleDAO.findById(role.getRoleId());
+		Role roleFromDB = roleDAO.findById(role.getId());
 
 		assertEquals(role, roleFromDB);
 	}

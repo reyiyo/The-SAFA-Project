@@ -22,7 +22,7 @@ public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "roleId")
-	private Long roleId;
+	private Long id;
 
 	@Column(name = "name", unique = true, nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -36,12 +36,12 @@ public class Role {
 		this.name = name;
 	}
 
-	public Long getRoleId() {
-		return roleId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setName(String name) {
