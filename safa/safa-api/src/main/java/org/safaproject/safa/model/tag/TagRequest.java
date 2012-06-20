@@ -27,7 +27,7 @@ public class TagRequest {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "tagRequestId")
-	private Long tagRequestId;
+	private Long id;
 
 	@ManyToOne
 	@JoinColumn(name = "userId", nullable = false)
@@ -64,16 +64,16 @@ public class TagRequest {
 	/**
 	 * @return the tagRequestId
 	 */
-	public Long getTagRequestId() {
-		return tagRequestId;
+	public Long getId() {
+		return id;
 	}
 
 	/**
-	 * @param tagRequestId
+	 * @param id
 	 *            the tagRequestId to set
 	 */
-	public void setTagRequestId(Long tagRequestId) {
-		this.tagRequestId = tagRequestId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**

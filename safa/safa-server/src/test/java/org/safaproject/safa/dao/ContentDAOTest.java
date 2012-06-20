@@ -158,7 +158,7 @@ public class ContentDAOTest {
 
 		contentDao.save(content);
 
-		Content contentFromDB = contentDao.findById(content.getContentId());
+		Content contentFromDB = contentDao.findById(content.getId());
 
 		Assert.assertEquals(content, contentFromDB);
 	}

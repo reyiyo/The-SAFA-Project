@@ -22,13 +22,13 @@ public class UserProfile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "profileId")
-	private Long profileId;
+	private Long id;
 
-	public void setProfileId(Long profileId) {
-		this.profileId = profileId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public Long getProfileId() {
-		return profileId;
+	public Long getId() {
+		return id;
 	}
 }

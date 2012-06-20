@@ -54,7 +54,7 @@ public class ResourceDAOTest {
 		
 		resourceDAO.save(testResource);
 		
-		Resource resourceFromDB = resourceDAO.findById(testResource.getResourceId());
+		Resource resourceFromDB = resourceDAO.findById(testResource.getId());
 		
 		Assert.assertEquals(testResource, resourceFromDB);
 	}

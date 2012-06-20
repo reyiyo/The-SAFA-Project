@@ -43,7 +43,7 @@ public class ContentServiceImplTest {
 
 		final Content contentRecieved = contentService.get(id);
 
-		Assert.assertEquals(id, contentRecieved.getContentId());
+		Assert.assertEquals(id, contentRecieved.getId());
 		Assert.assertEquals(content.getDescription(), contentRecieved.getDescription());
 		Assert.assertEquals(content.getTitle(), contentRecieved.getTitle());
 
@@ -73,7 +73,7 @@ public class ContentServiceImplTest {
 				.withThumbnail(thumbnail).withTitle("Titanic")
 				.withUploadDate(new Date()).withUser(new User());
 		final Content content = builder.build();
-		content.setContentId(CONTENT_ID);
+		content.setId(CONTENT_ID);
 		return content;
 	}
 

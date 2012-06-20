@@ -20,7 +20,7 @@ public class Tag {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "tagId")
-	private Long tagId;
+	private Long id;
 
 	@ManyToOne
 	@JoinColumn(name = "tagName", nullable = false)
@@ -50,16 +50,16 @@ public class Tag {
 	/**
 	 * @return the tagId
 	 */
-	public Long getTagId() {
-		return tagId;
+	public Long getId() {
+		return id;
 	}
 
 	/**
-	 * @param tagId
+	 * @param id
 	 *            the tagId to set
 	 */
-	public void setTagId(Long tagId) {
-		this.tagId = tagId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**

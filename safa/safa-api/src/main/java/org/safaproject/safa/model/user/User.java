@@ -29,7 +29,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "userId")
-	private Long userId;
+	private Long id;
 
 	@Pattern(regexp = "^[a-zA-Z0-9]+[\\.\\-_a-zA-Z0-9]+$")
 	@Column(name = "username", unique = true, nullable = false)
@@ -69,16 +69,16 @@ public class User {
 	/**
 	 * @return the userId
 	 */
-	public Long getUserId() {
-		return userId;
+	public Long getId() {
+		return id;
 	}
 
 	/**
-	 * @param userId
+	 * @param id
 	 *            the userId to set
 	 */
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**

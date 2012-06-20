@@ -32,7 +32,7 @@ public class Comment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "commentId")
-	private Long commentId;
+	private Long id;
 
 	@Column(name = "commentDate", nullable = false)
 	private Date commentDate;
@@ -45,12 +45,12 @@ public class Comment {
 	@Size(min = 1, message = "{Comment.commentText.Size}")
 	private String commentText;
 
-	public Long getCommentId() {
-		return commentId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setCommentId(Long commentId) {
-		this.commentId = commentId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Date getCommentDate() {

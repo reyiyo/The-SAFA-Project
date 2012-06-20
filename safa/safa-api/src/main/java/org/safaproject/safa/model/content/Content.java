@@ -33,7 +33,7 @@ public class Content {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "contentId")
-	private Long contentId;
+	private Long id;
 
 	@Column(name = "title", nullable = false)
 	@Size(min = 1, message = "{Content.title.Size}")
@@ -102,16 +102,16 @@ public class Content {
 	/**
 	 * @return the contentId
 	 */
-	public Long getContentId() {
-		return contentId;
+	public Long getId() {
+		return id;
 	}
 
 	/**
-	 * @param contentId
+	 * @param id
 	 *            the contentId to set
 	 */
-	public void setContentId(Long contentId) {
-		this.contentId = contentId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**

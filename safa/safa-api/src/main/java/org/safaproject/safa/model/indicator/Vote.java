@@ -25,7 +25,7 @@ public class Vote {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "voteId")
-	private Long voteId;
+	private Long id;
 
 	@ManyToOne
 	@JoinColumn(name = "userId", nullable = false)
@@ -54,18 +54,18 @@ public class Vote {
 	}
 
 	/**
-	 * @param voteId
+	 * @param id
 	 *            the voteId to set
 	 */
-	public void setVoteId(Long voteId) {
-		this.voteId = voteId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**
 	 * @return the voteId
 	 */
-	public Long getVoteId() {
-		return voteId;
+	public Long getId() {
+		return id;
 	}
 
 	/**

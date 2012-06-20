@@ -12,7 +12,7 @@
 <script>
 	var defaultOrder = {
 		"selectedTags" : [ {
-			"tagId" : 1,
+			"id" : 1,
 			"tagType" : {
 				"tagDataType" : "STRING",
 				"tagName" : "Universidad"
@@ -28,7 +28,7 @@
 
 	var titleOrder = {
 		"selectedTags" : [ {
-			"tagId" : 1,
+			"id" : 1,
 			"tagType" : {
 				"tagDataType" : "STRING",
 				"tagName" : "Universidad"
@@ -48,7 +48,7 @@
 			"tagName" : "Facultad"
 		},
 		"selectedTags" : [ {
-			"tagId" : 1,
+			"id" : 1,
 			"tagType" : {
 				"tagDataType" : "STRING",
 				"tagName" : "Universidad"

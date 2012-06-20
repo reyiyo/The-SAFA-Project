@@ -44,7 +44,7 @@ public class CommentDAOTest {
 
 		commentDao.save(comment);
 
-		Comment commentFromDB = commentDao.findById(comment.getCommentId());
+		Comment commentFromDB = commentDao.findById(comment.getId());
 
 		Assert.assertEquals(comment, commentFromDB);
 	}

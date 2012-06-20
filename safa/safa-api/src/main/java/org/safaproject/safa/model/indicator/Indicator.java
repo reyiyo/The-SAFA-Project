@@ -25,7 +25,7 @@ public class Indicator implements Comparable<Indicator> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "indicatorId")
-	private Long indicatorId;
+	private Long id;
 
 	@ManyToOne
 	@JoinColumn(name = "indicatorName", nullable = false)
@@ -57,16 +57,16 @@ public class Indicator implements Comparable<Indicator> {
 	/**
 	 * @return the indicatorId
 	 */
-	public Long getIndicatorId() {
-		return indicatorId;
+	public Long getId() {
+		return id;
 	}
 
 	/**
-	 * @param indicatorId
+	 * @param id
 	 *            the indicatorId to set
 	 */
-	public void setIndicatorId(Long indicatorId) {
-		this.indicatorId = indicatorId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**

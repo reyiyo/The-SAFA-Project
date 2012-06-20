@@ -27,7 +27,7 @@ public class Resource {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "resourceId")
-	private Long resourceId;
+	private Long id;
 
 	@Column(name = "url", nullable = false)
 	@URL(message = "{Resource.url.Url}")
@@ -61,16 +61,16 @@ public class Resource {
 	/**
 	 * @return the resourceId
 	 */
-	public Long getResourceId() {
-		return resourceId;
+	public Long getId() {
+		return id;
 	}
 
 	/**
-	 * @param resourceId
+	 * @param id
 	 *            the resourceId to set
 	 */
-	public void setResourceId(Long resourceId) {
-		this.resourceId = resourceId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**

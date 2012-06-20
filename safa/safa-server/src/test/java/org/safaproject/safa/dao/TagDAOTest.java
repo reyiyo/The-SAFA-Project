@@ -48,7 +48,7 @@ public class TagDAOTest {
 
 		tagDAO.save(tag);
 
-		Tag tagFromDB = tagDAO.findById(tag.getTagId());
+		Tag tagFromDB = tagDAO.findById(tag.getId());
 
 		assertEquals(tag, tagFromDB);
 	}
@@ -94,9 +94,9 @@ public class TagDAOTest {
 		tag1.setValue("Susana Granado Peralta");
 		tagDAO.save(tag1);
 
-		Tag updated = tagDAO.findById(tag1.getTagId());
+		Tag updated = tagDAO.findById(tag1.getId());
 
-		assertEquals(tag1.getTagId(), updated.getTagId());
+		assertEquals(tag1.getId(), updated.getId());
 		assertEquals(tag1.getTagType(), updated.getTagType());
 		assertEquals(tag1.getValue(), updated.getValue());
 

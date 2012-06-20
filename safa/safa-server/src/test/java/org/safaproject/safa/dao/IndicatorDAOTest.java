@@ -42,7 +42,7 @@ public class IndicatorDAOTest {
 		
 		indicatorDAO.save(indicator);
 		
-		Indicator indicatorFromDB = indicatorDAO.findById(indicator.getIndicatorId());
+		Indicator indicatorFromDB = indicatorDAO.findById(indicator.getId());
 		
 		Assert.assertEquals(indicator, indicatorFromDB);
 	}
@@ -93,7 +93,7 @@ public class IndicatorDAOTest {
 		
 		indicatorDAO.save(indicator);
 		
-		Indicator indicatorFromDB = indicatorDAO.findById(indicator.getIndicatorId());
+		Indicator indicatorFromDB = indicatorDAO.findById(indicator.getId());
 		
 		Assert.assertEquals(indicatorType, indicatorFromDB.getIndicatorType());
 	}

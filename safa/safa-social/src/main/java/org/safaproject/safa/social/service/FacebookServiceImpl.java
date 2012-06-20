@@ -18,12 +18,12 @@ public class FacebookServiceImpl implements FacebookService {
 	
 	@Override
 	public void addLikeToContent(SocialUser user, Content content) {		
-		facebook.likeOperations().like(urlFactory.generateAbsoluteContentURL(content.getContentId()));
+		facebook.likeOperations().like(urlFactory.generateAbsoluteContentURL(content.getId()));
 		// TODO: Generate indicators :)
 	}
 
 	@Override
 	public void postContentToWall(SocialUser user, Content content) {
-		facebook.feedOperations().updateStatus(urlFactory.generateAbsoluteContentURL(content.getContentId()));
+		facebook.feedOperations().updateStatus(urlFactory.generateAbsoluteContentURL(content.getId()));
 	}
 }
