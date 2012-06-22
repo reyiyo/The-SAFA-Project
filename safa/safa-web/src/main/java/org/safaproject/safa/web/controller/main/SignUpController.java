@@ -33,7 +33,7 @@ public class SignUpController {
 	private static Logger logger = Logger.getLogger("SignUpController");
 
 	private static final String FORM_VIEW = "signup";
-	private static final String SUCCESS_VIEW = "redirect:/";
+	private static final String MAIN_VIEW = "redirect:safa-web/main/index";
 
 	@Autowired
 	private UserService userService;
@@ -69,8 +69,7 @@ public class SignUpController {
 			ProviderSignInUtils.handlePostSignUp(user.getUsername(), request);
 
 			// sign the user in and send them to the user home page
-			signInAdapter.signIn(user.getUsername(), connection, request);
-			view = SUCCESS_VIEW;
+			view = 	"redirect:" + signInAdapter.signIn(user.getUsername(), connection, request);
 		}
 
 		return view;
@@ -88,6 +87,6 @@ public class SignUpController {
 		SecurityUtil.signInUser(user);
 
 		// send to user home page
-		return SUCCESS_VIEW;
+		return MAIN_VIEW;
 	}
 }
