@@ -26,13 +26,16 @@ public class Role {
 
 	@Column(name = "name", unique = true, nullable = false)
 	@Enumerated(EnumType.STRING)
-	private String name;
+	private Roles name;
+	
+	@Column(name="version")
+	private Long version;
 
 	public Role() {
 		// Hibernate constructor
 	}
 
-	public Role(String name) {
+	public Role(Roles name) {
 		this.name = name;
 	}
 
@@ -44,12 +47,20 @@ public class Role {
 		this.id = id;
 	}
 
-	public void setName(String name) {
+	public void setName(Roles name) {
 		this.name = name;
 	}
 
-	public String getName() {
+	public Roles getName() {
 		return name;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 
 }

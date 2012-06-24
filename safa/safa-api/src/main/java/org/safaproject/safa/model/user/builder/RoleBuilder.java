@@ -1,14 +1,15 @@
 package org.safaproject.safa.model.user.builder;
 
 import org.safaproject.safa.model.user.Role;
+import org.safaproject.safa.model.user.Roles;
 
 import com.google.common.base.Preconditions;
 
 public class RoleBuilder {
 	
-	private String name;
+	private Roles name;
 	
-	public RoleBuilder withName(String name) {
+	public RoleBuilder withName(Roles name) {
 		this.name = name;
 		return this;
 	}

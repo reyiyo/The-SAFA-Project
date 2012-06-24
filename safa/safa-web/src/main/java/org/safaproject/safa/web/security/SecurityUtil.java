@@ -46,7 +46,7 @@ public class SecurityUtil {
 	public static List<GrantedAuthority> getRoles(User user) {
 		List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
 		for (Role role : user.getRoles()) {
-			roles.add(new SimpleGrantedAuthority(role.getName()));
+			roles.add(new SimpleGrantedAuthority(role.getName().name()));
 		}
 		return roles;
 	}

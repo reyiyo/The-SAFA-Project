@@ -7,6 +7,7 @@ import javax.persistence.PersistenceException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.safaproject.safa.model.user.Role;
+import org.safaproject.safa.model.user.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -23,7 +24,7 @@ public class RoleDAOTest {
 	@Test
 	public void shallCreateRole() {
 		Role role = new Role();
-		role.setName("ADMIN");
+		role.setName(Roles.ROLE_ADMIN);
 		roleDAO.save(role);
 
 		Role roleFromDB = roleDAO.findById(role.getId());
@@ -34,11 +35,11 @@ public class RoleDAOTest {
 	@Test
 	public void shallFindAll() {
 		Role role = new Role();
-		role.setName("ADMIN");
+		role.setName(Roles.ROLE_ADMIN);
 		roleDAO.save(role);
 
 		Role role2 = new Role();
-		role2.setName("USER");
+		role2.setName(Roles.ROLE_USER);
 		roleDAO.save(role2);
 
 		assertEquals(roleDAO.findAll().size(), 2);
@@ -47,11 +48,11 @@ public class RoleDAOTest {
 	@Test
 	public void shallGetRoleCount() {
 		Role role = new Role();
-		role.setName("ADMIN");
+		role.setName(Roles.ROLE_ADMIN);
 		roleDAO.save(role);
 
 		Role role2 = new Role();
-		role2.setName("USER");
+		role2.setName(Roles.ROLE_USER);
 		roleDAO.save(role2);
 
 		assertEquals(roleDAO.countAll(), new Long(2));
@@ -60,11 +61,11 @@ public class RoleDAOTest {
 	@Test
 	public void shallDeleteRole() {
 		Role role = new Role();
-		role.setName("ADMIN");
+		role.setName(Roles.ROLE_ADMIN);
 		roleDAO.save(role);
 
 		Role role2 = new Role();
-		role2.setName("USER");
+		role2.setName(Roles.ROLE_USER);
 		roleDAO.save(role2);
 		
 		roleDAO.delete(role);
@@ -81,11 +82,11 @@ public class RoleDAOTest {
 	@Test(expected=PersistenceException.class)
 	public void shallGetNotUniqueNameConstraintViolationException() {
 		Role role = new Role();
-		role.setName("ADMIN");
+		role.setName(Roles.ROLE_ADMIN);
 		roleDAO.save(role);
 
 		Role role2 = new Role();
-		role2.setName("ADMIN");
+		role2.setName(Roles.ROLE_ADMIN);
 		roleDAO.save(role2);
 	}
 	

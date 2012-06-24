@@ -15,7 +15,7 @@ public class RoleDAO extends GenericJPADAO<Role, Long> {
 	public Role getDefaultRole() {
 		Query query = entityManager
 				.createQuery("SELECT r FROM Role r WHERE r.name = :name");
-		query.setParameter("name", Roles.USER.getValue());
+		query.setParameter("name", Roles.ROLE_USER);
 		return (Role) query.getSingleResult();
 	}
 
