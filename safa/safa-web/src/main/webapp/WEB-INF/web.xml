@@ -85,6 +85,7 @@
 
 	<servlet-mapping>
 		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+		<url-pattern>/safa/*</url-pattern>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
