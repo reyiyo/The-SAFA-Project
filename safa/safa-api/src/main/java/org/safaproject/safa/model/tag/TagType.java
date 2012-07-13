@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -23,7 +25,11 @@ public class TagType {
 	 * one
 	 */
 	@Id
-	@Column(name = "tagName")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="id")
+	private Long id;
+	
+	@Column(name = "tagName", unique = true, nullable = false)
 	private String tagName;
 
 	@Column(name = "tagDataType", nullable = false)
@@ -72,6 +78,14 @@ public class TagType {
 	 */
 	public void setTagDataType(TagDataTypes tagDataType) {
 		this.tagDataType = tagDataType;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

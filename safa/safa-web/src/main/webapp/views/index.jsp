@@ -14,6 +14,7 @@
 		"selectedTags" : [ {
 			"id" : 1,
 			"tagType" : {
+				"id": 1,
 				"tagDataType" : "STRING",
 				"tagName" : "Universidad"
 			},
@@ -30,6 +31,7 @@
 		"selectedTags" : [ {
 			"id" : 1,
 			"tagType" : {
+				"id" : 1,
 				"tagDataType" : "STRING",
 				"tagName" : "Universidad"
 			},
@@ -44,12 +46,14 @@
 
 	var filterTagRequest = {
 		"tagType" : {
+			"id"	: 2,
 			"tagDataType" : "STRING",
 			"tagName" : "Facultad"
 		},
 		"selectedTags" : [ {
 			"id" : 1,
 			"tagType" : {
+				"id"	: 1,
 				"tagDataType" : "STRING",
 				"tagName" : "Universidad"
 			},

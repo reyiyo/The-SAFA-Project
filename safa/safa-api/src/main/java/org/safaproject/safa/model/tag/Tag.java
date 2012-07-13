@@ -23,7 +23,7 @@ public class Tag {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "tagName", nullable = false)
+	@JoinColumn(name = "tagTypeId", nullable = false)
 	private TagType tagType;
 
 	@Column(name = "value", nullable = false)

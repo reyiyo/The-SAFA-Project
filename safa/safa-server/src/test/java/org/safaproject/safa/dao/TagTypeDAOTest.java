@@ -29,7 +29,7 @@ public class TagTypeDAOTest {
 				.withTagDataType(TagDataTypes.STRING).build();
 		tagTypeDAO.save(tagType);
 
-		TagType tagTypeFromDB = tagTypeDAO.findById(tagType.getTagName());
+		TagType tagTypeFromDB = tagTypeDAO.findById(tagType.getId());
 
 		assertEquals(tagType, tagTypeFromDB);
 	}
@@ -89,7 +89,7 @@ public class TagTypeDAOTest {
 
 		assertEquals(tagTypeDAO.countAll(), new Long(1));
 
-		TagType toUpdate = tagTypeDAO.findById(tagType1.getTagName());
+		TagType toUpdate = tagTypeDAO.findById(tagType1.getId());
 
 		/**
 		 * The TagType Name cannot be changed/updated because it is the ID of
@@ -101,7 +101,7 @@ public class TagTypeDAOTest {
 
 		assertEquals(tagTypeDAO.countAll(), new Long(1));
 
-		TagType updated = tagTypeDAO.findById(toUpdate.getTagName());
+		TagType updated = tagTypeDAO.findById(toUpdate.getId());
 
 		assertEquals(TagDataTypes.NUMERIC, updated.getTagDataType());
 

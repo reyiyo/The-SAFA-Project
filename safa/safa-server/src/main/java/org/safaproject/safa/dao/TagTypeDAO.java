@@ -7,7 +7,7 @@ import org.safaproject.safa.model.tag.TagType;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class TagTypeDAO extends GenericJPADAO<TagType, String> {
+public class TagTypeDAO extends GenericJPADAO<TagType, Long> {
 
 	@Override
 	public EntityCriteriaBuilder<TagType> getCriteriaBuilder() {
