@@ -35,6 +35,9 @@ public class TagType {
 	@Column(name = "tagDataType", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private TagDataTypes tagDataType;
+	
+	@Column(name="version")
+	private Long version;
 
 	public TagType() {
 		// Constructor for hibernate
@@ -86,6 +89,14 @@ public class TagType {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 
 }
