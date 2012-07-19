@@ -4,15 +4,14 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
+
+import org.safaproject.safa.model.BaseEntity;
 
 /**
  * This class contains the basic data from an user in our system. It has the
@@ -24,12 +23,7 @@ import javax.validation.constraints.Pattern;
  */
 @Entity
 @Table(name = "SAFA_USER")
-public class User {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "userId")
-	private Long id;
+public class User extends BaseEntity {
 
 	@Pattern(regexp = "^[a-zA-Z0-9]+[\\.\\-_a-zA-Z0-9]+$")
 	@Column(name = "username", unique = true, nullable = false)
@@ -64,21 +58,6 @@ public class User {
 
 	public void addSocialProfile(SocialUser socialUser) {
 		this.connectedSocialProfiles.add(socialUser);
-	}
-
-	/**
-	 * @return the userId
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the userId to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	/**

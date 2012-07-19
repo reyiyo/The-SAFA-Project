@@ -12,8 +12,8 @@ DELETE FROM SAFA_USER;
 DELETE FROM TAG;
 DELETE FROM TAG_TYPE;
 
-INSERT INTO ROLE (roleId, name) VALUES (1, 'ROLE_USER');
-INSERT INTO ROLE (roleId, name) VALUES (2, 'ROLE_ADMIN');
+INSERT INTO ROLE (id, name) VALUES (1, 'ROLE_USER');
+INSERT INTO ROLE (id, name) VALUES (2, 'ROLE_ADMIN');
 
 
 INSERT INTO TAG_TYPE (id, tagName, tagDataType) VALUES (1, 'Universidad', 'STRING');
@@ -26,24 +26,24 @@ INSERT INTO TAG_TYPE (id, tagName, tagDataType) VALUES (7, 'Fecha de Subida', 'D
 INSERT INTO TAG_TYPE (id, tagName, tagDataType) VALUES (8, 'Algún Tag Numérico', 'NUMERIC');
 INSERT INTO TAG_TYPE (id, tagName, tagDataType) VALUES (9, 'Resource Type', 'NUMERIC');
 
-INSERT INTO TAG (tagId, tagTypeId, value, iconURL) VALUES (1, 1, 'UTN', '');
-INSERT INTO TAG (tagId, tagTypeId, value, iconURL) VALUES (2, 2, 'FRBA', '');
-INSERT INTO TAG (tagId, tagTypeId, value, iconURL) VALUES (3, 2, 'FRC', '');
-INSERT INTO TAG (tagId, tagTypeId, value, iconURL) VALUES (10, 2, 'FRSF', '');
-INSERT INTO TAG (tagId, tagTypeId, value, iconURL) VALUES (4, 3, 'Matemática Discreta', '');
-INSERT INTO TAG (tagId, tagTypeId, value, iconURL) VALUES (5, 3, 'Paradigmas de Programación', '');
-INSERT INTO TAG (tagId, tagTypeId, value, iconURL) VALUES (6, 4, 'Susana Granado Peralta', '');
-INSERT INTO TAG (tagId, tagTypeId, value, iconURL) VALUES (7, 5, 'Ingeniería en Sistemas de Información', '');
-INSERT INTO TAG (tagId, tagTypeId, value, iconURL) VALUES (8, 9, 'PDF', 'http://2.bp.blogspot.com/_Ht1_rh8kGYQ/TT790CwQs_I/AAAAAAAADao/eeNAPJZB0OE/s1600/pdf.png');
-INSERT INTO TAG (tagId, tagTypeId, value, iconURL) VALUES (9, 9, 'Imagen', 'http://rededuca.wikispaces.com/file/view/imagen/30143250/imagen');
+INSERT INTO TAG (id, tagTypeId, value, iconURL) VALUES (1, 1, 'UTN', '');
+INSERT INTO TAG (id, tagTypeId, value, iconURL) VALUES (2, 2, 'FRBA', '');
+INSERT INTO TAG (id, tagTypeId, value, iconURL) VALUES (3, 2, 'FRC', '');
+INSERT INTO TAG (id, tagTypeId, value, iconURL) VALUES (10, 2, 'FRSF', '');
+INSERT INTO TAG (id, tagTypeId, value, iconURL) VALUES (4, 3, 'Matemática Discreta', '');
+INSERT INTO TAG (id, tagTypeId, value, iconURL) VALUES (5, 3, 'Paradigmas de Programación', '');
+INSERT INTO TAG (id, tagTypeId, value, iconURL) VALUES (6, 4, 'Susana Granado Peralta', '');
+INSERT INTO TAG (id, tagTypeId, value, iconURL) VALUES (7, 5, 'Ingeniería en Sistemas de Información', '');
+INSERT INTO TAG (id, tagTypeId, value, iconURL) VALUES (8, 9, 'PDF', 'http://2.bp.blogspot.com/_Ht1_rh8kGYQ/TT790CwQs_I/AAAAAAAADao/eeNAPJZB0OE/s1600/pdf.png');
+INSERT INTO TAG (id, tagTypeId, value, iconURL) VALUES (9, 9, 'Imagen', 'http://rededuca.wikispaces.com/file/view/imagen/30143250/imagen');
 
 
-INSERT INTO RESOURCE (resourceId, url, resourceType, size, description, contentId) VALUES (1, 'http://www.mediafire.com/?oum7aa6t5bpscda', 8, 0, 'lalala1', null);
-INSERT INTO RESOURCE (resourceId, url, resourceType, size, description, contentId) VALUES (2, 'http://www.definicionabc.com/wp-content/uploads/apuntes.jpg', 9, 0, 'Default Content Thumbnail', null);
-INSERT INTO RESOURCE (resourceId, url, resourceType, size, description, contentId) VALUES (3, 'http://www.mediafire.com/?oum7aa6t5bpscda', 8, 0, 'lalala2', null);
+INSERT INTO RESOURCE (id, url, resourceType, size, description, contentId) VALUES (1, 'http://www.mediafire.com/?oum7aa6t5bpscda', 8, 0, 'lalala1', null);
+INSERT INTO RESOURCE (id, url, resourceType, size, description, contentId) VALUES (2, 'http://www.definicionabc.com/wp-content/uploads/apuntes.jpg', 9, 0, 'Default Content Thumbnail', null);
+INSERT INTO RESOURCE (id, url, resourceType, size, description, contentId) VALUES (3, 'http://www.mediafire.com/?oum7aa6t5bpscda', 8, 0, 'lalala2', null);
 
 
-INSERT INTO SAFA_USER (userId, username, password, locked) VALUES (1, 'LaPosta', '123456', false);
+INSERT INTO SAFA_USER (id, username, password, locked) VALUES (1, 'LaPosta', '123456', false);
 
 DELETE FROM INDICATOR_CONTENT;
 INSERT INTO SAFA_USER_ROLE VALUES(1, 1);

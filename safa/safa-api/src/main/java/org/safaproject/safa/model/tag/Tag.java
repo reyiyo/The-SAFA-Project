@@ -2,12 +2,11 @@ package org.safaproject.safa.model.tag;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.safaproject.safa.model.BaseEntity;
 
 /**
  * @author reyiyo
@@ -15,12 +14,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "TAG")
-public class Tag {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "tagId")
-	private Long id;
+public class Tag extends BaseEntity{
 
 	@ManyToOne
 	@JoinColumn(name = "tagTypeId", nullable = false)
@@ -45,21 +39,6 @@ public class Tag {
 
 	public String toString() {
 		return this.getTagType().toString() + ": " + this.getValue();
-	}
-
-	/**
-	 * @return the tagId
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the tagId to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	/**

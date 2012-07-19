@@ -2,15 +2,13 @@ package org.safaproject.safa.model.content;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.URL;
+import org.safaproject.safa.model.BaseEntity;
 import org.safaproject.safa.model.tag.Tag;
 
 /**
@@ -22,12 +20,7 @@ import org.safaproject.safa.model.tag.Tag;
  */
 @Entity
 @Table(name = "RESOURCE")
-public class Resource {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "resourceId")
-	private Long id;
+public class Resource extends BaseEntity {
 
 	@Column(name = "url", nullable = false)
 	@URL(message = "{Resource.url.Url}")
@@ -56,21 +49,6 @@ public class Resource {
 		this.size = size;
 		this.description = description;
 
-	}
-
-	/**
-	 * @return the resourceId
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the resourceId to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	/**

@@ -4,10 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.safaproject.safa.model.BaseEntity;
 
 /**
  * This class defines the type of a tag.
@@ -17,17 +16,13 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "TAG_TYPE")
-public class TagType {
+public class TagType extends BaseEntity{
 
 	/**
 	 * The TagType Name cannot be changed/updated because it is the ID of the
 	 * entity. To change it, it is needed to remove the old one and create a new
 	 * one
 	 */
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id")
-	private Long id;
 	
 	@Column(name = "tagName", unique = true, nullable = false)
 	private String tagName;
@@ -35,9 +30,6 @@ public class TagType {
 	@Column(name = "tagDataType", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private TagDataTypes tagDataType;
-	
-	@Column(name="version")
-	private Long version;
 
 	public TagType() {
 		// Constructor for hibernate
@@ -81,22 +73,6 @@ public class TagType {
 	 */
 	public void setTagDataType(TagDataTypes tagDataType) {
 		this.tagDataType = tagDataType;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getVersion() {
-		return version;
-	}
-
-	public void setVersion(Long version) {
-		this.version = version;
 	}
 
 }
