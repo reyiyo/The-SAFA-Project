@@ -1,10 +1,11 @@
+DELETE FROM ROLE;
 DELETE FROM TAG_CONTENT;
 DELETE FROM SAFA_USER_ROLE;
 DELETE FROM INDICATOR_CONTENT;
-DELETE FROM ROLE;
-UPDATE RESOURCE SET contentId=null WHERE resourceId=1;
+
+UPDATE RESOURCE SET contentId=null WHERE id=1;
 UPDATE CONTENT SET idThumbnailResource=null WHERE contentId=1;
-UPDATE RESOURCE SET contentId=null WHERE resourceId=3;
+UPDATE RESOURCE SET contentId=null WHERE id=3;
 UPDATE CONTENT SET idThumbnailResource=null WHERE contentId=2;
 DELETE FROM RESOURCE;
 DELETE FROM CONTENT;
@@ -51,8 +52,8 @@ INSERT INTO SAFA_USER_ROLE VALUES(1, 1);
 INSERT INTO CONTENT (contentId, available, description, reviewed, idThumbnailResource, title, uploadDate, userId) VALUES (1, true, 'lalala1', true, 2, 'Resumen pedorro1', CURRENT_DATE, 1);
 INSERT INTO CONTENT (contentId, title, description, uploadDate, userId, available, idThumbnailResource, reviewed) VALUES (2, 'Resumen pedorro2', 'lalala2', CURRENT_DATE, 1, true, 2, true);
 
-UPDATE RESOURCE SET contentId=1 WHERE resourceId=1
-UPDATE RESOURCE SET contentId=2 WHERE resourceId=3
+UPDATE RESOURCE SET contentId=1 WHERE id=1
+UPDATE RESOURCE SET contentId=2 WHERE id=3
 
 
 INSERT INTO TAG_CONTENT VALUES (1, 1);

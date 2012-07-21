@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:security="http://www.springframework.org/schema/security"
+
+
+	xsi:schemaLocation="  http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+         http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd              
+                http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<security:global-method-security
+		proxy-target-class="false">
+	</security:global-method-security>
+
+
+	<security:authentication-manager alias="authenticationManager">
+	</security:authentication-manager>
+
+
+	<bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased"
+		xmlns="http://www.springframework.org/schema/beans">
+		<constructor-arg>
+			<list>
+				<bean class="org.springframework.security.access.vote.RoleVoter" />
+				<bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<security:http use-expressions="true"
+		entry-point-ref="springSocialSecurityEntryPoint" xmlns="http://www.springframework.org/schema/security">
+
+		<intercept-url pattern="/protected/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/content/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/role/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/tags/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/oauthconnect.jsp" access="hasRole('ROLE_USER')" />
+
+
+		<security:logout logout-url="/logout" />
+
+		<anonymous />
+		<security:custom-filter position="FORM_LOGIN_FILTER"
+			ref="springSocialSecurityAuthenticationFilter" />
+
+		<remember-me services-ref="springSocialSecurityRememberMeServices"
+			key="springSocialSecurity" />
+
+
+	</security:http>
+
+	<bean id="springSocialSecurityRememberMeServices"
+		class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
+		<property name="userDetailsService" ref="springSocialSecurityUserDetailsService" />
+		<property name="tokenRepository" ref="tokenRepository" />
+		<property name="key" value="springSocialSecurity" />
+		<property name="alwaysRemember" value="true" />
+		<property name="tokenValiditySeconds" value="3600" />
+	</bean>
+
+	<bean id="tokenRepository"
+		class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl">
+		<property name="createTableOnStartup" value="true" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+</beans>

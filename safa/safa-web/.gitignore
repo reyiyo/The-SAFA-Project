@@ -1,6 +1,4 @@
+/target
+/.settings
 /.classpath
 /.project
-/.settings
-/target
-/safa-war/target
-/safa-war/.settings

@@ -5,26 +5,7 @@
                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
 	<bean id="connectionFactoryLocator"
-		class="org.springframework.social.connect.support.ConnectionFactoryRegistry">
-		<property name="connectionFactories">
-			<list>
-				<ref bean="twitterConnectionFactory" />
-				<ref bean="facebookConnectionFactory" />
-			</list>
-		</property>
-	</bean>
-
-	<bean id="twitterConnectionFactory"
-		class="org.springframework.social.twitter.connect.TwitterConnectionFactory">
-		<constructor-arg name="consumerKey" value="${twitter.app.consumerKey}" />
-		<constructor-arg name="consumerSecret" value="${twitter.app.consumerSecret}" />
-	</bean>
-
-	<bean id="facebookConnectionFactory"
-		class="org.springframework.social.facebook.connect.FacebookConnectionFactory">
-		<constructor-arg name="clientId" value="${facebook.app.clientId}" />
-		<constructor-arg name="clientSecret" value="${facebook.app.clientSecret}" />
-	</bean>
+		class="org.springframework.social.connect.support.ConnectionFactoryRegistry" />
 
 	<bean id="usersConnectionRepository"
 		class="org.safaproject.safa.social.service.SocialUserServiceImpl" />

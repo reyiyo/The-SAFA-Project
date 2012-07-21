@@ -13,9 +13,9 @@
 	<description>Safa Social Module</description>
 
 	<properties>
-		<spring-social.version>1.0.0.RELEASE</spring-social.version>
-		<spring-social-facebook.version>1.0.0.RELEASE</spring-social-facebook.version>
-		<spring-social-twitter.version>1.0.0.RELEASE</spring-social-twitter.version>
+		<spring-social.version>1.0.2.RELEASE</spring-social.version>
+		<spring-social-facebook.version>1.0.1.RELEASE</spring-social-facebook.version>
+		<spring-social-twitter.version>1.0.2.RELEASE</spring-social-twitter.version>
 		<spring-security-crypto.version>3.1.0.RELEASE</spring-security-crypto.version>
 		<org.springsecurity.version>3.1.0.RELEASE</org.springsecurity.version>
 	</properties>
@@ -37,16 +37,20 @@
 			<name>Spring Maven Milestone Repository</name>
 			<url>http://maven.springframework.org/milestone</url>
 		</repository>
+		<repository>
+			<id>opensourceagility-snapshots</id>
+			<url>http://repo.opensourceagility.com/snapshots</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
 
 		<dependency>
 			<groupId>org.safaproject</groupId>
-			<artifactId>safa-server</artifactId>
-			<version>${safa-server.version}</version>
+			<artifactId>safa-commons</artifactId>
+			<version>${safa-commons.version}</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
@@ -69,6 +73,12 @@
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-web</artifactId>
 			<version>${spring-social.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.socialsignin</groupId>
+			<artifactId>spring-social-security</artifactId>
+			<version>1.0.2-SNAPSHOT</version>
 		</dependency>
 
 		<!-- SOCIAL CONNECTORS -->

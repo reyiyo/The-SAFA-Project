@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+
+	xsi:schemaLocation="  http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+         http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd              
+                http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-3.1.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
+
+	<context:property-placeholder
+		location="classpath:hsql.properties, classpath:social.properties, classpath:urls.properties, classpath:web.properties" />
+
+	<import resource="classpath:/spring-social-security-config.xml" />
+	<import resource="classpath:safa-server-applicationContext.xml" />
+	<import resource="classpath:safa-social-applicationContext.xml" />
+	<import resource="classpath:safa-web-security-context.xml" />
+
+	<!-- Scan classpath for components, including Social Security Configuration 
+		class -->
+	<context:component-scan base-package="org.socialsignin.springsocial.security" />
+	<context:component-scan base-package="org.safaproject.safa" />
+
+	<bean id="defaultAnnotationHandlerMapping"
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+
+	<bean id="annotationMethodHandlerAdapter"
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonConverter" />
+			</list>
+		</property>
+	</bean>
+	<bean id="jsonConverter"
+		class="org.safaproject.safa.web.jackson.MappingJackson2HttpMessageConverter">
+		<property name="objectMapper">
+			<bean class="org.safaproject.safa.web.jackson.HibernateAwareObjectMapper" />
+		</property>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="false" />
+
+	<bean class="org.springframework.social.connect.web.ProviderSignInController">
+		<constructor-arg value="${url.domain}" />
+		<property name="signUpUrl" value="/signup" />
+		<property name="applicationUrl" value="${url.domain}" />
+		<property name="postSignInUrl" value="/authenticate" />
+		<!-- relies on by-type autowiring for the other constructor-args -->
+	</bean>
+
+	<bean class="org.springframework.social.connect.web.ConnectController">
+		<!-- relies on by-type autowiring for the constructor-args -->
+		<property name="applicationUrl" value="${url.domain}" />
+		<property name="interceptors" ref="connectInterceptorList" />
+	</bean>
+
+	<jdbc:initialize-database data-source="dataSource">
+		<jdbc:script location="classpath:scripts/initdb.sql" />
+	</jdbc:initialize-database>
+
+</beans>
