@@ -1,0 +1,42 @@
+[
+	{
+	  "tagId":"Carrera",
+      "tagDataType":"STRING",
+      "tagName":"Carrera"
+   },
+   {
+	"tagId":"AlgunTagNumerico",
+      "tagDataType":"NUMERIC",
+      "tagName":"Algun Tag Numerico"
+   },
+   {
+   "tagId":"Facultad",
+      "tagDataType":"STRING",
+      "tagName":"Facultad"
+   },
+   {
+   "tagId":"FechaDeExamen",
+      "tagDataType":"DOUBLE_DATE",
+      "tagName":"Fecha de Examen"
+   },
+   {
+   "tagId":"FechaDeSubida",
+      "tagDataType":"DATE",
+      "tagName":"Fecha de Subida"
+   },
+   {
+   "tagId":"Materia",
+      "tagDataType":"STRING",
+      "tagName":"Materia"
+   },
+   {
+   "tagId":"Profesor",
+      "tagDataType":"STRING",
+      "tagName":"Profesor"
+   },
+   {
+   "tagId":"Universidad",
+      "tagDataType":"STRING",
+      "tagName":"Universidad"
+   }
+]

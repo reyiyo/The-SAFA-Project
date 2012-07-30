@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="libs/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" charset="utf-8"></script>
+	<link rel="stylesheet" href="css/jquery.capty.css" type="text/css" charset="utf-8"></script>
+
+	<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery-ui-1.8.21.custom.min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.8.21.custom.css" type="text/css" charset="utf-8"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <script src="libs/mustache.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.capty.js" type="text/javascript" charset="utf-8"></script>
+    
+	<script src="app/model.js" type="text/javascript" charset="utf-8"></script>
+	<script src="app/app.js" type="text/javascript" charset="utf-8"></script>
+	
+	<style>
+		div .searchDiv{
+			padding-top:20px;
+		}
+		div .contentItem{
+			height:160px;
+			padding-top:20px;
+		}
+		div .contentContent{
+			padding:5px;
+			width:100%;
+			height:100%;
+			background-color:#9D9;
+		}
+		.contentContentImage{
+			width:100%;
+			height:100px;
+			position:absolute;
+		}
+		.contentContentIcon{
+			width:16px;
+			height:16px;
+		}
+		.importantTag{
+			
+			font-size:0.8em
+		}
+	</style>
+	<title>SAFA</title>
+	<!-- Templates -->
+	<script type="text/template" id="tplSelectSTRING"><input id="tagName" type="search" class="search submitOnEnter" style="padding:10px" placeholder="Ingrese su busqueda aqui" dataElem="{{tagId}}" /></script>
+	<script type="text/template" id="tplSelectNUMERIC"><input id="tagName" pattern="\d*" type="search" class=" search submitOnEnter" style="padding:10px" placeholder="Ingrese el numero aqui"/></script>
+	<script type="text/template" id="tplSelectDATE"><input id="tagName" type="search" class=" withDatepicker search submitOnEnter" style="padding:10px" placeholder="DD/MM/AAAA"/></script>
+	<script type="text/template" id="tplSelectDOUBLE_DATE">
+		<input id="dateFrom" type="search" class="span4 withDatepicker" style="padding:10px" placeholder="Desde"/><input type="text" class="span4 withDatepicker submitOnEnter" style="padding:10px" id="dateTo" placeholder="Hasta"/></script>
+	<script type="text/template" id="tplResult"><div class="span2"><img src="img/placeholder.jpg"></div></script>
+	
+	<script type="text/template" id="tplCombobox">
+		<div class="tabbable tabs-left searchDiv" id="tagTypes">
+			<ul class="nav nav-tabs" id="selectTagTypes">
+				{{#tagTypes}}
+					<li><a href="#{{tagId}}" data-toggle="tab">{{tagName}}</a></li>
+				{{/tagTypes}}
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="all">Todos</div>
+			{{#tagTypes}}
+				<div class="tab-pane" id="{{tagId}}"><form class="well form-search">{{{tagTextbox}}}<input type="button" style="padding:10px" tagType="{{tagName}}" class="btn" value="Agregar" /></form></div>
+			{{/tagTypes}}
+			</div>
+		</div>
+	</script>
+
+
+	<script type="text/template" id="tplCommentSidebar">
+		<br />
+		{{#comments}}
+			<div class="alert alert-block">
+				<a class="close" data-dismiss="alert" href="#">×</a>
+				{{.}}
+			</div>
+		{{/comments}}
+	</script>
+
+	<script type="text/template" id="tplCombobox2"><select id="tagTypes">
+	{{#tagTypes}}
+	<option value="{{tagDataType}}">{{tagName}}</option>
+	{{/tagTypes}}
+	</select></script>
+	<script type="text/template" id="tplTaglist">Tags seleccionados:<ul>{{#tags}}<li><span class="label label-success" tagType="{{tagType}}" tagValue="{{tagValue}}">{{tagType}}: {{tagValue}}  <button type="button" class="close delete selectedTag" killgrandparent>×</button></span></li>{{/tags}}</ul><br /><input type="button" class="btn initSearch" value="Buscar" id="initSearch"></script>
+	<script type="text/template" id="tplSearch">
+		<div class="row">
+			<div id="left" class="span8">{{{select}}}</div>
+		</div>
+	</script>
+	<script type="text/template" id="tplContentList">
+		<div class="row">
+			{{#contents}}
+			<div class="span2 contentItem">
+				<img id="content{{contentId}}" src="{{thumbnail.url}}"
+				
+				 class="capty " name="#content-target{{contentId}}" style="width:100%;height:100%"
+				 />
+				<div id="content-target{{contentId}}"
+				data-content='<div>
+					<p>
+						2/5 <img src="http://www.korpg.com/images/star.png" style="width:16px;height:16px" /><img src="http://www.korpg.com/images/star.png" style="width:16px;height:16px" /><img src="http://www.korpg.com/images/star.png" style="width:16px;height:16px" />
+					</p>
+					<p>
+						Revisado <img src="http://www.mediatab.co.cc/images/ok.png" style="width:16px;height:16px" />
+					</p>
+					<p>
+						{{description}}
+					</p>
+				</div>'
+				data-original-title="{{title}}" class="popovered">
+					  <a href="#!/content/{{contentId}}"><strong>{{title}}</strong></a><br/>
+					  <span style="color: #AAA;">
+					  {{#importantTags}}
+						- {{{.}}} <br />
+					  {{/importantTags}}
+					<br />
+					</span>
+					  <img src="http://www.korpg.com/images/star.png" style="width:16px;height:16px" /><img src="http://www.korpg.com/images/star.png" style="width:16px;height:16px" /><img src="http://www.korpg.com/images/star.png" style="width:16px;height:16px" />
+					  <img src="http://www.mediatab.co.cc/images/ok.png" style="width:16px;height:16px" />
+					  <br/>
+				</div>
+				
+			</div>
+			
+			{{/contents}}
+		</div>
+	</script>
+	<script type="text/template" id="popoverData">
+		
+	</script>
+	<script type="text/template" id="tplContent">
+		<div class="row">
+			<div class="span7">
+				<a href="#!/search"> << Volver a la busqueda.</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span4">
+				<h2>{{title}}</h2>
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="span4">
+				{{description}}
+			</div>
+			<div class="span3">
+				<img id="content{{contentId}}" src="{{thumbnail.url}}" style="border:solid black 2px;padding:5px;"/>
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="span4">
+			{{#tags}}
+				<span class="label label-info">
+					{{tagType.tagName}} : {{value}} 
+				</span>
+				&nbsp;&nbsp;
+			{{/tags}}
+			</div>
+			<div class="span3">
+			{{#indicators}}
+				{{indicatorType.indicatorName}} : {{value}} / {{indicatorType.maxValue}} <img src="http://www.korpg.com/images/star.png" style="width:16px;height:16px" /><br/>
+			{{/indicators}}
+			</div>
+		</div>
+		
+	</script>
+	<!-- -------------------------------------------------------------------------------- -->
+	
+	<meta name="author" content="Joachim Haagen Skeie">
+	
+</head>
+<body bgcolor="#555154">
+	
+	<div class="container">
+		<div class="row">
+			<div class="span8" id="mainArea" >
+				<!--Body content-->
+			</div>
+			<div class="span3" id="sidebar">
+				<!--Sidebar content-->
+			</div>
+		</div>
+	</div>
+	<div id="modal">
+	</div>
+</body>
+</html>
+
+<script>
+States.search();
+</script>

@@ -1,0 +1,31 @@
+[
+   {
+      "tagId":2,
+      "tagType":
+      {
+         "tagName":"Facultad","tagDataType":"STRING"
+      },
+      "value":"FRBA","iconURL":""
+   },
+      
+   {
+      "tagId":3,
+      "tagType":
+      {
+         "tagName":"Facultad",
+         "tagDataType":"STRING"
+      },
+      "value":"FRC",
+      "iconURL":""
+   },
+   {
+      "tagId":10,
+      "tagType":
+      {
+         "tagName":"Facultad",
+         "tagDataType":"STRING"
+      },
+      "value":"FRSF",
+      "iconURL":""
+   }
+]
