@@ -39,7 +39,7 @@
 
 	<security:http use-expressions="true"
 		entry-point-ref="springSocialSecurityEntryPoint" xmlns="http://www.springframework.org/schema/security">
-
+		<intercept-url pattern="/view/**" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/protected/**" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/content/**" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/role/**" access="hasRole('ROLE_USER')" />

@@ -20,6 +20,8 @@
         http://www.springframework.org/schema/util/spring-util.xsd">
 
 	<mvc:annotation-driven />
+	
+	<mvc:resources mapping="/view/**" location="/view/" />
 
 	<bean id="jspViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

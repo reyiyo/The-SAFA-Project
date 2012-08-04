@@ -172,13 +172,45 @@
 		</div>
 		
 	</script>
-	<!-- -------------------------------------------------------------------------------- -->
 	
-	<meta name="author" content="Joachim Haagen Skeie">
+	<script>
+	var defaultOrder = {
+			"selectedTags" : [ {
+				"id" : 1,
+				"tagType" : {
+					"id" : 1,
+					"tagDataType" : "STRING",
+					"tagName" : "Universidad"
+				},
+				"value" : "UTN",
+				"iconURL" : ""
+			} ],
+			"firstResult" : 0,
+			"maxResults" : 10,
+			"orderBy" : "default",
+			"orderDirection" : "DESC"
+		};
+	
+	function testContenSearch(searchRequest) {
+
+		$.ajax({
+			url : "../content/search",
+			type : "POST",
+			data : JSON.stringify(searchRequest),
+			success : function(data) {
+				alert(JSON.stringify(data));
+				console.log(data);
+			},
+			dataType : "json",
+			contentType : "application/json"
+		});
+	};
+	</script>
 	
 </head>
 <body bgcolor="#555154">
-	
+	<button onclick="testContenSearch(defaultOrder)">Test
+				Default Content Search!</button>
 	<div class="container">
 		<div class="row">
 			<div class="span8" id="mainArea" >
