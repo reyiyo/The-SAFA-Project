@@ -29,7 +29,7 @@ public class TagRepositoryTest {
 
 	@Autowired
 	private Neo4jTemplate template;
-	
+
 	@Rollback(false)
 	@BeforeTransaction
 	public void clearDatabase() {
@@ -59,7 +59,7 @@ public class TagRepositoryTest {
 	}
 
 	@Test
-	public void shouldFindAllWorlds() {
+	public void shouldFindAllTags() {
 		List<Tag> madeTags = Lists.newArrayList(this.makeSomeTags());
 		Iterable<Tag> foundTags = tagRepository.findAll();
 
@@ -77,6 +77,24 @@ public class TagRepositoryTest {
 		for (Tag t : this.makeSomeTags()) {
 			Assert.assertNotNull(tagRepository.findTagByValue(t.getValue()));
 		}
+	}
+
+	@Test
+	public void shouldFilterTags() {
+		this.makeSomeTags();
+		TagType universidad = null;
+		for (TagType type : template.findAll(TagType.class)) {
+			if (type.getName().equals("Universidad")) {
+				universidad = type;
+			}
+		}
+
+		Iterable<Tag> tags = tagRepository.filterTags(universidad.getNodeId());
+		for (Tag tag : tags) {
+			Assert.assertTrue(tag.getValue().equalsIgnoreCase("UTN")
+					|| tag.getValue().equalsIgnoreCase("UBA"));
+		}
+
 	}
 
 	private Iterable<Tag> makeSomeTags() {
@@ -100,10 +118,10 @@ public class TagRepositoryTest {
 		Tag utn = new Tag(universidad, "UTN");
 		Tag uba = new Tag(universidad, "UBA");
 		Tag frba = new Tag(facultad, "FRBA");
-		Tag fce = new Tag(universidad, "FCE");
-		Tag sistemas = new Tag(universidad,
+		Tag fce = new Tag(facultad, "FCE");
+		Tag sistemas = new Tag(carrera,
 				"Ingeniería en Sistemas de Información");
-		Tag administracion = new Tag(universidad,
+		Tag administracion = new Tag(carrera,
 				"Licenciatura en Administración");
 		Tag am1 = new Tag(materia, "Análisis Matemático I");
 		Tag algoritmos = new Tag(materia, "Algoritmos y Estructuras de Datos");
