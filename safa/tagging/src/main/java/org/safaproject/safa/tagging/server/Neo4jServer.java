@@ -41,15 +41,18 @@ public class Neo4jServer {
 		TagType facultad = new TagType("Facultad");
 		TagType carrera = new TagType("Carrera");
 		TagType materia = new TagType("Materia");
+		TagType profesor = new TagType("Profesor");
 
 		facultad.addDependency(universidad);
 		carrera.addDependency(facultad);
 		materia.addDependency(carrera);
+		profesor.addDependency(materia);
 
 		tagTypeRepository.save(universidad);
 		tagTypeRepository.save(facultad);
 		tagTypeRepository.save(carrera);
 		tagTypeRepository.save(materia);
+		tagTypeRepository.save(profesor);
 
 		// Create some Tags
 		Tag utn = new Tag(universidad, "UTN");
@@ -61,6 +64,7 @@ public class Neo4jServer {
 		Tag am1 = new Tag(materia, "Análisis Matemático I");
 		Tag algoritmos = new Tag(materia, "Algoritmos y Estructuras de Datos");
 		Tag tContable = new Tag(materia, "Teoría Contable");
+		Tag capurro = new Tag(profesor, "Lidia Capurro");
 
 		frba.addParent(utn);
 		fce.addParent(uba);
@@ -72,7 +76,7 @@ public class Neo4jServer {
 		tContable.addParent(administracion);
 
 		tagRepository.save(Arrays.asList(utn, uba, frba, fce, sistemas,
-				administracion, am1, algoritmos, tContable));
+				administracion, am1, algoritmos, tContable, capurro));
 
 		tagRepository.findAll();
 

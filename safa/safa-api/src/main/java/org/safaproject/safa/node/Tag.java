@@ -3,11 +3,10 @@ package org.safaproject.safa.node;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.RelatedTo;
+import org.springframework.data.neo4j.annotation.RelatedToVia;
 
 @NodeEntity
 public class Tag {
@@ -19,9 +18,18 @@ public class Tag {
 
 	@Indexed
 	private String value;
+	
+	@RelatedToVia
+    Set<ParentTag> parents=new HashSet<ParentTag>();
+    public ParentTag addParent(Tag parent) {
+        ParentTag p=new ParentTag(this,parent);
+        parents.add(p);
+        return p;
+    }
 
-	@RelatedTo(type = "FROM", direction = Direction.OUTGOING)
-	private Set<Tag> parents = new HashSet<Tag>();
+//	@Fetch
+//	@RelatedToVia(type = "FROM", direction = Direction.OUTGOING)
+//	Set<Tag> parents = new HashSet<Tag>();
 
 	public Tag() {
 
@@ -31,9 +39,9 @@ public class Tag {
 		return this.parents.contains(otherTag);
 	}
 
-	public void addParent(Tag parent) {
-		this.parents.add(parent);
-	}
+//	public void addParent(Tag parent) {
+//		this.parents.add(parent);
+//	}
 
 	public Tag(TagType tagType, String value) {
 		this.tagType = tagType;
@@ -83,11 +91,11 @@ public class Tag {
 		this.value = value;
 	}
 
-	public Set<Tag> getParents() {
+	public Set<ParentTag> getParents() {
 		return parents;
 	}
 
-	public void setParents(Set<Tag> parents) {
+	public void setParents(Set<ParentTag> parents) {
 		this.parents = parents;
 	}
 }
