@@ -3,19 +3,19 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<artifactId>safa</artifactId>
-		<groupId>org.safaproject</groupId>
-		<version>${safa.version}</version>
-	</parent>
-	<groupId>org.safaproject</groupId>
 	<artifactId>safa-admin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>Safa Admin</name>
 	<description>The SAFA Administration module</description>
+	
+	<parent>
+		<artifactId>safa</artifactId>
+		<groupId>org.safaproject</groupId>
+		<version>${safa.version}</version>
+	</parent>
+	
 	<build>
-		<pluginManagement />
 		<plugins>
 			<plugin>
 				<groupId>org.grails</groupId>
