@@ -18,6 +18,7 @@ import org.springframework.test.context.transaction.BeforeTransaction;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 @ContextConfiguration(locations = "classpath:tagging-unit-test-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -80,7 +81,7 @@ public class TagRepositoryTest {
 	}
 
 	@Test
-	public void shouldFilterTags() {
+	public void shouldFilterTagsWithoutSelectedTags() {
 		this.makeSomeTags();
 		TagType universidad = null;
 		for (TagType type : template.findAll(TagType.class)) {
@@ -94,7 +95,39 @@ public class TagRepositoryTest {
 			Assert.assertTrue(tag.getValue().equalsIgnoreCase("UTN")
 					|| tag.getValue().equalsIgnoreCase("UBA"));
 		}
+	}
 
+	// TODO: More test cases for fiterTags are needed!
+	@Test
+	public void shouldFilterTagsWithOneSelectedTag() {
+		this.makeSomeTags();
+		Tag utn = tagRepository.findByPropertyValue("value", "UTN");
+
+		Iterable<Tag> tags = tagRepository.filterTags(
+				Sets.newHashSet(utn.getNodeId()), "Facultad");
+		for (Tag tag : tags) {
+			System.out.println(tag.getValue());
+			Assert.assertTrue("Shall return FRBA", tag.getValue()
+					.equalsIgnoreCase("FRBA"));
+		}
+	}
+
+	@Test
+	public void shouldFilterTagsWithManySelectedTags() {
+		this.makeSomeTags();
+		Tag utn = tagRepository.findByPropertyValue("value", "UTN");
+		Tag frba = tagRepository.findByPropertyValue("value", "FRBA");
+
+		Iterable<Tag> tags = tagRepository.filterTags(
+				Sets.newHashSet(utn.getNodeId(), frba.getNodeId()), "Materia");
+
+		for (Tag tag : tags) {
+			Assert.assertTrue(
+					"Shall return UTN-FRBA materias",
+					tag.getValue().equalsIgnoreCase("Análisis Matemático I")
+							|| tag.getValue().equalsIgnoreCase(
+									"Algoritmos y Estructuras de Datos"));
+		}
 	}
 
 	private Iterable<Tag> makeSomeTags() {
@@ -119,10 +152,8 @@ public class TagRepositoryTest {
 		Tag uba = new Tag(universidad, "UBA");
 		Tag frba = new Tag(facultad, "FRBA");
 		Tag fce = new Tag(facultad, "FCE");
-		Tag sistemas = new Tag(carrera,
-				"Ingeniería en Sistemas de Información");
-		Tag administracion = new Tag(carrera,
-				"Licenciatura en Administración");
+		Tag sistemas = new Tag(carrera, "Ingeniería en Sistemas de Información");
+		Tag administracion = new Tag(carrera, "Licenciatura en Administración");
 		Tag am1 = new Tag(materia, "Análisis Matemático I");
 		Tag algoritmos = new Tag(materia, "Algoritmos y Estructuras de Datos");
 		Tag tContable = new Tag(materia, "Teoría Contable");
