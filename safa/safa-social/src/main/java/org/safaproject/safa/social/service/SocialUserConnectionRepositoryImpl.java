@@ -17,7 +17,6 @@ import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.DuplicateConnectionException;
 import org.springframework.social.connect.NoSuchConnectionException;
 import org.springframework.social.connect.NotConnectedException;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
@@ -141,7 +140,6 @@ public class SocialUserConnectionRepositoryImpl implements ConnectionRepository 
 		return connection;
 	}
 
-	@Transactional
 	public void addConnection(Connection<?> connection) {
 		ConnectionData connectionData = connection.createData();
 

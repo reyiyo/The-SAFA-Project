@@ -15,8 +15,8 @@
 		<!-- SAFA DEPENDENCIES -->
 		<dependency>
 			<groupId>org.safaproject</groupId>
-			<artifactId>safa-api</artifactId>
-			<version>${safa-api.version}</version>
+			<artifactId>safa-commons</artifactId>
+			<version>${safa-commons.version}</version>
 		</dependency>
 		
 		<!-- NEO4J DEPENDENCIES -->

@@ -45,6 +45,7 @@
 		<mokito.version>1.9.0</mokito.version>
 		<org.springframework.data.version>2.0.1.RELEASE</org.springframework.data.version>
 		<neo4j.version>1.6.2</neo4j.version>
+		<commons-collections.version>3.2.1</commons-collections.version>
 	</properties>
 
 	<build>
@@ -88,6 +89,13 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>${guava.version}</version>
+		</dependency>
+		
+		<!-- APACHE COMMONS DEPENDENCIES -->
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>${commons-collections.version}</version>
 		</dependency>
 	</dependencies>
 

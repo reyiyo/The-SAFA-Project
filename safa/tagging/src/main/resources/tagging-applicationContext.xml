@@ -9,6 +9,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
 	<context:annotation-config />
 	<context:property-placeholder location="classpath:embedded-neo4j.properties" />
+	<context:component-scan base-package="org.safaproject.safa.tagging.service" />
 
 	<bean id="graphDatabaseService" class="org.neo4j.kernel.EmbeddedGraphDatabase"
 		destroy-method="shutdown">
@@ -21,12 +22,14 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 	</bean>
 
 	<bean id="serverWrapper" class="org.neo4j.server.WrappingNeoServerBootstrapper"
-		 destroy-method="stop">
+		destroy-method="stop">
 		<constructor-arg ref="graphDatabaseService" />
 	</bean>
 
 	<bean class="org.springframework.data.neo4j.config.Neo4jConfiguration" />
 
 	<neo4j:repositories base-package="org.safaproject.safa.tagging.repository" />
+
+	<bean id="databasePopulator" class="org.safaproject.safa.tagging.service.DatabasePopulator" />
 
 </beans>

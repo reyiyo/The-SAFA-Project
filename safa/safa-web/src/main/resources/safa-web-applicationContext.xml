@@ -12,19 +12,20 @@
          http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd              
                 http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
         		http://www.springframework.org/schema/aop
-		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
         http://www.springframework.org/schema/security
         http://www.springframework.org/schema/security/spring-security-3.1.xsd
         http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
 
 	<context:property-placeholder
-		location="classpath:hsql.properties, classpath:social.properties, classpath:urls.properties, classpath:web.properties" />
+		location="classpath:hsql.properties, classpath:social.properties, classpath:urls.properties, classpath:web.properties, classpath:embedded-neo4j.properties" />
 
 	<import resource="classpath:/spring-social-security-config.xml" />
 	<import resource="classpath:safa-server-applicationContext.xml" />
 	<import resource="classpath:safa-social-applicationContext.xml" />
+	<import resource="classpath:tagging-applicationContext.xml" />
 	<import resource="classpath:safa-web-security-context.xml" />
 
 	<!-- Scan classpath for components, including Social Security Configuration 

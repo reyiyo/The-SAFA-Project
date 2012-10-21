@@ -1,53 +1,43 @@
 package org.safaproject.safa.api.request;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
-import org.safaproject.safa.model.tag.Tag;
-import org.safaproject.safa.model.tag.TagType;
+import org.safaproject.safa.node.dto.TagDTO;
+import org.safaproject.safa.node.dto.TagTypeDTO;
 
 public class FilterTagsRequest implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private TagType tagType;
-	private List<Tag> selectedTags;
-	private String value;
+	private TagTypeDTO tagType;
+	private Set<TagDTO> selectedTags;
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(this.getTagType().toString());
 		sb.append(" - ");
-		for (Tag tag : this.getSelectedTags()) {
+		for (TagDTO tag : this.getSelectedTags()) {
 			sb.append(tag.toString());
 			sb.append("\n");
 		}
-		sb.append("filterValue: " + this.getValue());
-		return sb.toString();		
+		return sb.toString();
 	}
 
-	public TagType getTagType() {
+	public TagTypeDTO getTagType() {
 		return tagType;
 	}
 
-	public void setTagType(TagType tagType) {
+	public void setTagType(TagTypeDTO tagType) {
 		this.tagType = tagType;
 	}
 
-	public List<Tag> getSelectedTags() {
+	public Set<TagDTO> getSelectedTags() {
 		return selectedTags;
 	}
 
-	public void setSelectedTags(List<Tag> selectedTags) {
+	public void setSelectedTags(Set<TagDTO> selectedTags) {
 		this.selectedTags = selectedTags;
-	}
-
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
 	}
 
 }

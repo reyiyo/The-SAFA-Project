@@ -40,7 +40,7 @@
 		"orderDirection" : "ASC"
 	};
 
-	var filterTagRequest = {
+	var filterTagRequestOld = {
 		"tagType" : {
 			"id" : 2,
 			"tagDataType" : "STRING",
@@ -57,6 +57,21 @@
 			"iconURL" : ""
 		} ],
 		"value" : "FR"
+	};
+
+	var filterTagRequest = {
+		"tagType" : {
+			"nodeId" : 2,
+			"name" : "Facultad"
+		},
+		"selectedTags" : [ {
+			"nodeId" : 6,
+			"tagType" : {
+				"nodeId" : 1,
+				"name" : "Universidad"
+			},
+			"value" : "UTN",
+		} ],
 	};
 
 	function testTagFilter(filterRequest) {
@@ -115,8 +130,10 @@ Public Area.
 		</p>
 	</authz:authorize>
 	<authz:authorize access="hasRole('ROLE_USER')">
-						<p><b>You are logged in locally as <c:out value="${userName}" /></b>. &nbsp;<a
-			href="/logout">Logout</a></p>
+		<p>
+			<b>You are logged in locally as <c:out value="${userName}" /></b>.
+			&nbsp;<a href="/logout">Logout</a>
+		</p>
 
 		<p>Technical Information</p>
 		<p>
