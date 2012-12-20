@@ -16,14 +16,14 @@ import org.safaproject.safa.model.BaseEntity;
  */
 @Entity
 @Table(name = "TAG_TYPE")
-public class TagType extends BaseEntity{
+public class TagType extends BaseEntity {
 
 	/**
 	 * The TagType Name cannot be changed/updated because it is the ID of the
 	 * entity. To change it, it is needed to remove the old one and create a new
 	 * one
 	 */
-	
+
 	@Column(name = "tagName", unique = true, nullable = false)
 	private String tagName;
 
