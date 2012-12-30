@@ -14,25 +14,36 @@ import org.springframework.data.neo4j.annotation.RelatedTo;
 @NodeEntity
 public class Content implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6061837681279030593L;
 
 	@GraphId
 	private Long nodeId;
 
-	@Indexed
+	@Indexed(unique=true)
 	private Long contentId;
 
 	@Fetch
 	@RelatedTo(type = "HAS", direction = Direction.OUTGOING)
 	private Set<Tag> tags = new HashSet<Tag>();
-	
+
 	public Content() {
 		// Default constructor for frameworks.
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Content other = (Content) obj;
+		if (nodeId == null)
+			return other.nodeId == null;
+		return nodeId.equals(other.nodeId);
+	}
+
 	public void addTag(Tag tag) {
 		this.tags.add(tag);
 	}

@@ -2,12 +2,12 @@ package org.safaproject.safa.tagging.service;
 
 import java.util.Arrays;
 
-import org.neo4j.helpers.collection.ClosableIterable;
 import org.safaproject.safa.node.Tag;
 import org.safaproject.safa.node.TagType;
 import org.safaproject.safa.tagging.repository.TagRepository;
 import org.safaproject.safa.tagging.repository.TagTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.neo4j.conversion.EndResult;
 
 public class DatabasePopulator {
 
@@ -17,7 +17,7 @@ public class DatabasePopulator {
 	@Autowired
 	private TagRepository tagRepository;
 
-	public ClosableIterable<Tag> populateDb() {
+	public EndResult<Tag> populateDb() {
 		// Create TagTypes
 		TagType universidad = new TagType("Universidad");
 		TagType facultad = new TagType("Facultad");

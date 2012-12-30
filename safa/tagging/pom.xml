@@ -18,7 +18,7 @@
 			<artifactId>safa-commons</artifactId>
 			<version>${safa-commons.version}</version>
 		</dependency>
-		
+
 		<!-- NEO4J DEPENDENCIES -->
 		<dependency>
 			<groupId>org.neo4j</groupId>
@@ -28,7 +28,7 @@
 		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j-cypher-dsl</artifactId>
-			<version>1.6</version>
+			<version>${neo4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.neo4j.app</groupId>
@@ -125,9 +125,9 @@
 			</snapshots>
 		</repository>
 		<repository>
-		        <id>java.net-Public</id>
-		        <name>Maven Java Net Snapshots and Releases</name>
-		        <url>https://maven.java.net/content/groups/public/</url>
+			<id>java.net-Public</id>
+			<name>Maven Java Net Snapshots and Releases</name>
+			<url>https://maven.java.net/content/groups/public/</url>
 		</repository>
 	</repositories>
 

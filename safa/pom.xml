@@ -43,8 +43,8 @@
 		<jetty.plugin.version>6.1.10</jetty.plugin.version>
 		<guava.version>10.0.1</guava.version>
 		<mokito.version>1.9.0</mokito.version>
-		<org.springframework.data.version>2.0.1.RELEASE</org.springframework.data.version>
-		<neo4j.version>1.6.2</neo4j.version>
+		<org.springframework.data.version>2.2.0.BUILD-SNAPSHOT</org.springframework.data.version>
+		<neo4j.version>1.8</neo4j.version>
 		<commons-collections.version>3.2.1</commons-collections.version>
 	</properties>
 
