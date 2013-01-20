@@ -1,8 +1,14 @@
 package org.safaproject.safa.dsl
+
 import org.safaproject.safa.dsl.filter.Filter
 
-
 class QueryingDescriptorTest extends GroovyTestCase {
+	
+	class TestTag {
+		def getValue() {
+			return "test"
+		}
+	}
 	
 	void testExecutes() {
 		assertTrue new QueryingDescriptor().parse("true")
@@ -30,9 +36,3 @@ class QueryingDescriptorTest extends GroovyTestCase {
 		assertFalse filter.evaluate(new TestTag())
 	}
 }
-
-class TestTag {
-	def getValue() {
-		return "test"
-	}
-} 
