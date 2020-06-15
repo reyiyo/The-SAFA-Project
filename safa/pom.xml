@@ -45,7 +45,7 @@
 		<mokito.version>1.9.0</mokito.version>
 		<org.springframework.data.version>2.2.0.BUILD-SNAPSHOT</org.springframework.data.version>
 		<neo4j.version>1.8</neo4j.version>
-		<commons-collections.version>3.2.1</commons-collections.version>
+		<commons-collections.version>3.2.2</commons-collections.version>
 	</properties>
 
 	<build>
