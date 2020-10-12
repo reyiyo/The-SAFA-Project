@@ -38,7 +38,7 @@
 		<hsqldb.version>2.2.8</hsqldb.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<log4j.version>1.2.14</log4j.version>
-		<junit.version>4.8.1</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<jetty.version>6.1.4</jetty.version>
 		<jetty.plugin.version>6.1.10</jetty.plugin.version>
 		<guava.version>10.0.1</guava.version>
