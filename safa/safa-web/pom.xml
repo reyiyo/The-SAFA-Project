@@ -7,7 +7,7 @@
 	<name>Safa Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-		<org.springframework.security.version>3.1.0.RELEASE</org.springframework.security.version>
+		<org.springframework.security.version>5.2.10.RELEASE</org.springframework.security.version>
 		<org.socialsignin.spring.security.version>1.0.2-SNAPSHOT</org.socialsignin.spring.security.version>
 	</properties>
 
